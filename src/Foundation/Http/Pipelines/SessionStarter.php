@@ -46,6 +46,7 @@ class SessionStarter implements MiddlewareInterface {
         if($this->sessionConfigured()) {
             $session = $this->startSession($request);
             $request = $request->withAttribute('session', $session);
+            $this->collectGarbage($session);
         }
         $response = $out ? $out($request, $response) : $response;
         if($this->sessionConfigured()) {

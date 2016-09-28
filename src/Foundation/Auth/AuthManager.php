@@ -14,6 +14,7 @@ use Notadd\Foundation\Auth\Guards\RequestGuard;
 use Notadd\Foundation\Auth\Guards\SessionGuard;
 use Notadd\Foundation\Auth\Guards\TokenGuard;
 use Notadd\Foundation\Auth\Traits\CreatesUserProviders;
+use Psr\Http\Message\ServerRequestInterface;
 /**
  * Class AuthManager
  * @package Notadd\Foundation\Auth
@@ -96,9 +97,9 @@ class AuthManager implements FactoryContract {
         if(method_exists($guard, 'setDispatcher')) {
             $guard->setDispatcher($this->app['events']);
         }
-        //if(method_exists($guard, 'setRequest')) {
-        //    $guard->setRequest($this->app->refresh('request', $guard, 'setRequest'));
-        //}
+        if(method_exists($guard, 'setRequest')) {
+            $guard->setRequest($this->app->make(ServerRequestInterface::class));
+        }
         return $guard;
     }
     /**
