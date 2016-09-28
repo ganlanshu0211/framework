@@ -85,6 +85,15 @@ if(!function_exists('event')) {
         return app('events')->fire($event, $payload, $halt);
     }
 }
+if (! function_exists('head')) {
+    /**
+     * @param array $array
+     * @return mixed
+     */
+    function head($array) {
+        return reset($array);
+    }
+}
 if(!function_exists('public_path')) {
     /**
      * @param string $path

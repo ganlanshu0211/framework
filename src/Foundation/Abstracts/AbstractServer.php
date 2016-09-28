@@ -24,6 +24,7 @@ use Notadd\Admin\AdminServiceProvider;
 use Notadd\Extension\ExtensionServiceProvider;
 use Notadd\Foundation\Application;
 use Notadd\Foundation\Auth\AuthServiceProvider;
+use Notadd\Foundation\Cookie\CookieServiceProvider;
 use Notadd\Foundation\Database\DatabaseServiceProvider;
 use Notadd\Foundation\Http\HttpServiceProvider;
 use Notadd\Foundation\Routing\RouterServiceProvider;
@@ -62,6 +63,7 @@ abstract class AbstractServer {
         $app->register(BusServiceProvider::class);
         $app->register(AuthServiceProvider::class);
         $app->register(CacheServiceProvider::class);
+        $app->register(CookieServiceProvider::class);
         $app->register(DatabaseServiceProvider::class);
         $app->register(FilesystemServiceProvider::class);
         $app->register(HashServiceProvider::class);
