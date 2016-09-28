@@ -50,6 +50,7 @@ class SessionStarter implements MiddlewareInterface {
         $response = $out ? $out($request, $response) : $response;
         if($this->sessionConfigured()) {
             $response = $this->withSessionCookie($response, $session);
+            $this->manager->driver()->save();
         }
         return $response;
     }
