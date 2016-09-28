@@ -67,7 +67,7 @@ abstract class AbstractController implements ControllerContract {
      * AbstractController constructor.
      */
     public function __construct() {
-        $this->container = Container::getInstance();
+        $this->container = $this->getContainer();
         $this->config = $this->container->make('config');
         $this->events = $this->container->make('events');
         $this->log = $this->container->make('log');
@@ -83,6 +83,12 @@ abstract class AbstractController implements ControllerContract {
      */
     public function getConsole() {
         return Application::getInstance($this->container);
+    }
+    /**
+     * @return \Illuminate\Container\Container
+     */
+    public function getContainer() {
+        return Container::getInstance();
     }
     /**
      * @param string $name
