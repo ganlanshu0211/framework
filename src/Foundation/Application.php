@@ -15,7 +15,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Notadd\Foundation\Contracts\Application as ApplicationContract;
-use Notadd\Foundation\Routing\Responses\RedirectResponse;
+use Notadd\Foundation\Routing\Redirector;
 use Notadd\Foundation\Routing\Router;
 use Notadd\Foundation\Routing\UrlGenerator;
 use Notadd\Setting\Contracts\SettingsRepository;
@@ -362,7 +362,7 @@ class Application extends Container implements ApplicationContract {
                 'Illuminate\Contracts\Mail\MailQueue'
             ],
             'migration.repository' => MigrationRepositoryInterface::class,
-            'redirect' => RedirectResponse::class,
+            'redirector' => Redirector::class,
             'router' => Router::class,
             SettingsRepository::class => 'setting',
             'session' => ['Illuminate\Session\SessionManager'],

@@ -11,8 +11,6 @@ use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 use Illuminate\Support\Str;
 use Notadd\Foundation\Console\Application;
 use Notadd\Foundation\Routing\Contracts\Controller as ControllerContract;
-use Notadd\Foundation\Routing\Responses\RedirectResponse;
-use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 /**
  * Class AbstractController
@@ -24,37 +22,21 @@ abstract class AbstractController implements ControllerContract {
      */
     protected $container;
     /**
-     * @var \Illuminate\Config\Repository
-     */
-    protected $config;
-    /**
      * @var \Illuminate\Events\Dispatcher
      */
     protected $events;
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    protected $log;
-    /**
-     * @var \Illuminate\Mail\Mailer
-     */
-    protected $mailer;
     /**
      * @var array
      */
     protected $middleware = [];
     /**
-     * @var \Notadd\Foundation\Routing\Responses\RedirectResponse
+     * @var \Notadd\Foundation\Routing\Redirector
      */
-    protected $redirect;
+    protected $redirector;
     /**
      * @var \Psr\Http\Message\ServerRequestInterface
      */
     protected $request;
-    /**
-     * @var \Psr\Http\Message\ResponseInterface
-     */
-    protected $response;
     /**
      * @var \Notadd\Foundation\Session\Contracts\Session
      */
@@ -68,13 +50,9 @@ abstract class AbstractController implements ControllerContract {
      */
     public function __construct() {
         $this->container = $this->getContainer();
-        $this->config = $this->container->make('config');
         $this->events = $this->container->make('events');
-        $this->log = $this->container->make('log');
-        $this->mailer = $this->container->make('mailer');
-        $this->redirect = $this->container->make(RedirectResponse::class);
+        $this->redirector = $this->container->make('redirector');
         $this->request = $this->container->make(ServerRequestInterface::class);
-        $this->response = $this->container->make(ResponseInterface::class);
         $this->session = $this->request->getAttribute('session');
         $this->view = $this->container->make('view');
     }
@@ -85,10 +63,28 @@ abstract class AbstractController implements ControllerContract {
         return Application::getInstance($this->container);
     }
     /**
+     * @return \Illuminate\Config\Repository
+     */
+    public function getConfig() {
+        return $this->container->make('config');
+    }
+    /**
      * @return \Illuminate\Container\Container
      */
     public function getContainer() {
         return Container::getInstance();
+    }
+    /**
+     * @return \Psr\Log\LoggerInterface
+     */
+    public function getLogger() {
+        return $this->container->make('log');
+    }
+    /**
+     * @return \Illuminate\Mail\Mailer
+     */
+    public function getMailer() {
+        return $this->container->make('mailer');
     }
     /**
      * @param string $name

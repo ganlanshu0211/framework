@@ -16,11 +16,17 @@ class RouterServiceProvider extends ServiceProvider {
      * @return void
      */
     public function register() {
-        $this->app->singleton('url', function() {
-            return new UrlGenerator($this->app);
+        $this->app->singleton('router', function($app) {
+            return new Router($app, $app['events']);
         });
-        $this->app->singleton('router', function() {
-            return new Router($this->app, $this->app['events']);
+        $this->app->singleton('redirector', function($app) {
+            $redirector = new Redirector($app['url']);
+            if (isset($app['session.store'])) {
+                $redirector->setSession($app['session.store']);
+            }
+        });
+        $this->app->singleton('url', function($app) {
+            return new UrlGenerator($app);
         });
     }
 }

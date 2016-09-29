@@ -93,7 +93,7 @@ class PassportServiceProvider extends ServiceProvider {
         });
         $this->app->make('auth')->extend('passport', function ($app, $name, array $config) {
             return tap($this->makeGuard($config), function ($guard) {
-                $this->app->refresh('request', $guard, 'setRequest');
+                //$this->app->refresh('request', $guard, 'setRequest');
             });
         });
     }
