@@ -14,9 +14,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
  */
 interface Session extends SessionInterface {
     /**
-     * Set the request on the handler instance.
-     *
-     * @param \Psr\Http\Message\ServerRequestInterface  $request
+     * @param \Psr\Http\Message\ServerRequestInterface $request
      * @return void
      */
     public function setPsrRequestOnHandler(Request $request);

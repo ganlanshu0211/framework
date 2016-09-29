@@ -14,6 +14,7 @@ use Notadd\Foundation\Http\Pipelines\JsonBodyParser;
 use Notadd\Foundation\Http\Pipelines\RouteDispatcher;
 use Notadd\Foundation\Http\Pipelines\SessionStarter;
 use Notadd\Install\InstallServiceProvider;
+use Notadd\Install\Pipelines\RedirectIfNotInstalled;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Server as ZendServer;
 use Zend\Stratigility\MiddlewarePipe;
@@ -32,6 +33,7 @@ class Server extends AbstractServer {
         $path = parse_url($this->getUrl(), PHP_URL_PATH);
         if(!$app->isInstalled()) {
             $app->register(InstallServiceProvider::class);
+            $pipe->pipe($path, $app->make(RedirectIfNotInstalled::class));
             $pipe->pipe($path, $app->make(RouteDispatcher::class));
             $pipe->pipe($path, new ErrorHandler($errorDir, true, $app->make('log')));
         } elseif($app->isInstalled()) {
