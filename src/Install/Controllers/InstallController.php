@@ -47,7 +47,7 @@ class InstallController extends AbstractController {
         }
     }
     /**
-     * @return \Notadd\Foundation\Routing\Responses\RedirectResponse
+     * @return \Illuminate\Contracts\View\View
      */
     public function store() {
         $this->command = $this->getCommand('install');
@@ -56,6 +56,8 @@ class InstallController extends AbstractController {
         $input = new ArrayInput([]);
         $output = new BufferedOutput();
         $this->command->run($input, $output);
-        return new RedirectResponse(url('/'));
+        $this->share('admin_account', $data['admin_account']);
+        $this->share('admin_email', $data['admin_email']);
+        return $this->view('install::success');
     }
 }
