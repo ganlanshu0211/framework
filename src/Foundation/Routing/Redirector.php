@@ -10,7 +10,6 @@ use Dflydev\FigCookies\FigResponseCookies;
 use Dflydev\FigCookies\SetCookie;
 use Illuminate\Session\SessionInterface;
 use Notadd\Foundation\Routing\Responses\RedirectResponse;
-use Notadd\Foundation\Session\Store as SessionStore;
 use Psr\Http\Message\ResponseInterface as Response;
 /**
  * Class Redirector
@@ -22,7 +21,7 @@ class Redirector {
      */
     protected $generator;
     /**
-     * @var \Notadd\Foundation\Session\Store $session
+     * @var \Illuminate\Session\SessionInterface
      */
     protected $session;
     /**
@@ -31,6 +30,15 @@ class Redirector {
      */
     public function __construct(UrlGenerator $generator) {
         $this->generator = $generator;
+    }
+    /**
+     * @param string $path
+     * @param int $status
+     * @param array $headers
+     * @return \Notadd\Foundation\Routing\Responses\RedirectResponse
+     */
+    public function away($path, $status = 302, $headers = []) {
+        return $this->createRedirect($path, $status, $headers);
     }
     /**
      * @param $path
@@ -52,10 +60,30 @@ class Redirector {
         return $this->generator;
     }
     /**
-     * @param \Notadd\Foundation\Session\Store $session
+     * @param string $path
+     * @param int $status
+     * @param array $headers
+     * @return \Notadd\Foundation\Routing\Responses\RedirectResponse
      */
-    public function setSession(SessionStore $session) {
+    public function secure($path, $status = 302, $headers = []) {
+        return $this->to($path, $status, $headers, true);
+    }
+    /**
+     * @param \Illuminate\Session\SessionInterface $session
+     */
+    public function setSession(SessionInterface $session) {
         $this->session = $session;
+    }
+    /**
+     * @param string $path
+     * @param int $status
+     * @param array $headers
+     * @param bool $secure
+     * @return \Notadd\Foundation\Routing\Responses\RedirectResponse
+     */
+    public function to($path, $status = 302, $headers = [], $secure = null) {
+        $path = $this->generator->to($path, [], $secure);
+        return $this->createRedirect($path, $status, $headers);
     }
     /**
      * @param \Psr\Http\Message\ResponseInterface $response
@@ -64,34 +92,5 @@ class Redirector {
      */
     protected function withSessionCookie(Response $response, SessionInterface $session) {
         return FigResponseCookies::set($response, SetCookie::create($session->getName(), $session->getId())->withPath('/')->withHttpOnly(true));
-    }
-    /**
-     * @param  string $path
-     * @param  int $status
-     * @param  array $headers
-     * @param  bool $secure
-     * @return \Notadd\Foundation\Routing\Responses\RedirectResponse
-     */
-    public function to($path, $status = 302, $headers = [], $secure = null) {
-        $path = $this->generator->to($path, [], $secure);
-        return $this->createRedirect($path, $status, $headers);
-    }
-    /**
-     * @param  string $path
-     * @param  int $status
-     * @param  array $headers
-     * @return \Notadd\Foundation\Routing\Responses\RedirectResponse
-     */
-    public function away($path, $status = 302, $headers = []) {
-        return $this->createRedirect($path, $status, $headers);
-    }
-    /**
-     * @param  string $path
-     * @param  int $status
-     * @param  array $headers
-     * @return \Notadd\Foundation\Routing\Responses\RedirectResponse
-     */
-    public function secure($path, $status = 302, $headers = []) {
-        return $this->to($path, $status, $headers, true);
     }
 }
