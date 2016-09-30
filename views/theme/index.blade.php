@@ -6,7 +6,7 @@
                 <nav class="navbar navbar-default navbar-fixed-top" style="background: rgb(27, 201, 168);z-index:11111;">
                     <div class="container">
                         <div class="navbar-header">
-                            <a class="navbar-brand" href="#"> <img src="{{ asset('assets/default/images/logo.png') }}" alt="NotAdd"> </a>
+                            <a class="navbar-brand" href="{{ url('/') }}"> <img src="{{ asset('assets/default/images/logo.png') }}" alt="NotAdd"> </a>
                             <ul class="nav nav-pills">
                                 <li role="presentation" class="active"><a href="{{ url('/') }}" target="_self">首页</a></li>
                                 {{--<li role="presentation"><a href="https://docs.notadd.com" target="_blank">文档</a></li>--}}
@@ -216,11 +216,11 @@
                         <p>Recommend content</p>
                     </div>
                     <ul class="common-list">
-                        <li class="list-icon"><a href="#" target="_blank">notadd插件开发</a></li>
-                        <li class="list-icon"><a href="#" target="_blank">notadd插件开发</a></li>
-                        <li class="list-icon"><a href="#" target="_blank">notadd插件开发</a></li>
-                        <li class="list-icon"><a href="#" target="_blank">notadd插件开发</a></li>
-                        <li class="list-icon"><a href="#" target="_blank">notadd插件开发</a></li>
+                        <li class="list-icon"><a href="{{ url('/') }}" target="_blank">notadd插件开发</a></li>
+                        <li class="list-icon"><a href="{{ url('/') }}" target="_blank">notadd插件开发</a></li>
+                        <li class="list-icon"><a href="{{ url('/') }}" target="_blank">notadd插件开发</a></li>
+                        <li class="list-icon"><a href="{{ url('/') }}" target="_blank">notadd插件开发</a></li>
+                        <li class="list-icon"><a href="{{ url('/') }}" target="_blank">notadd插件开发</a></li>
                     </ul>
                 </div>
                 <div class="announcement common-content">
@@ -233,7 +233,7 @@
                         <li class="list-icon"><a href="https://bbs.notadd.com/d/2" target="_blank">Notadd Alpha3 发布</a></li>
                         <li class="list-icon"><a href="https://bbs.notadd.com/d/5" target="_blank">Notadd Alpha2 发布</a></li>
                         <li class="list-icon"><a href="https://bbs.notadd.com/d/6" target="_blank">Notadd Alpha1 发布</a></li>
-                        <li class="list-icon"><a href="#">敬请期待</a></li>
+                        <li class="list-icon"><a href="{{ url('/') }}">敬请期待</a></li>
                     </ul>
                 </div>
             </div>
