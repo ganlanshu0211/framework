@@ -9,6 +9,7 @@ namespace Notadd\Foundation\Routing\Dispatchers;
 use Illuminate\Container\Container;
 use Notadd\Foundation\Routing\Contracts\Controller as ControllerContract;
 use Notadd\Foundation\Http\Exceptions\MethodNotFoundException;
+use Notadd\Foundation\Routing\Router;
 use Notadd\Foundation\Routing\Traits\ResolveDependencyTrait;
 /**
  * Class ControllerDispatcher
@@ -29,7 +30,7 @@ class ControllerDispatcher {
      * @param \Illuminate\Container\Container $container
      * @param \Notadd\Foundation\Routing\Router $router
      */
-    public function __construct(Container $container, \Notadd\Foundation\Routing\Router $router) {
+    public function __construct(Container $container, Router $router) {
         $this->container = $container;
         $this->router = $router;
     }
