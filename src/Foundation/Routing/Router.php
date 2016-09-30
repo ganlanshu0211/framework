@@ -7,6 +7,7 @@
  */
 namespace Notadd\Foundation\Routing;
 use Closure;
+use Exception;
 use FastRoute\Dispatcher as RouteDispatcher;
 use FastRoute\RouteCollector;
 use Illuminate\Container\Container;
@@ -14,6 +15,7 @@ use Illuminate\Events\Dispatcher as EventsDispatcher;
 use Illuminate\Support\Arr;
 use Notadd\Foundation\Http\Exceptions\MethodNotAllowedException;
 use Notadd\Foundation\Http\Exceptions\RouteNotFoundException;
+use Notadd\Foundation\Routing\Dispatchers\ApiDispatcher;
 use Notadd\Foundation\Routing\Dispatchers\CallableDispatcher;
 use Notadd\Foundation\Routing\Dispatchers\ControllerDispatcher;
 use Notadd\Foundation\Routing\Registrars\ResourceRegistrar;
@@ -96,7 +98,7 @@ class Router {
         $this->routes[$method . $uri] = [
             'method' => $method,
             'uri' => $uri,
-            'action' => $action
+            'action' => $action,
         ];
     }
     /**
@@ -156,19 +158,19 @@ class Router {
     /**
      * @param array $routeInfo
      * @return mixed
+     * @throws \Exception
      */
     protected function callActionOnArrayBasedRoute($routeInfo) {
         $action = $routeInfo[1];
-        if(isset($action['uses'])) {
+        if($action['type'] == 'controller') {
             return (new ControllerDispatcher($this->container, $this))->dispatch($routeInfo);
+        } elseif($action['type'] == 'api' && is_string($action['uses'])) {
+            return (new ApiDispatcher($this->container, $this))->dispatch($routeInfo);
+        } elseif($action['type'] == 'closure' || $action['uses'] instanceof Closure) {
+            return (new CallableDispatcher($this->container))->dispatch($action['uses'], $routeInfo[2]);
+        } else {
+            throw new Exception('Can not Handle Router Action !');
         }
-        foreach($action as $value) {
-            if($value instanceof Closure) {
-                $closure = $value;
-                break;
-            }
-        }
-        return (new CallableDispatcher($this->container))->dispatch($closure, $routeInfo[2]);
     }
     /**
      * @param array $new
@@ -383,9 +385,9 @@ class Router {
      */
     protected function parseAction($action) {
         if(is_string($action)) {
-            return ['uses' => $action];
-        } elseif(!is_array($action)) {
-            return [$action];
+            return ['uses' => $action, 'type' => 'controller'];
+        } elseif($action instanceof Closure) {
+            return ['uses' => $action, 'type' => 'closure'];
         }
         if(isset($action['middleware']) && is_string($action['middleware'])) {
             $action['middleware'] = explode('|', $action['middleware']);
