@@ -78,9 +78,10 @@ class Router {
      * @param string $method
      * @param string $uri
      * @param mixed $action
+     * @param null $type
      */
-    public function addRoute($method, $uri, $action) {
-        $action = $this->parseAction($action);
+    public function addRoute($method, $uri, $action, $type = null) {
+        $action = $this->parseAction($action, $type);
         if(isset($this->groupAttributes)) {
             if(isset($this->groupAttributes['prefix'])) {
                 $uri = trim($this->groupAttributes['prefix'], '/') . '/' . trim($uri, '/');
@@ -118,6 +119,15 @@ class Router {
         foreach($methods as $method) {
             $this->addRoute($method, $uri, $action);
         }
+        return $this;
+    }
+    /**
+     * @param string $uri
+     * @param null $action
+     * @return \Notadd\Foundation\Routing\Router
+     */
+    public function api($uri, $action = null) {
+        $this->addRoute('POST', $uri, $action, 'api');
         return $this;
     }
     /**
@@ -381,17 +391,19 @@ class Router {
     }
     /**
      * @param mixed $action
+     * @param null $type
      * @return array
      */
-    protected function parseAction($action) {
+    protected function parseAction($action, $type = null) {
         if(is_string($action)) {
-            return ['uses' => $action, 'type' => 'controller'];
+            return ['uses' => $action, 'type' => $type == 'api' ? $type : 'controller'];
         } elseif($action instanceof Closure) {
-            return ['uses' => $action, 'type' => 'closure'];
+            return ['uses' => $action, 'type' => $type == 'api' ? $type : 'closure'];
         }
         if(isset($action['middleware']) && is_string($action['middleware'])) {
             $action['middleware'] = explode('|', $action['middleware']);
         }
+        isset($action['type']) || $action['type'] = $type == 'api' ? $type : 'controller';
         return $action;
     }
     /**
