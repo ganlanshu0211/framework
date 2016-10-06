@@ -13,6 +13,7 @@ use FastRoute\RouteCollector;
 use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher as EventsDispatcher;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Notadd\Foundation\Http\Exceptions\MethodNotAllowedException;
 use Notadd\Foundation\Http\Exceptions\RouteNotFoundException;
 use Notadd\Foundation\Routing\Dispatchers\ApiDispatcher;
@@ -93,6 +94,9 @@ class Router {
         }
         $uri = $this->prefix($uri);
         $uri = '/' . trim($uri, '/');
+        if($type == 'api') {
+            $uri = '/api' . $uri;
+        }
         if(isset($action['as'])) {
             $this->namedRoutes[$action['as']] = $uri;
         }
@@ -127,6 +131,9 @@ class Router {
      * @return \Notadd\Foundation\Routing\Router
      */
     public function api($uri, $action = null) {
+        if(!Str::contains('@', $action)) {
+            $action = $action . '@handle';
+        }
         $this->addRoute('POST', $uri, $action, 'api');
         return $this;
     }
