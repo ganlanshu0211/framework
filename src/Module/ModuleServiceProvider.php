@@ -6,7 +6,6 @@
  * @datetime 2016-10-08 16:25
  */
 namespace Notadd\Module;
-use Illuminate\Filesystem\Filesystem;
 use Notadd\Foundation\Abstracts\AbstractServiceProvider;
 /**
  * Class ModuleServiceProvider
@@ -17,7 +16,6 @@ class ModuleServiceProvider extends AbstractServiceProvider {
      * @param \Notadd\Module\ModuleManager $manager
      */
     public function boot(ModuleManager $manager) {
-        dd($manager->getModules());
     }
     /**
      * @return void
