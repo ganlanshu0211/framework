@@ -30,6 +30,7 @@ use Notadd\Foundation\Http\HttpServiceProvider;
 use Notadd\Foundation\Routing\RouterServiceProvider;
 use Notadd\Foundation\Session\SessionServiceProvider;
 use Notadd\Member\Models\Member;
+use Notadd\Module\ModuleServiceProvider;
 use Notadd\Passport\PassportServiceProvider;
 use Notadd\Setting\Contracts\SettingsRepository;
 use Notadd\Setting\SettingServiceProvider;
@@ -88,6 +89,7 @@ abstract class AbstractServer {
             $config->set('mail.password', $setting->get('mail.password'));
             $app->register(HttpServiceProvider::class);
             $app->register(AdminServiceProvider::class);
+            $app->register(ModuleServiceProvider::class);
             $app->register(ExtensionServiceProvider::class);
         } else {
             $app->setDebugMode(true);
