@@ -7,6 +7,7 @@
  */
 namespace Notadd\Admin\Listeners;
 use Notadd\Admin\Controllers\AdminController;
+use Notadd\Admin\Handlers\DashboardHandler;
 use Notadd\Foundation\Routing\Abstracts\AbstractRouteRegister;
 /**
  * Class RouteRegister
@@ -18,7 +19,10 @@ class RouteRegister extends AbstractRouteRegister {
      */
     public function handle() {
         $this->router->group(['middleware' => 'web', 'prefix' => 'admin'], function() {
-            $this->router->resource('/', AdminController::class);
+            $this->router->resource('/', AdminController::class, [
+                'only' => 'index'
+            ]);
+            $this->router->api('dashboard', DashboardHandler::class);
         });
     }
 }
