@@ -33,7 +33,7 @@ abstract class AbstractCommand extends Command {
      */
     public function __construct() {
         parent::__construct();
-        $this->container = Container::getInstance();
+        $this->container = $this->getContainer();
     }
     /**
      * @param $command
@@ -60,6 +60,12 @@ abstract class AbstractCommand extends Command {
      */
     abstract protected function fire();
     /**
+     * @return \Illuminate\Container\Container
+     */
+    protected function getContainer() {
+        return Container::getInstance();
+    }
+    /**
      * @param $name
      * @return bool
      */
@@ -71,5 +77,11 @@ abstract class AbstractCommand extends Command {
      */
     protected function info($string) {
         $this->output->writeln("<info>$string</info>");
+    }
+    /**
+     * @param $container
+     */
+    protected function setContainer($container) {
+        $this->container = $container;
     }
 }
