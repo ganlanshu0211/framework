@@ -21,6 +21,8 @@ use Tobscure\JsonApi\SerializerInterface;
  * @package Notadd\Foundation\Passport\Abstracts
  */
 abstract class AbstractHandler implements Handler {
+    const COLLECTION = 'Collection';
+    const RESOURCE = 'Resource';
     /**
      * @var \Illuminate\Bus\Dispatcher
      */

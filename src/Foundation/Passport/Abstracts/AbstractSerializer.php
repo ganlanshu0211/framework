@@ -12,4 +12,21 @@ use Tobscure\JsonApi\AbstractSerializer as AbstractTobscureSerializer;
  * @package Notadd\Foundation\Passport\Abstracts
  */
 abstract class AbstractSerializer extends AbstractTobscureSerializer {
+    /**
+     * @param array|object $model
+     * @param array|null $fields
+     * @return array
+     */
+    public function getAttributes($model, array $fields = null) {
+        if(!is_object($model) && !is_array($model)) {
+            return [];
+        }
+        $attributes = $this->getDefaultAttributes($model);
+        return $attributes;
+    }
+    /**
+     * @param array|object $model
+     * @return array
+     */
+    abstract protected function getDefaultAttributes($model);
 }
