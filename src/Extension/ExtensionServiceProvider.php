@@ -13,14 +13,16 @@ use Notadd\Foundation\Abstracts\AbstractServiceProvider;
  */
 class ExtensionServiceProvider extends AbstractServiceProvider {
     /**
-     * @return void
+     * @param \Notadd\Extension\ExtensionManager $manager
      */
-    public function boot() {
+    public function boot(ExtensionManager $manager) {
     }
     /**
      * @return void
      */
     public function register() {
-        $this->app->singleton('extensions', ExtensionManager::class);
+        $this->app->singleton('extensions', function($app) {
+            return new ExtensionManager($app, $app['events'], $app['files']);
+        });
     }
 }

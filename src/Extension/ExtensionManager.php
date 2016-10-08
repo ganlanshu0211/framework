@@ -68,21 +68,18 @@ class ExtensionManager {
                     $this->extensions->put($extension->getId(), $extension);
                 });
             }
-            if($this->filesystem->exists($this->getExtensionPath()) && !empty($directories = $this->filesystem->directories($this->getExtensionPath()))) {
-                $directories = new Collection($directories);
-                $directories->each(function($directory) {
-                    if(!$this->filesystem->exists($bootstrap = $directory . DIRECTORY_SEPARATOR . 'bootstrap.php')) {
-                        return null;
+            if($this->filesystem->isDirectory($this->getExtensionPath()) && !empty($directories = $this->filesystem->directories($this->getExtensionPath()))) {
+                (new Collection($directories))->each(function($directory) {
+                    if($this->filesystem->exists($bootstrap = $directory . DIRECTORY_SEPARATOR . 'bootstrap.php')) {
+                        $extension = $this->filesystem->getRequire($bootstrap);
+                        if(is_string($extension) && in_array(ExtensionRegistrar::class, class_implements($extension))) {
+                            $registrar = $this->container->make($extension);
+                            $extension = $registrar->getExtension();
+                        }
+                        if($extension instanceof Extension) {
+                            $this->extensions->put($extension->getId(), $extension);
+                        }
                     }
-                    $extension = $this->filesystem->getRequire($bootstrap);
-                    if(is_string($extension) && in_array(ExtensionRegistrar::class, class_implements($extension))) {
-                        $registrar = $this->container->make($extension);
-                        $extension = $registrar->getExtension();
-                        return $this->extensions->put($extension->getId(), $extension);
-                    } elseif($extension instanceof Extension) {
-                        return $this->extensions->put($extension->getId(), $extension);
-                    }
-                    return null;
                 });
             }
         }

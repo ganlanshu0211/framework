@@ -14,10 +14,12 @@ use Illuminate\Events\EventServiceProvider;
 use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use Notadd\Extension\ExtensionManager;
 use Notadd\Foundation\Contracts\Application as ApplicationContract;
 use Notadd\Foundation\Routing\Redirector;
 use Notadd\Foundation\Routing\Router;
 use Notadd\Foundation\Routing\UrlGenerator;
+use Notadd\Module\ModuleManager;
 use Notadd\Setting\Contracts\SettingsRepository;
 /**
  * Class Application
@@ -343,6 +345,7 @@ class Application extends Container implements ApplicationContract {
             ],
             'db' => ConnectionResolverInterface::class,
             'db.connection' => ConnectionInterface::class,
+            'extensions' => ExtensionManager::class,
             'events' => [
                 'Illuminate\Events\Dispatcher',
                 'Illuminate\Contracts\Events\Dispatcher'
@@ -362,6 +365,7 @@ class Application extends Container implements ApplicationContract {
                 'Illuminate\Contracts\Mail\MailQueue'
             ],
             'migration.repository' => MigrationRepositoryInterface::class,
+            'modules' => ModuleManager::class,
             'redirector' => Redirector::class,
             'router' => Router::class,
             SettingsRepository::class => 'setting',
