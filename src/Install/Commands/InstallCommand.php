@@ -119,6 +119,11 @@ class InstallCommand extends AbstractCommand {
         ]);
         $setting = $this->container->make(SettingsRepository::class);
         $setting->set('setting.title', $this->data->get('website'));
+        if($this->data->get('image_engine', false)) {
+            $setting->set('setting.image.engine', 'webp');
+        } else {
+            $setting->set('setting.image.engine', 'normal');
+        }
         $this->createAdministrationUser();
         $this->writingConfiguration();
         $this->info('Notadd Installed!');
@@ -138,12 +143,14 @@ class InstallCommand extends AbstractCommand {
         $this->data->put('admin_password_confirmation', $this->output->secret('重复密码：'));
         $this->data->put('admin_email', $this->output->ask('电子邮箱：'));
         $this->data->put('website', $this->output->ask('网站标题：'));
+        $this->data->put('image_engine', $this->output->ask('是否开启Webp图片模式(on)：'));
         $this->isDataSetted = true;
     }
     /**
      * @param array $data
      */
     public function setDataFromController(array $data) {
+        $this->data->put('image_engine', $data['image_engine']);
         $this->data->put('driver', $data['driver']);
         $this->data->put('database_host', $data['database_host']);
         $this->data->put('database', $data['database']);

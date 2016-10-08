@@ -15,7 +15,7 @@
                             <div class="form-group">
                                 <label for="toggle1" class="col-xs-6 control-label webp-label">Webp图片模式</label>
                                 <div class="togglebutton" id="toggle1">
-                                    <label><input type="checkbox" checked></label>
+                                    <label><input name="image_engine" type="checkbox" checked></label>
                                 </div>
                             </div>
                             <div class="form-group label-floating">
