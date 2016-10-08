@@ -1,4 +1,16 @@
 {
+    "name": "notadd/framework",
+    "description": "The Notadd Framework.",
+    "type": "project",
+    "keywords": ["notadd", "cms", "framework"],
+    "homepage": "https://notadd.com",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "twilroad",
+            "email": "269044570@qq.com"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "Notadd\\": "src/"
