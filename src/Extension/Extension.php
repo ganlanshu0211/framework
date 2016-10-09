@@ -6,6 +6,7 @@
  * @datetime 2016-08-29 14:07
  */
 namespace Notadd\Extension;
+use Notadd\Extension\Abstracts\ExtensionRegistrar;
 use Notadd\Extension\Contracts\Extension as ExtensionContract;
 /**
  * Class Extension
@@ -32,6 +33,10 @@ class Extension implements ExtensionContract {
      * @var string
      */
     protected $path;
+    /**
+     * @var \Notadd\Extension\Abstracts\ExtensionRegistrar
+     */
+    protected $registrar;
     /**
      * @var string
      */
@@ -70,6 +75,12 @@ class Extension implements ExtensionContract {
         return $this->path;
     }
     /**
+     * @return \Notadd\Extension\Abstracts\ExtensionRegistrar
+     */
+    public function getRegistrar() {
+        return $this->registrar;
+    }
+    /**
      * @return bool
      */
     public function hasAssets() {
@@ -86,5 +97,11 @@ class Extension implements ExtensionContract {
      */
     public function toArray() {
         return [];
+    }
+    /**
+     * @param \Notadd\Extension\Abstracts\ExtensionRegistrar $registrar
+     */
+    public function setRegistrar(ExtensionRegistrar $registrar) {
+        $this->registrar = $registrar;
     }
 }

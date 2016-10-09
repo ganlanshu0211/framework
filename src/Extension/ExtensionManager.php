@@ -11,13 +11,16 @@ use Illuminate\Events\Dispatcher;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Notadd\Extension\Contracts\Extension as ExtensionContract;
-use Notadd\Extension\Contracts\ExtensionRegistrar;
+use Notadd\Extension\Abstracts\ExtensionRegistrar;
 /**
  * Class ExtensionManager
  * @package Notadd\Extension
  */
 class ExtensionManager {
+    /**
+     * @var array
+     */
+    protected $booted = [];
     /**
      * @var \Illuminate\Container\Container
      */
@@ -47,6 +50,13 @@ class ExtensionManager {
         $this->filesystem = $filesystem;
     }
     /**
+     * @param \Notadd\Extension\Abstracts\ExtensionRegistrar $registrar
+     */
+    public function bootExtension(ExtensionRegistrar $registrar) {
+        $registrar->register();
+        $this->booted[get_class($registrar)] = $registrar;
+    }
+    /**
      * @return string
      */
     protected function getExtensionPath() {
@@ -72,7 +82,7 @@ class ExtensionManager {
                 (new Collection($directories))->each(function($directory) {
                     if($this->filesystem->exists($bootstrap = $directory . DIRECTORY_SEPARATOR . 'bootstrap.php')) {
                         $extension = $this->filesystem->getRequire($bootstrap);
-                        if(is_string($extension) && in_array(ExtensionRegistrar::class, class_implements($extension))) {
+                        if(is_string($extension) && in_array(ExtensionRegistrar::class, class_parents($extension))) {
                             $registrar = $this->container->make($extension);
                             $extension = $registrar->getExtension();
                         }
