@@ -89,7 +89,6 @@ abstract class AbstractServer {
             $config->set('mail.password', $setting->get('mail.password'));
             $app->register(HttpServiceProvider::class);
             $app->register(AdminServiceProvider::class);
-            $app->register(ModuleServiceProvider::class);
             $app->register(ExtensionServiceProvider::class);
         } else {
             $app->setDebugMode(true);
