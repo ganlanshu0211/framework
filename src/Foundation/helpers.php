@@ -48,27 +48,27 @@ if(!function_exists('base_path')) {
         return app()->basePath() . ($path ? DIRECTORY_SEPARATOR . $path : $path);
     }
 }
-if (! function_exists('bcrypt')) {
+if(!function_exists('bcrypt')) {
     /**
      * @param string $value
-     * @param array  $options
+     * @param array $options
      * @return string
      */
     function bcrypt($value, $options = []) {
         return app('hash')->make($value, $options);
     }
 }
-if (!function_exists('config')) {
+if(!function_exists('config')) {
     /**
-     * @param array|string  $key
-     * @param mixed  $default
+     * @param array|string $key
+     * @param mixed $default
      * @return mixed
      */
     function config($key = null, $default = null) {
-        if (is_null($key)) {
+        if(is_null($key)) {
             return app('config');
         }
-        if (is_array($key)) {
+        if(is_array($key)) {
             return app('config')->set($key);
         }
         return app('config')->get($key, $default);
@@ -85,7 +85,7 @@ if(!function_exists('event')) {
         return app('events')->fire($event, $payload, $halt);
     }
 }
-if (! function_exists('head')) {
+if(!function_exists('head')) {
     /**
      * @param array $array
      * @return mixed

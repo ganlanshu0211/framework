@@ -44,6 +44,7 @@
         "illuminate/mail": "5.3.*",
         "illuminate/notifications": "5.3.*",
         "illuminate/queue": "5.3.*",
+        "illuminate/redis": "5.3.*",
         "illuminate/session": "5.3.*",
         "illuminate/support": "5.3.*",
         "illuminate/validation": "5.3.*",

@@ -19,7 +19,6 @@ use Notadd\Foundation\Contracts\Application as ApplicationContract;
 use Notadd\Foundation\Routing\Redirector;
 use Notadd\Foundation\Routing\Router;
 use Notadd\Foundation\Routing\UrlGenerator;
-use Notadd\Module\ModuleManager;
 use Notadd\Setting\Contracts\SettingsRepository;
 /**
  * Class Application
@@ -365,7 +364,6 @@ class Application extends Container implements ApplicationContract {
                 'Illuminate\Contracts\Mail\MailQueue'
             ],
             'migration.repository' => MigrationRepositoryInterface::class,
-            'modules' => ModuleManager::class,
             'redirector' => Redirector::class,
             'router' => Router::class,
             SettingsRepository::class => 'setting',
@@ -396,6 +394,12 @@ class Application extends Container implements ApplicationContract {
      */
     public function resolveProviderClass($provider) {
         return new $provider($this);
+    }
+    /**
+     * @return string
+     */
+    public function resourcePath() {
+        return $this->basePath . DIRECTORY_SEPARATOR . 'resources';
     }
     /**
      * @param string $basePath

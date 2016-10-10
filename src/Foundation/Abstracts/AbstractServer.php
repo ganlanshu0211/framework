@@ -30,11 +30,9 @@ use Notadd\Foundation\Http\HttpServiceProvider;
 use Notadd\Foundation\Routing\RouterServiceProvider;
 use Notadd\Foundation\Session\SessionServiceProvider;
 use Notadd\Member\Models\Member;
-use Notadd\Module\ModuleServiceProvider;
 use Notadd\Passport\PassportServiceProvider;
 use Notadd\Setting\Contracts\SettingsRepository;
 use Notadd\Setting\SettingServiceProvider;
-use PDO;
 /**
  * Class AbstractServer
  * @package Notadd\Foundation\Abstracts
