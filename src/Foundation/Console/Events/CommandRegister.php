@@ -10,7 +10,7 @@ use Illuminate\Container\Container;
 use Notadd\Foundation\Console\Abstracts\AbstractCommand;
 use Notadd\Foundation\Console\Application as Console;
 /**
- * Class CommandRegister
+ * Class CommandRegistrar
  * @package Notadd\Foundation\Console\Events
  */
 class CommandRegister {
@@ -23,7 +23,7 @@ class CommandRegister {
      */
     protected $container;
     /**
-     * CommandRegister constructor.
+     * CommandRegistrar constructor.
      * @param \Illuminate\Container\Container $container
      * @param \Notadd\Foundation\Console\Application $console
      */

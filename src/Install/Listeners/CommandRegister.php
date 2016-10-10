@@ -10,7 +10,7 @@ use Notadd\Foundation\Console\Abstracts\AbstractCommandRegister;
 use Notadd\Foundation\Console\Events\CommandRegister as CommandRegisterEvent;
 use Notadd\Install\Commands\InstallCommand;
 /**
- * Class CommandRegister
+ * Class CommandRegistrar
  * @package Notadd\Install\Listeners
  */
 class CommandRegister extends AbstractCommandRegister {

@@ -7,12 +7,12 @@
  */
 namespace Notadd\Foundation\Http\Listeners;
 use Notadd\Foundation\Http\Controllers\IndexController;
-use Notadd\Foundation\Routing\Abstracts\AbstractRouteRegister;
+use Notadd\Foundation\Routing\Abstracts\AbstractRouteRegistrar;
 /**
  * Class RouteRegister
  * @package Notadd\Foundation\Http\Listeners
  */
-class RouteRegister extends AbstractRouteRegister {
+class RouteRegistrar extends AbstractRouteRegistrar {
     /**
      * @return void
      */

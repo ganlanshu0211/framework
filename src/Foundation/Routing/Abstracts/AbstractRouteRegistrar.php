@@ -15,7 +15,7 @@ use Notadd\Foundation\Routing\Router;
  * Class AbstractRouteRegister
  * @package Notadd\Foundation\Routing\Abstracts
  */
-abstract class AbstractRouteRegister extends AbstractEventSubscriber {
+abstract class AbstractRouteRegistrar extends AbstractEventSubscriber {
     /**
      * @var \Notadd\Foundation\Routing\Router
      */

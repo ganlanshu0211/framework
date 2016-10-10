@@ -10,10 +10,10 @@ use Notadd\Foundation\Abstracts\AbstractEventSubscriber;
 use Notadd\Foundation\Console\Events\CommandRegister as CommandRegisterEvent;
 use Notadd\Upgrade\Commands\UpgradeCommand;
 /**
- * Class CommandRegister
+ * Class CommandRegistrar
  * @package Notadd\Upgrade\Listeners
  */
-class CommandRegister extends AbstractEventSubscriber {
+class CommandRegistrar extends AbstractEventSubscriber {
     /**
      * @return string
      */

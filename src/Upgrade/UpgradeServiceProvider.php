@@ -7,8 +7,8 @@
  */
 namespace Notadd\Upgrade;
 use Notadd\Foundation\Abstracts\AbstractServiceProvider;
-use Notadd\Upgrade\Listeners\CommandRegister;
-use Notadd\Upgrade\Listeners\RouteRegister;
+use Notadd\Upgrade\Listeners\CommandRegistrar;
+use Notadd\Upgrade\Listeners\RouteRegistrar;
 /**
  * Class UpgradeServiceProvider
  * @package Notadd\Upgrade
@@ -18,7 +18,7 @@ class UpgradeServiceProvider extends AbstractServiceProvider {
      * @return void
      */
     public function boot() {
-        $this->events->subscribe(CommandRegister::class);
-        $this->events->subscribe(RouteRegister::class);
+        $this->events->subscribe(CommandRegistrar::class);
+        $this->events->subscribe(RouteRegistrar::class);
     }
 }

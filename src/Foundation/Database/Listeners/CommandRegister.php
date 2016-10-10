@@ -14,7 +14,7 @@ use Notadd\Foundation\Database\Commands\MakeMigrationCommand;
 use Notadd\Foundation\Database\Commands\MigrateCommand;
 use Notadd\Foundation\Database\Commands\RollbackCommand;
 /**
- * Class CommandRegister
+ * Class CommandRegistrar
  * @package Notadd\Foundation\Database\Listeners
  */
 class CommandRegister extends AbstractCommandRegister {

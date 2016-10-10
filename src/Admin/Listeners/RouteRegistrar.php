@@ -8,12 +8,12 @@
 namespace Notadd\Admin\Listeners;
 use Notadd\Admin\Controllers\AdminController;
 use Notadd\Admin\Handlers\DashboardHandler;
-use Notadd\Foundation\Routing\Abstracts\AbstractRouteRegister;
+use Notadd\Foundation\Routing\Abstracts\AbstractRouteRegistrar;
 /**
  * Class RouteRegister
  * @package Notadd\Admin\Listeners
  */
-class RouteRegister extends AbstractRouteRegister {
+class RouteRegistrar extends AbstractRouteRegistrar {
     /**
      * @return void
      */

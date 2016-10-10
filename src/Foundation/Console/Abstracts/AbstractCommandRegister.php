@@ -23,7 +23,7 @@ abstract class AbstractCommandRegister {
      */
     protected $events;
     /**
-     * CommandRegister constructor.
+     * CommandRegistrar constructor.
      * @param \Illuminate\Container\Container $container
      * @param \Illuminate\Events\Dispatcher $events
      */

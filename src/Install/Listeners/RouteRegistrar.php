@@ -6,13 +6,13 @@
  * @datetime 2016-08-27 16:33
  */
 namespace Notadd\Install\Listeners;
-use Notadd\Foundation\Routing\Abstracts\AbstractRouteRegister;
+use Notadd\Foundation\Routing\Abstracts\AbstractRouteRegistrar;
 use Notadd\Install\Controllers\InstallController;
 /**
  * Class RouteRegister
  * @package Notadd\Install\Listeners
  */
-class RouteRegister extends AbstractRouteRegister {
+class RouteRegistrar extends AbstractRouteRegistrar {
     /**
      * @return void
      */

@@ -12,7 +12,7 @@ use Notadd\Passport\Commands\ClientCommand;
 use Notadd\Passport\Commands\InstallCommand;
 use Notadd\Passport\Commands\KeysCommand;
 /**
- * Class CommandRegister
+ * Class CommandRegistrar
  * @package Notadd\Passport\Listeners
  */
 class CommandRegister extends AbstractCommandRegister {

@@ -6,7 +6,7 @@
  * @datetime 2016-08-29 16:18
  */
 namespace Notadd\Admin;
-use Notadd\Admin\Listeners\RouteRegister;
+use Notadd\Admin\Listeners\RouteRegistrar;
 use Notadd\Foundation\Abstracts\AbstractServiceProvider;
 /**
  * Class AdminServiceProvider
@@ -17,6 +17,6 @@ class AdminServiceProvider extends AbstractServiceProvider {
      * @return void
      */
     public function boot() {
-        $this->events->subscribe(RouteRegister::class);
+        $this->events->subscribe(RouteRegistrar::class);
     }
 }

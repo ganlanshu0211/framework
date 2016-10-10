@@ -7,7 +7,7 @@
  */
 namespace Notadd\Member;
 use Notadd\Foundation\Abstracts\AbstractServiceProvider;
-use Notadd\Member\Listeners\RouteRegister;
+use Notadd\Member\Listeners\RouteRegistrar;
 /**
  * Class MemberServiceProvider
  * @package Notadd\Member
@@ -17,6 +17,6 @@ class MemberServiceProvider extends AbstractServiceProvider {
      * @return void
      */
     public function boot() {
-        $this->events->subscribe(RouteRegister::class);
+        $this->events->subscribe(RouteRegistrar::class);
     }
 }
