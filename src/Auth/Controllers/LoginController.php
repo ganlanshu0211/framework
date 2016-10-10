@@ -6,10 +6,10 @@
  * @datetime 2016-09-26 11:30
  */
 namespace Notadd\Auth\Controllers;
-use Notadd\Foundation\Routing\Abstracts\AbstractController;
+use Notadd\Foundation\Routing\Abstracts\Controller;
 /**
  * Class LoginController
  * @package Notadd\Auth\Controllers
  */
-class LoginController extends AbstractController {
+class LoginController extends Controller {
 }

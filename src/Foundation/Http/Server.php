@@ -6,7 +6,7 @@
  * @datetime 2016-08-20 00:51
  */
 namespace Notadd\Foundation\Http;
-use Notadd\Foundation\Abstracts\AbstractServer;
+use Notadd\Foundation\Abstracts\Server as BaseServer;
 use Notadd\Foundation\Application;
 use Notadd\Foundation\Http\Events\PipelineInjection;
 use Notadd\Foundation\Http\Pipelines\ErrorHandler;
@@ -22,7 +22,7 @@ use Zend\Stratigility\MiddlewarePipe;
  * Class Server
  * @package Notadd\Foundation\Http
  */
-class Server extends AbstractServer {
+class Server extends BaseServer {
     /**
      * @param \Notadd\Foundation\Application $app
      * @return \Zend\Stratigility\MiddlewareInterface

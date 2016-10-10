@@ -6,13 +6,13 @@
  * @datetime 2016-09-30 13:58
  */
 namespace Notadd\Foundation\Console\Commands;
-use Notadd\Foundation\Console\Abstracts\AbstractCommand;
+use Notadd\Foundation\Console\Abstracts\Command;
 use Symfony\Component\Console\Input\InputOption;
 /**
  * Class OptimizeCommand
  * @package Notadd\Foundation\Console\Commands
  */
-class OptimizeCommand extends AbstractCommand {
+class OptimizeCommand extends Command {
     /**
      * @return void
      */

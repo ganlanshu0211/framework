@@ -13,10 +13,10 @@ use Notadd\Foundation\Console\Application;
 use Notadd\Foundation\Routing\Contracts\Controller as ControllerContract;
 use Psr\Http\Message\ServerRequestInterface;
 /**
- * Class AbstractController
+ * Class Controller
  * @package Notadd\Foundation\Http\Abstracts
  */
-abstract class AbstractController implements ControllerContract {
+abstract class Controller implements ControllerContract {
     /**
      * @var \Illuminate\Container\Container
      */
@@ -46,7 +46,7 @@ abstract class AbstractController implements ControllerContract {
      */
     protected $view;
     /**
-     * AbstractController constructor.
+     * Controller constructor.
      */
     public function __construct() {
         $this->container = $this->getContainer();

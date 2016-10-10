@@ -8,7 +8,7 @@
 namespace Notadd\Foundation\Database;
 use Illuminate\Database\DatabaseServiceProvider as IlluminateDatabaseServiceProvider;
 use Illuminate\Database\Migrations\DatabaseMigrationRepository;
-use Notadd\Foundation\Database\Listeners\CommandRegister;
+use Notadd\Foundation\Database\Listeners\CommandRegistrar;
 use Notadd\Foundation\Database\Migrations\MigrationCreator;
 use Notadd\Foundation\Database\Migrations\Migrator;
 /**
@@ -21,7 +21,7 @@ class DatabaseServiceProvider extends IlluminateDatabaseServiceProvider {
      */
     public function boot() {
         parent::boot();
-        $this->app->make('events')->subscribe(CommandRegister::class);
+        $this->app->make('events')->subscribe(CommandRegistrar::class);
     }
     /**
      * @return void

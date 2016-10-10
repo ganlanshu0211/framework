@@ -6,13 +6,13 @@
  * @datetime 2016-09-26 17:54
  */
 namespace Notadd\Passport\Commands;
-use Notadd\Foundation\Console\Abstracts\AbstractCommand;
+use Notadd\Foundation\Console\Abstracts\Command;
 use Symfony\Component\Console\Input\InputOption;
 /**
  * Class InstallCommand
  * @package Notadd\Passport\Commands
  */
-class InstallCommand extends AbstractCommand {
+class InstallCommand extends Command {
     /**
      * @return void
      */

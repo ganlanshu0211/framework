@@ -6,12 +6,12 @@
  * @datetime 2016-08-29 16:21
  */
 namespace Notadd\Admin\Controllers;
-use Notadd\Foundation\Routing\Abstracts\AbstractController;
+use Notadd\Foundation\Routing\Abstracts\Controller;
 /**
  * Class AdminController
  * @package Notadd\Admin\Controllers
  */
-class AdminController extends AbstractController {
+class AdminController extends Controller {
     /**
      * @return \Illuminate\Contracts\View\View
      */

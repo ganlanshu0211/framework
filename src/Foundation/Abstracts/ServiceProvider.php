@@ -6,12 +6,12 @@
  * @datetime 2016-08-27 13:03
  */
 namespace Notadd\Foundation\Abstracts;
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
 /**
- * Class AbstractServiceProvider
+ * Class ServiceProvider
  * @package Notadd\Foundation\Abstracts
  */
-abstract class AbstractServiceProvider extends ServiceProvider {
+abstract class ServiceProvider extends IlluminateServiceProvider {
     /**
      * @var \Notadd\Foundation\Application
      */
@@ -37,7 +37,7 @@ abstract class AbstractServiceProvider extends ServiceProvider {
      */
     protected $view;
     /**
-     * AbstractServiceProvider constructor.
+     * ServiceProvider constructor.
      * @param \Illuminate\Contracts\Foundation\Application $application
      */
     public function __construct($application) {

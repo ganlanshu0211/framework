@@ -7,13 +7,13 @@
  */
 namespace Notadd\Setting;
 use Illuminate\Database\ConnectionInterface;
-use Notadd\Foundation\Abstracts\AbstractServiceProvider;
+use Notadd\Foundation\Abstracts\ServiceProvider;
 use Notadd\Setting\Contracts\SettingsRepository;
 /**
  * Class SettingServiceProvider
  * @package Notadd\Setting
  */
-class SettingServiceProvider extends AbstractServiceProvider {
+class SettingServiceProvider extends ServiceProvider {
     /**
      * @return void
      */

@@ -7,7 +7,7 @@
  */
 namespace Notadd\Foundation\Database\Commands;
 use Illuminate\Support\Composer;
-use Notadd\Foundation\Console\Abstracts\AbstractCommand;
+use Notadd\Foundation\Console\Abstracts\Command;
 use Notadd\Foundation\Database\Migrations\MigrationCreator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
@@ -15,7 +15,7 @@ use Symfony\Component\Console\Input\InputOption;
  * Class MakeMigration
  * @package Foundation\Database\Commands
  */
-class MakeMigrationCommand extends AbstractCommand {
+class MakeMigrationCommand extends Command {
     /**
      * @var \Illuminate\Database\Migrations\MigrationCreator
      */

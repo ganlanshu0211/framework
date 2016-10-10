@@ -6,7 +6,7 @@
  * @datetime 2016-08-27 15:46
  */
 namespace Notadd\Foundation\Http\Events;
-use Notadd\Foundation\Abstracts\AbstractServer;
+use Notadd\Foundation\Abstracts\Server;
 use Zend\Stratigility\MiddlewarePipe;
 /**
  * Class MiddlewareConfigurer
@@ -22,16 +22,16 @@ class PipelineInjection {
      */
     protected $pipe;
     /**
-     * @var \Notadd\Foundation\Abstracts\AbstractServer
+     * @var \Notadd\Foundation\Abstracts\Server
      */
     protected $server;
     /**
      * MiddlewareConfigurer constructor.
      * @param \Zend\Stratigility\MiddlewarePipe $pipe
      * @param string $path
-     * @param \Notadd\Foundation\Abstracts\AbstractServer $server
+     * @param \Notadd\Foundation\Abstracts\Server $server
      */
-    public function __construct(MiddlewarePipe $pipe, $path, AbstractServer $server) {
+    public function __construct(MiddlewarePipe $pipe, $path, Server $server) {
         $this->pipe = $pipe;
         $this->path = $path;
         $this->server = $server;

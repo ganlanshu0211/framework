@@ -6,14 +6,14 @@
  * @datetime 2016-09-10 13:27
  */
 namespace Notadd\Foundation\Database\Commands;
-use Notadd\Foundation\Console\Abstracts\AbstractCommand;
+use Notadd\Foundation\Console\Abstracts\Command;
 use Notadd\Foundation\Database\Migrations\Migrator;
 use Symfony\Component\Console\Input\InputOption;
 /**
  * Class RollbackCommand
  * @package Notadd\Foundation\Database\Commands
  */
-class RollbackCommand extends AbstractCommand {
+class RollbackCommand extends Command {
     /**
      * @var \Notadd\Foundation\Database\Migrations\Migrator
      */

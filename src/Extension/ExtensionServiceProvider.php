@@ -7,12 +7,12 @@
  */
 namespace Notadd\Extension;
 use Illuminate\Support\Collection;
-use Notadd\Foundation\Abstracts\AbstractServiceProvider;
+use Notadd\Foundation\Abstracts\ServiceProvider;
 /**
  * Class ExtensionServiceProvider
  * @package Notadd\Extension
  */
-class ExtensionServiceProvider extends AbstractServiceProvider {
+class ExtensionServiceProvider extends ServiceProvider {
     /**
      * @var \Illuminate\Support\Collection
      */

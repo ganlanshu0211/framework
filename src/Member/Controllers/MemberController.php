@@ -6,10 +6,10 @@
  * @datetime 2016-09-24 17:33
  */
 namespace Notadd\Member\Controllers;
-use Notadd\Foundation\Routing\Abstracts\AbstractController;
+use Notadd\Foundation\Routing\Abstracts\Controller;
 /**
  * Class MemberController
  * @package Notadd\Member\Controllers
  */
-class MemberController extends AbstractController {
+class MemberController extends Controller {
 }

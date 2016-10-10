@@ -6,12 +6,12 @@
  * @datetime 2016-09-03 02:29
  */
 namespace Notadd\Foundation\Database\Commands;
-use Notadd\Foundation\Console\Abstracts\AbstractCommand;
+use Notadd\Foundation\Console\Abstracts\Command;
 /**
  * Class InfoCommand
  * @package Notadd\Foundation\Database\Commands
  */
-class InfoCommand extends AbstractCommand {
+class InfoCommand extends Command {
     /**
      * @return void
      */

@@ -6,13 +6,13 @@
  * @datetime 2016-09-24 17:27
  */
 namespace Notadd\Member;
-use Notadd\Foundation\Abstracts\AbstractServiceProvider;
+use Notadd\Foundation\Abstracts\ServiceProvider;
 use Notadd\Member\Listeners\RouteRegistrar;
 /**
  * Class MemberServiceProvider
  * @package Notadd\Member
  */
-class MemberServiceProvider extends AbstractServiceProvider {
+class MemberServiceProvider extends ServiceProvider {
     /**
      * @return void
      */

@@ -6,16 +6,16 @@
  * @datetime 2016-09-27 10:39
  */
 namespace Notadd\Install\Listeners;
-use Notadd\Foundation\Console\Abstracts\AbstractCommandRegister;
-use Notadd\Foundation\Console\Events\CommandRegister as CommandRegisterEvent;
+use Notadd\Foundation\Console\Abstracts\CommandRegistrar;
+use Notadd\Foundation\Console\Events\RegisterCommand as CommandRegisterEvent;
 use Notadd\Install\Commands\InstallCommand;
 /**
- * Class CommandRegistrar
+ * Class RegisterCommand
  * @package Notadd\Install\Listeners
  */
-class CommandRegister extends AbstractCommandRegister {
+class CommandRegistrar extends CommandRegistrar {
     /**
-     * @param \Notadd\Foundation\Console\Events\CommandRegister $console
+     * @param \Notadd\Foundation\Console\Events\RegisterCommand $console
      */
     public function handle(CommandRegisterEvent $console) {
         $console->registerCommand($this->container->make(InstallCommand::class));

@@ -7,7 +7,7 @@
  */
 namespace Notadd\Passport;
 use Notadd\Foundation\Passport\PassportServiceProvider as BaseServiceProvider;
-use Notadd\Passport\Listeners\CommandRegister;
+use Notadd\Passport\Listeners\CommandRegistrar;
 /**
  * Class PassportServiceProvider
  * @package Notadd\Passport
@@ -17,6 +17,6 @@ class PassportServiceProvider extends BaseServiceProvider {
      * @return void
      */
     public function boot() {
-        $this->app->make('events')->subscribe(CommandRegister::class);
+        $this->app->make('events')->subscribe(CommandRegistrar::class);
     }
 }

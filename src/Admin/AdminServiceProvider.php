@@ -7,12 +7,12 @@
  */
 namespace Notadd\Admin;
 use Notadd\Admin\Listeners\RouteRegistrar;
-use Notadd\Foundation\Abstracts\AbstractServiceProvider;
+use Notadd\Foundation\Abstracts\ServiceProvider;
 /**
  * Class AdminServiceProvider
  * @package Notadd\Admin
  */
-class AdminServiceProvider extends AbstractServiceProvider {
+class AdminServiceProvider extends ServiceProvider {
     /**
      * @return void
      */

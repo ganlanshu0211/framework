@@ -6,13 +6,13 @@
  * @datetime 2016-09-02 18:51
  */
 namespace Notadd\Foundation\Console;
-use Notadd\Foundation\Abstracts\AbstractServer;
+use Notadd\Foundation\Abstracts\Server as BaseServer;
 use Notadd\Install\InstallServiceProvider;
 /**
  * Class Server
  * @package Notadd\Foundation\Console
  */
-class Server extends AbstractServer{
+class Server extends BaseServer{
     /**
      * @return void
      */

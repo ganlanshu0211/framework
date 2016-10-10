@@ -3,19 +3,19 @@
  * This file is part of Notadd.
  * @author TwilRoad <269044570@qq.com>
  * @copyright (c) 2016, iBenchu.org
- * @datetime 2016-09-09 18:07
+ * @datetime 2016-09-27 09:49
  */
-namespace Notadd\Foundation\Abstracts;
+namespace Notadd\Foundation\Console\Abstracts;
 use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher;
-use Illuminate\Support\Str;
+use Notadd\Foundation\Console\Events\RegisterCommand;
 /**
- * Class AbstractEventSubscriber
- * @package Notadd\Foundation\Abstracts
+ * Class CommandRegistrar
+ * @package Notadd\Foundation\Console\Abstracts
  */
-abstract class AbstractEventSubscriber {
+abstract class CommandRegistrar {
     /**
-     * @var \Illuminate\Container\Container
+     * @var \Notadd\Foundation\Application
      */
     protected $container;
     /**
@@ -23,7 +23,7 @@ abstract class AbstractEventSubscriber {
      */
     protected $events;
     /**
-     * AbstractEventSubscriber constructor.
+     * RegisterCommand constructor.
      * @param \Illuminate\Container\Container $container
      * @param \Illuminate\Events\Dispatcher $events
      */
@@ -32,20 +32,13 @@ abstract class AbstractEventSubscriber {
         $this->events = $events;
     }
     /**
-     * @return string|object
-     * @throws \Exception
+     * @param \Notadd\Foundation\Console\Events\RegisterCommand $console
      */
-    protected function getEvent() {
-        throw new \Exception('Event not found!', 404);
-    }
+    abstract public function handle(RegisterCommand $console);
     /**
      * @return void
      */
     public function subscribe() {
-        $method = 'handle';
-        if(method_exists($this, $getHandler = 'get' . Str::ucfirst($method) . 'r')) {
-            $method = $this->{$getHandler}();
-        }
-        $this->events->listen($this->getEvent(), [$this, $method]);
+        $this->events->listen(RegisterCommand::class, [$this, 'handle']);
     }
 }

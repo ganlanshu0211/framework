@@ -6,13 +6,13 @@
  * @datetime 2016-10-06 14:36
  */
 namespace Notadd\Admin\Serializers;
-use Notadd\Foundation\Passport\Abstracts\AbstractSerializer;
+use Notadd\Foundation\Passport\Abstracts\Serializer;
 use Notadd\Member\Models\Member;
 /**
  * Class DashboardSerializer
  * @package Notadd\Admin\Serializers
  */
-class DashboardSerializer extends AbstractSerializer {
+class DashboardSerializer extends Serializer {
     /**
      * @var string
      */

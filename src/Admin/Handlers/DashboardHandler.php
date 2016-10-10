@@ -8,12 +8,12 @@
 namespace Notadd\Admin\Handlers;
 use Notadd\Admin\Jobs\DashboardJob;
 use Notadd\Admin\Serializers\DashboardSerializer;
-use Notadd\Foundation\Passport\Abstracts\AbstractHandler;
+use Notadd\Foundation\Passport\Abstracts\Handler;
 /**
  * Class DashboardDHandler
  * @package Notadd\Admin\Handlers
  */
-class DashboardHandler extends AbstractHandler {
+class DashboardHandler extends Handler {
     /**
      * @return string
      */

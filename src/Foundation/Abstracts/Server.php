@@ -34,16 +34,16 @@ use Notadd\Passport\PassportServiceProvider;
 use Notadd\Setting\Contracts\SettingsRepository;
 use Notadd\Setting\SettingServiceProvider;
 /**
- * Class AbstractServer
+ * Class Server
  * @package Notadd\Foundation\Abstracts
  */
-abstract class AbstractServer {
+abstract class Server {
     /**
      * @var string
      */
     protected $path;
     /**
-     * AbstractServer constructor.
+     * Server constructor.
      * @param $path
      */
     public function __construct($path) {

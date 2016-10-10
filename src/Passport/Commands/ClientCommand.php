@@ -6,7 +6,7 @@
  * @datetime 2016-09-26 17:58
  */
 namespace Notadd\Passport\Commands;
-use Notadd\Foundation\Console\Abstracts\AbstractCommand;
+use Notadd\Foundation\Console\Abstracts\Command;
 use Notadd\Foundation\Passport\PersonalAccessClient;
 use Notadd\Foundation\Passport\Repositories\ClientRepository;
 use Symfony\Component\Console\Input\InputOption;
@@ -14,7 +14,7 @@ use Symfony\Component\Console\Input\InputOption;
  * Class ClientCommand
  * @package Notadd\Passport\Commands
  */
-class ClientCommand extends AbstractCommand {
+class ClientCommand extends Command {
     /**
      * @var \Notadd\Foundation\Passport\Repositories\ClientRepository
      */

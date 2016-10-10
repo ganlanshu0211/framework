@@ -6,14 +6,14 @@
  * @datetime 2016-09-09 16:45
  */
 namespace Notadd\Upgrade;
-use Notadd\Foundation\Abstracts\AbstractServiceProvider;
+use Notadd\Foundation\Abstracts\ServiceProvider;
 use Notadd\Upgrade\Listeners\CommandRegistrar;
 use Notadd\Upgrade\Listeners\RouteRegistrar;
 /**
  * Class UpgradeServiceProvider
  * @package Notadd\Upgrade
  */
-class UpgradeServiceProvider extends AbstractServiceProvider {
+class UpgradeServiceProvider extends ServiceProvider {
     /**
      * @return void
      */

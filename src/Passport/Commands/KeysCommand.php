@@ -6,14 +6,14 @@
  * @datetime 2016-09-26 17:59
  */
 namespace Notadd\Passport\Commands;
-use Notadd\Foundation\Console\Abstracts\AbstractCommand;
+use Notadd\Foundation\Console\Abstracts\Command;
 use Notadd\Foundation\Passport\Passport;
 use phpseclib\Crypt\RSA;
 /**
  * Class KeysCommand
  * @package Notadd\Passport\Commands
  */
-class KeysCommand extends AbstractCommand {
+class KeysCommand extends Command {
     /**
      * @var \phpseclib\Crypt\RSA
      */

@@ -6,12 +6,12 @@
  * @datetime 2016-08-27 19:30
  */
 namespace Notadd\Install\Prerequisite;
-use Notadd\Install\Abstracts\AbstractPrerequisite;
+use Notadd\Install\Abstracts\Prerequisite;
 /**
  * Class PhpVersion
  * @package Notadd\Install\Prerequisite
  */
-class PhpVersion extends AbstractPrerequisite {
+class PhpVersion extends Prerequisite {
     /**
      * @var string
      */

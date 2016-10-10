@@ -6,14 +6,14 @@
  * @datetime 2016-09-09 17:38
  */
 namespace Notadd\Upgrade\Listeners;
-use Notadd\Foundation\Abstracts\AbstractEventSubscriber;
-use Notadd\Foundation\Console\Events\CommandRegister as CommandRegisterEvent;
+use Notadd\Foundation\Abstracts\EventSubscriber;
+use Notadd\Foundation\Console\Events\RegisterCommand as CommandRegisterEvent;
 use Notadd\Upgrade\Commands\UpgradeCommand;
 /**
- * Class CommandRegistrar
+ * Class RegisterCommand
  * @package Notadd\Upgrade\Listeners
  */
-class CommandRegistrar extends AbstractEventSubscriber {
+class CommandRegistrar extends EventSubscriber {
     /**
      * @return string
      */
@@ -21,7 +21,7 @@ class CommandRegistrar extends AbstractEventSubscriber {
         return CommandRegisterEvent::class;
     }
     /**
-     * @param \Notadd\Foundation\Console\Events\CommandRegister $console
+     * @param \Notadd\Foundation\Console\Events\RegisterCommand $console
      */
     public function handle(CommandRegisterEvent $console) {
         $console->registerCommand($this->container->make(UpgradeCommand::class));

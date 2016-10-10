@@ -8,14 +8,14 @@
 namespace Notadd\Foundation\Routing\Abstracts;
 use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher;
-use Notadd\Foundation\Abstracts\AbstractEventSubscriber;
+use Notadd\Foundation\Abstracts\EventSubscriber;
 use Notadd\Foundation\Routing\Events\RouteRegister as RouteRegisterEvent;
 use Notadd\Foundation\Routing\Router;
 /**
  * Class AbstractRouteRegister
  * @package Notadd\Foundation\Routing\Abstracts
  */
-abstract class AbstractRouteRegistrar extends AbstractEventSubscriber {
+abstract class RouteRegistrar extends EventSubscriber {
     /**
      * @var \Notadd\Foundation\Routing\Router
      */

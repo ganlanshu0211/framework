@@ -7,13 +7,13 @@
  */
 namespace Notadd\Foundation\Database\Commands;
 use Illuminate\Database\Migrations\MigrationRepositoryInterface;
-use Notadd\Foundation\Console\Abstracts\AbstractCommand;
+use Notadd\Foundation\Console\Abstracts\Command;
 use Symfony\Component\Console\Input\InputOption;
 /**
  * Class InstallCommand
  * @package Notadd\Foundation\Database\Commands
  */
-class InstallCommand extends AbstractCommand {
+class InstallCommand extends Command {
     /**
      * @var \Illuminate\Database\Migrations\MigrationRepositoryInterface
      */

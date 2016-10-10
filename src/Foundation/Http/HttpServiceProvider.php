@@ -6,7 +6,7 @@
  * @datetime 2016-08-27 14:59
  */
 namespace Notadd\Foundation\Http;
-use Notadd\Foundation\Abstracts\AbstractServiceProvider;
+use Notadd\Foundation\Abstracts\ServiceProvider;
 use Notadd\Foundation\Http\Listeners\RouteRegistrar;
 use Notadd\Foundation\Http\Middlewares\AuthenticateWithSession;
 use Notadd\Foundation\Http\Middlewares\RememberFromCookie;
@@ -15,7 +15,7 @@ use Notadd\Member\MemberServiceProvider;
  * Class HttpServiceProvider
  * @package Notadd\Foundation\Http
  */
-class HttpServiceProvider extends AbstractServiceProvider {
+class HttpServiceProvider extends ServiceProvider {
     /**
      * @return void
      */

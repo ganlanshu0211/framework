@@ -6,9 +6,9 @@
  * @datetime 2016-08-27 16:31
  */
 namespace Notadd\Install;
-use Notadd\Foundation\Abstracts\AbstractServiceProvider;
+use Notadd\Foundation\Abstracts\ServiceProvider;
 use Notadd\Install\Contracts\Prerequisite;
-use Notadd\Install\Listeners\CommandRegister;
+use Notadd\Install\Listeners\CommandRegistrar;
 use Notadd\Install\Listeners\RouteRegistrar;
 use Notadd\Install\Prerequisite\PhpExtension;
 use Notadd\Install\Prerequisite\PhpVersion;
@@ -17,12 +17,12 @@ use Notadd\Install\Prerequisite\WritablePath;
  * Class InstallServiceProvider
  * @package Notadd\Install
  */
-class InstallServiceProvider extends AbstractServiceProvider {
+class InstallServiceProvider extends ServiceProvider {
     /**
      * @return void
      */
     public function boot() {
-        $this->events->subscribe(CommandRegister::class);
+        $this->events->subscribe(CommandRegistrar::class);
         $this->events->subscribe(RouteRegistrar::class);
     }
     /**

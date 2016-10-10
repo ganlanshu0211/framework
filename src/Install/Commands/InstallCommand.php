@@ -9,7 +9,7 @@ namespace Notadd\Install\Commands;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
-use Notadd\Foundation\Console\Abstracts\AbstractCommand;
+use Notadd\Foundation\Console\Abstracts\Command;
 use Notadd\Member\Models\Member;
 use Notadd\Setting\Contracts\SettingsRepository;
 use PDO;
@@ -17,7 +17,7 @@ use PDO;
  * Class InstallCommand
  * @package Notadd\Install\Commands
  */
-class InstallCommand extends AbstractCommand {
+class InstallCommand extends Command {
     /**
      * @var \Illuminate\Contracts\Config\Repository
      */

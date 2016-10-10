@@ -6,12 +6,12 @@
  * @datetime 2016-08-26 14:41
  */
 namespace Notadd\Foundation\Http\Controllers;
-use Notadd\Foundation\Routing\Abstracts\AbstractController;
+use Notadd\Foundation\Routing\Abstracts\Controller;
 /**
  * Class IndexController
  * @package Notadd\Foundation\Http\Controllers
  */
-class IndexController extends AbstractController {
+class IndexController extends Controller {
     /**
      * @return \Illuminate\Contracts\View\View
      */

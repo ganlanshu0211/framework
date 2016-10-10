@@ -8,7 +8,7 @@
 namespace Notadd\Foundation\Console;
 use Illuminate\Container\Container;
 use Notadd\Foundation\Console\Commands\OptimizeCommand;
-use Notadd\Foundation\Console\Events\CommandRegister;
+use Notadd\Foundation\Console\Events\RegisterCommand;
 use Symfony\Component\Console\Application as SymfonyApplication;
 /**
  * Class Application
@@ -46,7 +46,7 @@ class Application extends SymfonyApplication {
         if(is_null(static::$instance)) {
             static::$instance = new static($container, $name);
             static::$instance->registerCommands();
-            static::$instance->events->fire(new CommandRegister($container, static::$instance));
+            static::$instance->events->fire(new RegisterCommand($container, static::$instance));
         }
         return static::$instance;
     }

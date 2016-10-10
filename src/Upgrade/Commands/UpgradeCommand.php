@@ -6,12 +6,12 @@
  * @datetime 2016-09-09 17:35
  */
 namespace Notadd\Upgrade\Commands;
-use Notadd\Foundation\Console\Abstracts\AbstractCommand;
+use Notadd\Foundation\Console\Abstracts\Command;
 /**
  * Class UpgradeCommand
  * @package Notadd\Upgrade\Commands
  */
-class UpgradeCommand extends AbstractCommand {
+class UpgradeCommand extends Command {
     /**
      * @return void
      */

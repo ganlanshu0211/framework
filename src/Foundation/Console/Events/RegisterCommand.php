@@ -7,13 +7,13 @@
  */
 namespace Notadd\Foundation\Console\Events;
 use Illuminate\Container\Container;
-use Notadd\Foundation\Console\Abstracts\AbstractCommand;
+use Notadd\Foundation\Console\Abstracts\Command;
 use Notadd\Foundation\Console\Application as Console;
 /**
- * Class CommandRegistrar
+ * Class RegisterCommand
  * @package Notadd\Foundation\Console\Events
  */
-class CommandRegister {
+class RegisterCommand {
     /**
      * @var \Notadd\Foundation\Console\Application
      */
@@ -23,7 +23,7 @@ class CommandRegister {
      */
     protected $container;
     /**
-     * CommandRegistrar constructor.
+     * RegisterCommand constructor.
      * @param \Illuminate\Container\Container $container
      * @param \Notadd\Foundation\Console\Application $console
      */
@@ -32,10 +32,10 @@ class CommandRegister {
         $this->container = $container;
     }
     /**
-     * @param \Notadd\Foundation\Console\Abstracts\AbstractCommand $command
+     * @param \Notadd\Foundation\Console\Abstracts\Command $command
      * @return null|\Symfony\Component\Console\Command\Command
      */
-    public function registerCommand(AbstractCommand $command) {
+    public function registerCommand(Command $command) {
         return $this->console->add($command);
     }
 }

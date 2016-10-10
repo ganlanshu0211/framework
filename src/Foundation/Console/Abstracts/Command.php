@@ -7,15 +7,15 @@
  */
 namespace Notadd\Foundation\Console\Abstracts;
 use Illuminate\Container\Container;
-use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 /**
- * Class AbstractCommand
+ * Class Command
  * @package Notadd\Foundation\Console\Abstracts
  */
-abstract class AbstractCommand extends Command {
+abstract class Command extends SymfonyCommand {
     /**
      * @var \Illuminate\Container\Container
      */
@@ -29,7 +29,7 @@ abstract class AbstractCommand extends Command {
      */
     protected $output;
     /**
-     * AbstractCommand constructor.
+     * Command constructor.
      */
     public function __construct() {
         parent::__construct();

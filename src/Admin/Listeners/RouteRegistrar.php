@@ -8,7 +8,7 @@
 namespace Notadd\Admin\Listeners;
 use Notadd\Admin\Controllers\AdminController;
 use Notadd\Admin\Handlers\DashboardHandler;
-use Notadd\Foundation\Routing\Abstracts\AbstractRouteRegistrar;
+use Notadd\Foundation\Routing\Abstracts\RouteRegistrar as AbstractRouteRegistrar;
 /**
  * Class RouteRegister
  * @package Notadd\Admin\Listeners

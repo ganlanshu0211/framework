@@ -3,19 +3,19 @@
  * This file is part of Notadd.
  * @author TwilRoad <269044570@qq.com>
  * @copyright (c) 2016, iBenchu.org
- * @datetime 2016-09-27 09:49
+ * @datetime 2016-09-09 18:07
  */
-namespace Notadd\Foundation\Console\Abstracts;
+namespace Notadd\Foundation\Abstracts;
 use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher;
-use Notadd\Foundation\Console\Events\CommandRegister;
+use Illuminate\Support\Str;
 /**
- * Class AbstractCommandRegister
- * @package Notadd\Foundation\Console\Abstracts
+ * Class EventSubscriber
+ * @package Notadd\Foundation\Abstracts
  */
-abstract class AbstractCommandRegister {
+abstract class EventSubscriber {
     /**
-     * @var \Notadd\Foundation\Application
+     * @var \Illuminate\Container\Container
      */
     protected $container;
     /**
@@ -23,7 +23,7 @@ abstract class AbstractCommandRegister {
      */
     protected $events;
     /**
-     * CommandRegistrar constructor.
+     * EventSubscriber constructor.
      * @param \Illuminate\Container\Container $container
      * @param \Illuminate\Events\Dispatcher $events
      */
@@ -32,13 +32,20 @@ abstract class AbstractCommandRegister {
         $this->events = $events;
     }
     /**
-     * @param \Notadd\Foundation\Console\Events\CommandRegister $console
+     * @return string|object
+     * @throws \Exception
      */
-    abstract public function handle(CommandRegister $console);
+    protected function getEvent() {
+        throw new \Exception('Event not found!', 404);
+    }
     /**
      * @return void
      */
     public function subscribe() {
-        $this->events->listen(CommandRegister::class, [$this, 'handle']);
+        $method = 'handle';
+        if(method_exists($this, $getHandler = 'get' . Str::ucfirst($method) . 'r')) {
+            $method = $this->{$getHandler}();
+        }
+        $this->events->listen($this->getEvent(), [$this, $method]);
     }
 }

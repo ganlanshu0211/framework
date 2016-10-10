@@ -6,14 +6,14 @@
  * @datetime 2016-09-08 19:23
  */
 namespace Notadd\Foundation\Database\Commands;
-use Notadd\Foundation\Console\Abstracts\AbstractCommand;
+use Notadd\Foundation\Console\Abstracts\Command;
 use Notadd\Foundation\Database\Migrations\Migrator;
 use Symfony\Component\Console\Input\InputOption;
 /**
  * Class MigrateCommand
  * @package Notadd\Foundation\Database\Commands
  */
-class MigrateCommand extends AbstractCommand {
+class MigrateCommand extends Command {
     /**
      * @var \Notadd\Foundation\Database\Migrations\Migrator
      */

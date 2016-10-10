@@ -6,12 +6,12 @@
  * @datetime 2016-08-27 17:18
  */
 namespace Notadd\Install\Prerequisite;
-use Notadd\Install\Abstracts\AbstractPrerequisite;
+use Notadd\Install\Abstracts\Prerequisite;
 /**
  * Class WritablePath
  * @package Notadd\Install\Prerequisite
  */
-class WritablePath extends AbstractPrerequisite {
+class WritablePath extends Prerequisite {
     /**
      * @var array
      */

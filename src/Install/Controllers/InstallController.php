@@ -6,7 +6,7 @@
  * @datetime 2016-08-27 18:36
  */
 namespace Notadd\Install\Controllers;
-use Notadd\Foundation\Routing\Abstracts\AbstractController;
+use Notadd\Foundation\Routing\Abstracts\Controller;
 use Notadd\Foundation\Routing\Responses\RedirectResponse;
 use Notadd\Install\Contracts\Prerequisite;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -16,7 +16,7 @@ use Symfony\Component\Console\Output\StreamOutput;
  * Class InstallController
  * @package Notadd\Install\Controllers
  */
-class InstallController extends AbstractController {
+class InstallController extends Controller {
     /**
      * @var \Notadd\Install\Commands\InstallCommand
      */

@@ -8,10 +8,10 @@
 namespace Notadd\Foundation\Passport\Abstracts;
 use Tobscure\JsonApi\AbstractSerializer as AbstractTobscureSerializer;
 /**
- * Class AbstractSerializer
+ * Class Serializer
  * @package Notadd\Foundation\Passport\Abstracts
  */
-abstract class AbstractSerializer extends AbstractTobscureSerializer {
+abstract class Serializer extends AbstractTobscureSerializer {
     /**
      * @param array|object $model
      * @param array|null $fields

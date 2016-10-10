@@ -6,20 +6,20 @@
  * @datetime 2016-09-03 03:09
  */
 namespace Notadd\Foundation\Database\Listeners;
-use Notadd\Foundation\Console\Abstracts\AbstractCommandRegister;
-use Notadd\Foundation\Console\Events\CommandRegister as CommandRegisterEvent;
+use Notadd\Foundation\Console\Abstracts\CommandRegistrar as AbstractCommandRegistrar;
+use Notadd\Foundation\Console\Events\RegisterCommand as CommandRegisterEvent;
 use Notadd\Foundation\Database\Commands\InfoCommand;
 use Notadd\Foundation\Database\Commands\InstallCommand;
 use Notadd\Foundation\Database\Commands\MakeMigrationCommand;
 use Notadd\Foundation\Database\Commands\MigrateCommand;
 use Notadd\Foundation\Database\Commands\RollbackCommand;
 /**
- * Class CommandRegistrar
+ * Class RegisterCommand
  * @package Notadd\Foundation\Database\Listeners
  */
-class CommandRegister extends AbstractCommandRegister {
+class CommandRegistrar extends AbstractCommandRegistrar {
     /**
-     * @param \Notadd\Foundation\Console\Events\CommandRegister $console
+     * @param \Notadd\Foundation\Console\Events\RegisterCommand $console
      */
     public function handle(CommandRegisterEvent $console) {
         $console->registerCommand(new InfoCommand());

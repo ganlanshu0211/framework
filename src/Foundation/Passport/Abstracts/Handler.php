@@ -10,17 +10,17 @@ use Exception;
 use Illuminate\Bus\Dispatcher as BusDispatcher;
 use Illuminate\Container\Container;
 use Notadd\Foundation\Http\Responses\JsonResponse;
-use Notadd\Foundation\Routing\Contracts\Handler;
+use Notadd\Foundation\Routing\Contracts\Handler as HandlerContract;
 use Tobscure\JsonApi\Collection;
 use Tobscure\JsonApi\Document;
 use Tobscure\JsonApi\ElementInterface;
 use Tobscure\JsonApi\Resource;
 use Tobscure\JsonApi\SerializerInterface;
 /**
- * Class AbstractHandler
+ * Class Handler
  * @package Notadd\Foundation\Passport\Abstracts
  */
-abstract class AbstractHandler implements Handler {
+abstract class Handler implements HandlerContract {
     const COLLECTION = 'Collection';
     const RESOURCE = 'Resource';
     /**
@@ -32,7 +32,7 @@ abstract class AbstractHandler implements Handler {
      */
     protected $container;
     /**
-     * AbstractHandler constructor.
+     * Handler constructor.
      */
     public function __construct() {
         $this->container = $this->getContainer();
