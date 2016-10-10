@@ -10,13 +10,13 @@ use Illuminate\Container\Container;
 use Notadd\Foundation\Routing\Contracts\Controller as ControllerContract;
 use Notadd\Foundation\Http\Exceptions\MethodNotFoundException;
 use Notadd\Foundation\Routing\Router;
-use Notadd\Foundation\Routing\Traits\ResolveDependencyTrait;
+use Notadd\Foundation\Routing\Traits\ResolveDependency;
 /**
  * Class ControllerDispatcher
  * @package Notadd\Foundation\Routing\Dispatchers
  */
 class ControllerDispatcher {
-    use ResolveDependencyTrait;
+    use ResolveDependency;
     /**
      * @var \Illuminate\Container\Container
      */

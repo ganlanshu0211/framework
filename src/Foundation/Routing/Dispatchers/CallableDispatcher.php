@@ -7,14 +7,14 @@
  */
 namespace Notadd\Foundation\Routing\Dispatchers;
 use Illuminate\Container\Container;
-use Notadd\Foundation\Routing\Traits\ResolveDependencyTrait;
+use Notadd\Foundation\Routing\Traits\ResolveDependency;
 use ReflectionFunction;
 /**
  * Class CallableDispatcher
  * @package Notadd\Foundation\Routing\Dispatchers
  */
 class CallableDispatcher {
-    use ResolveDependencyTrait;
+    use ResolveDependency;
     /**
      * @var \Illuminate\Container\Container
      */

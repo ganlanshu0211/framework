@@ -11,10 +11,10 @@ use ReflectionFunctionAbstract;
 use ReflectionMethod;
 use ReflectionParameter;
 /**
- * Class ResolveDependencyTrait
+ * Class ResolveDependency
  * @package Notadd\Foundation\Routing\Traits
  */
-trait ResolveDependencyTrait {
+trait ResolveDependency {
     /**
      * @param $class
      * @param array $parameters
