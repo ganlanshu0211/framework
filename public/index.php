@@ -5,5 +5,8 @@
  * @copyright (c) 2016, iBenchu.org
  * @datetime 2016-08-19 22:45
  */
-require '../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
+if(file_exists($compiled = realpath(__DIR__ . '/../storage/caches/compiled.php'))) {
+    require $compiled;
+}
 (new Notadd\Foundation\Http\Server(realpath(__DIR__ . '/../')))->listen();

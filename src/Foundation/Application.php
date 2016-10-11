@@ -182,6 +182,12 @@ class Application extends Container implements ApplicationContract {
         return $this->basePath() . '/bootstrap/cache/services.json';
     }
     /**
+     * @return array
+     */
+    public function getLoadedProviders() {
+        return $this->loadedProviders;
+    }
+    /**
      * @param $provider
      * @return mixed
      */

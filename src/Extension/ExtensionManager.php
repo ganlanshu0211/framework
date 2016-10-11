@@ -71,23 +71,25 @@ class ExtensionManager {
                 $packages = new Collection(json_decode($this->filesystem->get($file), true));
                 $packages->each(function (array $package) {
                     $name = Arr::get($package, 'name');
-                    if(Arr::get($package, 'type') != 'notadd-extension' || empty($name)) {
-                        return;
+                    if(Arr::get($package, 'type') == 'notadd-extension' && $name) {
+                        $extension = new Extension($name, $this->getVendorPath() . DIRECTORY_SEPARATOR . $name);
+                        $this->extensions->put($extension->getId(), $extension);
                     }
-                    $extension = new Extension($name, $this->getVendorPath() . DIRECTORY_SEPARATOR . $name);
-                    $this->extensions->put($extension->getId(), $extension);
                 });
             }
             if($this->filesystem->isDirectory($this->getExtensionPath()) && !empty($directories = $this->filesystem->directories($this->getExtensionPath()))) {
                 (new Collection($directories))->each(function($directory) {
-                    if($this->filesystem->exists($bootstrap = $directory . DIRECTORY_SEPARATOR . 'bootstrap.php')) {
-                        $extension = $this->filesystem->getRequire($bootstrap);
-                        if(is_string($extension) && in_array(ExtensionRegistrar::class, class_parents($extension))) {
-                            $registrar = $this->container->make($extension);
-                            $extension = $registrar->getExtension();
-                        }
-                        if($extension instanceof Extension) {
-                            $this->extensions->put($extension->getId(), $extension);
+                    if($this->filesystem->exists($file = $directory . DIRECTORY_SEPARATOR . 'composer.json')) {
+                        $package = new Collection(json_decode($this->filesystem->get($file), true));
+                        if(Arr::get($package, 'type') == 'notadd-extension' && $this->filesystem->exists($bootstrap = $directory . DIRECTORY_SEPARATOR . 'bootstrap.php')) {
+                            $extension = $this->filesystem->getRequire($bootstrap);
+                            if(is_string($extension) && in_array(ExtensionRegistrar::class, class_parents($extension))) {
+                                $registrar = $this->container->make($extension);
+                                $extension = $registrar->getExtension();
+                            }
+                            if($extension instanceof Extension) {
+                                $this->extensions->put($extension->getId(), $extension);
+                            }
                         }
                     }
                 });

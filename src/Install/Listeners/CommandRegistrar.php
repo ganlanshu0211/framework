@@ -6,14 +6,14 @@
  * @datetime 2016-09-27 10:39
  */
 namespace Notadd\Install\Listeners;
-use Notadd\Foundation\Console\Abstracts\CommandRegistrar;
+use Notadd\Foundation\Console\Abstracts\CommandRegistrar as AbstractCommandRegistrar;
 use Notadd\Foundation\Console\Events\RegisterCommand as CommandRegisterEvent;
 use Notadd\Install\Commands\InstallCommand;
 /**
  * Class RegisterCommand
  * @package Notadd\Install\Listeners
  */
-class CommandRegistrar extends CommandRegistrar {
+class CommandRegistrar extends AbstractCommandRegistrar {
     /**
      * @param \Notadd\Foundation\Console\Events\RegisterCommand $console
      */

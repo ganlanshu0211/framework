@@ -61,6 +61,6 @@ class Application extends SymfonyApplication {
      * @return void
      */
     protected function registerCommands() {
-        static::$instance->register(static::$instance->container->make(OptimizeCommand::class));
+        $this->add($this->container->make(OptimizeCommand::class));
     }
 }
