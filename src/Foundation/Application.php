@@ -89,6 +89,7 @@ class Application extends Container implements ApplicationContract {
     protected function bindPathsInContainer() {
         foreach([
                     'base',
+                    'localization',
                     'public',
                     'storage'
                 ] as $path) {
@@ -247,6 +248,12 @@ class Application extends Container implements ApplicationContract {
         if(!isset($this->loadedProviders[$provider])) {
             $this->registerDeferredProvider($provider, $service);
         }
+    }
+    /**
+     * @return string
+     */
+    public function localizationPath() {
+        return realpath(__DIR__ . '/../../localizations');
     }
     /**
      * @param $provider

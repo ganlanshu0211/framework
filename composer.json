@@ -48,6 +48,7 @@
         "illuminate/redis": "5.3.*",
         "illuminate/session": "5.3.*",
         "illuminate/support": "5.3.*",
+        "illuminate/translation": "5.3.*",
         "illuminate/validation": "5.3.*",
         "illuminate/view": "5.3.*",
         "intervention/image": "^2.3",
