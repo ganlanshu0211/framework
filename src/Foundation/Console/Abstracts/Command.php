@@ -11,6 +11,7 @@ use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\Question;
 /**
  * Class Command
  * @package Notadd\Foundation\Console\Abstracts
@@ -34,6 +35,15 @@ abstract class Command extends SymfonyCommand {
     public function __construct() {
         parent::__construct();
         $this->container = $this->getContainer();
+    }
+    /**
+     * @param $question
+     * @param null $default
+     * @return string
+     */
+    protected function ask($question, $default = null) {
+        $question = new Question("<question>$question</question> ", $default);
+        return $this->getHelperSet()->get('question')->ask($this->input, $this->output, $question);
     }
     /**
      * @param $command
@@ -77,6 +87,15 @@ abstract class Command extends SymfonyCommand {
      */
     protected function info($string) {
         $this->output->writeln("<info>$string</info>");
+    }
+    /**
+     * @param $question
+     * @return string
+     */
+    protected function secret($question) {
+        $question = new Question("<question>$question</question> ");
+        $question->setHidden(true)->setHiddenFallback(true);
+        return $this->getHelperSet()->get('question')->ask($this->input, $this->output, $question);
     }
     /**
      * @param $container

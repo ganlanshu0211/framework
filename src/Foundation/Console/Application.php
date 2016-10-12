@@ -10,6 +10,7 @@ use Illuminate\Container\Container;
 use Notadd\Foundation\Console\Commands\OptimizeCommand;
 use Notadd\Foundation\Console\Events\RegisterCommand;
 use Symfony\Component\Console\Application as SymfonyApplication;
+use Symfony\Component\Console\Command\Command;
 /**
  * Class Application
  * @package Notadd\Foundation\Console

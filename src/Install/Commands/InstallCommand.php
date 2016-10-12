@@ -13,6 +13,7 @@ use Notadd\Foundation\Console\Abstracts\Command;
 use Notadd\Member\Models\Member;
 use Notadd\Setting\Contracts\SettingsRepository;
 use PDO;
+use Psr\Http\Message\ServerRequestInterface;
 /**
  * Class InstallCommand
  * @package Notadd\Install\Commands
@@ -56,13 +57,14 @@ class InstallCommand extends Command {
      * @return void
      */
     protected function createAdministrationUser() {
-        $auth = $this->container->make('auth');
         $user = Member::create([
             'name' => $this->data->get('admin_account'),
             'email' => $this->data->get('admin_email'),
             'password' => bcrypt($this->data->get('admin_password')),
         ]);
-        $auth->login($user);
+        if($this->container->bound(ServerRequestInterface::class)) {
+            $this->container->make('auth')->login($user);
+        }
     }
     /**
      * @return void
@@ -111,6 +113,7 @@ class InstallCommand extends Command {
                     'database' => storage_path('notadd') . DIRECTORY_SEPARATOR . 'database.sqlite',
                     'prefix'   => $this->data->get('prefix'),
                 ]);
+                touch(storage_path('notadd') . DIRECTORY_SEPARATOR . 'database.sqlite');
                 break;
         }
         $this->call('migrate', [
@@ -132,18 +135,35 @@ class InstallCommand extends Command {
      * @return void
      */
     public function setDataFromConsoling() {
-        $this->data->put('driver', 'mysql');
-        $this->data->put('database_host', $this->output->ask('数据库服务器：'));
-        $this->data->put('database', $this->output->ask('数据库名：'));
-        $this->data->put('database_username', $this->output->ask('数据库用户名：'));
-        $this->data->put('database_password', $this->output->secret('数据库密码：'));
-        $this->data->put('database_prefix', $this->output->ask('数据库表前缀：'));
-        $this->data->put('admin_account', $this->output->ask('管理员帐号：'));
-        $this->data->put('admin_password', $this->output->secret('管理员密码：'));
-        $this->data->put('admin_password_confirmation', $this->output->secret('重复密码：'));
-        $this->data->put('admin_email', $this->output->ask('电子邮箱：'));
-        $this->data->put('website', $this->output->ask('网站标题：'));
-        $this->data->put('image_engine', $this->output->ask('是否开启Webp图片模式(on)：'));
+        $this->data->put('driver', $this->ask('数据库引擎(mysql/pgsql/sqlite)：'));
+        if(in_array($this->data->get('driver'), ['mysql', 'pgsql'])) {
+            $this->data->put('database_host', $this->ask('数据库服务器：'));
+            $this->data->put('database', $this->ask('数据库名：'));
+            $this->data->put('database_username', $this->ask('数据库用户名：'));
+            $this->data->put('database_password', $this->ask('数据库密码：'));
+        }
+        $this->data->put('database_prefix', $this->ask('数据库表前缀：'));
+        $this->data->put('admin_account', $this->ask('管理员帐号：'));
+        $this->data->put('admin_password', $this->ask('管理员密码：'));
+        $this->data->put('admin_password_confirmation', $this->ask('重复密码：'));
+        $this->data->put('admin_email', $this->ask('电子邮箱：'));
+        $this->data->put('website', $this->ask('网站标题：'));
+        $this->data->put('image_engine', $this->ask('是否开启Webp图片模式(on)：'));
+        $this->info('所填写的信息是：');
+        $this->info('数据库引擎：' . $this->data->get('driver'));
+        if(in_array($this->data->get('driver'), ['mysql', 'pgsql'])) {
+            $this->info('数据库服务器：' . $this->data->get('database_host'));
+            $this->info('数据库名：' . $this->data->get('database'));
+            $this->info('数据库用户名：' . $this->data->get('database_username'));
+            $this->info('数据库密码：' . $this->data->get('database_password'));
+        }
+        $this->info('数据库表前缀：' . $this->data->get('database_prefix'));
+        $this->info('管理员帐号：' . $this->data->get('admin_account'));
+        $this->info('管理员密码：' . $this->data->get('admin_password'));
+        $this->info('重复密码：' . $this->data->get('admin_password_confirmation'));
+        $this->info('电子邮箱：' . $this->data->get('admin_email'));
+        $this->info('网站标题：' . $this->data->get('website'));
+        $this->info('是否开启Webp图片模式：' . $this->data->get('image_engine') == 'on' ? '开启' : '关闭');
         $this->isDataSetted = true;
     }
     /**

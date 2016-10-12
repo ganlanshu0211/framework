@@ -36,6 +36,12 @@ class RegisterCommand {
      * @return null|\Symfony\Component\Console\Command\Command
      */
     public function registerCommand(Command $command) {
-        return $this->console->add($command);
+        if(is_string($command)) {
+            $command = $this->console->add($this->container->make($command));
+        }
+        if($command instanceof Command) {
+            $command = $this->console->add($command);
+        }
+        return $command;
     }
 }
