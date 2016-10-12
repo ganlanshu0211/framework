@@ -7,7 +7,6 @@
  */
 namespace Notadd\Extension\Abstracts;
 use Illuminate\Container\Container;
-use Illuminate\Support\ServiceProvider;
 use Notadd\Extension\Extension;
 /**
  * Class ExtensionRegistrar
@@ -62,16 +61,25 @@ abstract class ExtensionRegistrar {
      */
     abstract protected function getExtensionPath();
     /**
+     * @return array
+     */
+    public function loadLocalizationsFrom() {
+        return [];
+    }
+    /**
+     * @return array
+     */
+    public function loadMigrationsFrom() {
+        return [];
+    }
+    /**
+     * @return array
+     */
+    public function loadViewsFrom() {
+        return [];
+    }
+    /**
      * @return void
      */
     abstract public function register();
-    /**
-     * @param \Illuminate\Support\ServiceProvider $provider
-     * @return \Notadd\Extension\Abstracts\ExtensionRegistrar
-     */
-    public function withProvider(ServiceProvider $provider) {
-        $instance = clone $this;
-        $instance->provider = $provider;
-        return $instance;
-    }
 }

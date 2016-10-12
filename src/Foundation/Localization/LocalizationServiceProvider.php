@@ -25,7 +25,7 @@ class LocalizationServiceProvider extends ServiceProvider {
         $this->app->singleton('localization.loader', function ($app) {
             return new FileLoader($app['files'], $app['path.localization']);
         });
-        $this->app->singleton('localizer', function ($app) {
+        $this->app->singleton('translator', function ($app) {
             $loader = $app['localization.loader'];
             $locale = 'zh-cn';
             $trans = new Translator($loader, $locale);
