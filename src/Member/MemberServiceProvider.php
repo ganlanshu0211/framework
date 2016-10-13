@@ -19,4 +19,12 @@ class MemberServiceProvider extends ServiceProvider {
     public function boot() {
         $this->events->subscribe(RouteRegistrar::class);
     }
+    /**
+     * @return void
+     */
+    public function register() {
+        $this->app->singleton('member', function($app) {
+            return new MemberManager($app, $app['events']);
+        });
+    }
 }
