@@ -10,7 +10,7 @@ use Notadd\Foundation\Abstracts\ServiceProvider;
 use Notadd\Foundation\Http\Listeners\RouteRegistrar;
 use Notadd\Foundation\Http\Middlewares\AuthenticateWithSession;
 use Notadd\Foundation\Http\Middlewares\RememberFromCookie;
-use Notadd\Member\MemberServiceProvider;
+use Notadd\Foundation\Member\MemberServiceProvider;
 /**
  * Class HttpServiceProvider
  * @package Notadd\Foundation\Http

@@ -10,7 +10,7 @@ use Illuminate\Contracts\Config\Repository;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
 use Notadd\Foundation\Console\Abstracts\Command;
-use Notadd\Member\Models\Member;
+use Notadd\Foundation\Member\Models\Member;
 use Notadd\Setting\Contracts\SettingsRepository;
 use PDO;
 use Psr\Http\Message\ServerRequestInterface;

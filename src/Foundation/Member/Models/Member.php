@@ -5,7 +5,7 @@
  * @copyright (c) 2016, iBenchu.org
  * @datetime 2016-09-24 18:13
  */
-namespace Notadd\Member\Models;
+namespace Notadd\Foundation\Member\Models;
 use Notadd\Foundation\Auth\Models\User as Authenticatable;
 /**
  * Class Member

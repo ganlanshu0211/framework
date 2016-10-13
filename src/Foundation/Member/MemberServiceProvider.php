@@ -5,20 +5,14 @@
  * @copyright (c) 2016, iBenchu.org
  * @datetime 2016-09-24 17:27
  */
-namespace Notadd\Member;
+namespace Notadd\Foundation\Member;
 use Notadd\Foundation\Abstracts\ServiceProvider;
-use Notadd\Member\Listeners\RouteRegistrar;
+use Notadd\Foundation\Member\MemberManager;
 /**
  * Class MemberServiceProvider
  * @package Notadd\Member
  */
 class MemberServiceProvider extends ServiceProvider {
-    /**
-     * @return void
-     */
-    public function boot() {
-        $this->events->subscribe(RouteRegistrar::class);
-    }
     /**
      * @return void
      */

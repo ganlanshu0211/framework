@@ -142,7 +142,6 @@ class OptimizeCommand extends Command {
         '/vendor/symfony/finder/SplFileInfo.php',
         '/src/Extension/Abstracts/ExtensionRegistrar.php',
         '/src/Extension/Contracts/Extension.php',
-        '/src/Member/Listeners/RouteRegistrar.php',
         '/vendor/zendframework/zend-diactoros/src/Server.php',
         '/vendor/zendframework/zend-stratigility/src/MiddlewareInterface.php',
         '/src/Foundation/Http/Pipelines/JsonBodyParser.php',
