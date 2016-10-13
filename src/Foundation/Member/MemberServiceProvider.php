@@ -7,7 +7,6 @@
  */
 namespace Notadd\Foundation\Member;
 use Notadd\Foundation\Abstracts\ServiceProvider;
-use Notadd\Foundation\Member\MemberManager;
 /**
  * Class MemberServiceProvider
  * @package Notadd\Member
@@ -18,7 +17,13 @@ class MemberServiceProvider extends ServiceProvider {
      */
     public function register() {
         $this->app->singleton('member', function($app) {
-            return new MemberManager($app, $app['events']);
+            $manager = new MemberManager($app, $app['events']);
+            $manager->setDefaultDriver('notadd');
+            return $manager;
+        });
+        $this->app->singleton('member.provider', function($app) {
+            $manager = $this->app->make('member');
+            return $manager->driver();
         });
     }
 }

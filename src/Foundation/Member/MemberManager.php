@@ -7,10 +7,10 @@
  */
 namespace Notadd\Foundation\Member;
 use Closure;
-use Exception;
 use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher;
 use InvalidArgumentException;
+use Notadd\Foundation\Member\Abstracts\Driver;
 use Notadd\Foundation\Member\Contracts\Factory as FactoryContract;
 /**
  * Class MemberManager
@@ -28,7 +28,7 @@ class MemberManager implements FactoryContract {
     /**
      * @var string
      */
-    protected $default = 'notadd';
+    protected $default;
     /**
      * @var array
      */
@@ -48,11 +48,14 @@ class MemberManager implements FactoryContract {
     }
     /**
      * @param string $name
-     * @return mixed
+     * @return \Notadd\Foundation\Member\Abstracts\Driver
      */
     public function driver($name = null) {
         if(isset($this->drivers[$name])) {
-            return call_user_func($this->drivers[$name]);
+            $driver = $this->container->call($this->drivers[$name]);
+            if($driver instanceof Driver) {
+                return $driver;
+            }
         }
         throw new InvalidArgumentException("Auth guard driver [{$name}] is not defined.");
     }
@@ -85,9 +88,6 @@ class MemberManager implements FactoryContract {
      * @throws \Exception
      */
     public function setDefaultDriver($driver) {
-        if(in_array($driver, array_keys($this->drivers))) {
-            $this->default = $driver;
-        }
-        throw new InvalidArgumentException('Member Manager Driver is not defined.');
+        $this->default = $driver;
     }
 }
