@@ -21,7 +21,7 @@ class MemberServiceProvider extends ServiceProvider {
             $manager->setDefaultDriver('notadd');
             return $manager;
         });
-        $this->app->singleton('member.driver', function($app) {
+        $this->app->singleton('member.driver', function() {
             $manager = $this->app->make('member');
             return $manager->driver();
         });

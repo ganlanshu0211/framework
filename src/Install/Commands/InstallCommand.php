@@ -10,10 +10,8 @@ use Illuminate\Contracts\Config\Repository;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
 use Notadd\Foundation\Console\Abstracts\Command;
-use Notadd\Foundation\Member\Models\Member;
 use Notadd\Setting\Contracts\SettingsRepository;
 use PDO;
-use Psr\Http\Message\ServerRequestInterface;
 /**
  * Class InstallCommand
  * @package Notadd\Install\Commands
@@ -57,14 +55,14 @@ class InstallCommand extends Command {
      * @return void
      */
     protected function createAdministrationUser() {
-        $user = Member::create([
-            'name' => $this->data->get('admin_account'),
-            'email' => $this->data->get('admin_email'),
-            'password' => bcrypt($this->data->get('admin_password')),
-        ]);
-        if($this->container->bound(ServerRequestInterface::class)) {
-            $this->container->make('auth')->login($user);
-        }
+        //$user = Member::create([
+        //    'name' => $this->data->get('admin_account'),
+        //    'email' => $this->data->get('admin_email'),
+        //    'password' => bcrypt($this->data->get('admin_password')),
+        //]);
+        //if($this->container->bound(ServerRequestInterface::class)) {
+        //    $this->container->make('auth')->login($user);
+        //}
     }
     /**
      * @return void

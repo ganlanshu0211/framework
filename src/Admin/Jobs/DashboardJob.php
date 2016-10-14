@@ -6,7 +6,6 @@
  * @datetime 2016-10-06 14:17
  */
 namespace Notadd\Admin\Jobs;
-use Notadd\Foundation\Member\Models\Member;
 /**
  * Class DashboardJob
  * @package Notadd\Admin\Jobs
@@ -16,6 +15,5 @@ class DashboardJob {
      * @return array
      */
     public function handle() {
-        return Member::find(1);
     }
 }

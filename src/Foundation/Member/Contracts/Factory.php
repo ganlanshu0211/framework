@@ -12,6 +12,41 @@ namespace Notadd\Foundation\Member\Contracts;
  */
 interface Factory {
     /**
+     * @param array $data
+     * @param bool $force
+     * @return \Notadd\Foundation\Member\Abstracts\Member
+     */
+    public function create(array $data, $force = false);
+    /**
+     * @param array $data
+     * @param bool $force
+     * @return \Notadd\Foundation\Member\Abstracts\Member
+     */
+    public function delete(array $data, $force = false);
+    /**
+     * @param $key
+     * @return \Notadd\Foundation\Member\Abstracts\Member
+     */
+    public function find($key);
+    /**
+     * @param array $data
+     * @param bool $force
+     * @return \Notadd\Foundation\Member\Abstracts\Member
+     */
+    public function edit(array $data, $force = false);
+    /**
+     * @param array $data
+     * @param bool $force
+     * @return \Notadd\Foundation\Member\Abstracts\Member
+     */
+    public function store(array $data, $force = false);
+    /**
+     * @param array $data
+     * @param bool $force
+     * @return \Notadd\Foundation\Member\Abstracts\Member
+     */
+    public function update(array $data, $force = false);
+    /**
      * @param string $name
      * @return mixed
      */

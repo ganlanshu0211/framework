@@ -30,7 +30,7 @@ use Notadd\Foundation\Http\HttpServiceProvider;
 use Notadd\Foundation\Localization\LocalizationServiceProvider;
 use Notadd\Foundation\Routing\RouterServiceProvider;
 use Notadd\Foundation\Session\SessionServiceProvider;
-use Notadd\Foundation\Member\Models\Member;
+use Notadd\Foundation\Member\Abstracts\Member;
 use Notadd\Passport\PassportServiceProvider;
 use Notadd\Setting\Contracts\SettingsRepository;
 use Notadd\Setting\SettingServiceProvider;

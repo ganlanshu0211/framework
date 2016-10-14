@@ -38,7 +38,7 @@ abstract class Driver {
     /**
      * @param array $data
      * @param bool $force
-     * @return \Notadd\Foundation\Member\Models\Member
+     * @return \Notadd\Foundation\Member\Abstracts\Member
      */
     final public function create(array $data, $force = false) {
         $member = $this->creating($data, $force);
@@ -48,13 +48,13 @@ abstract class Driver {
     /**
      * @param array $data
      * @param bool $force
-     * @return \Notadd\Foundation\Member\Models\Member
+     * @return \Notadd\Foundation\Member\Abstracts\Member
      */
     abstract protected function creating(array $data, $force = false);
     /**
      * @param array $data
      * @param bool $force
-     * @return \Notadd\Foundation\Member\Models\Member
+     * @return \Notadd\Foundation\Member\Abstracts\Member
      */
     final public function delete(array $data, $force = false) {
         $member = $this->deleting($data, $force);
@@ -64,13 +64,13 @@ abstract class Driver {
     /**
      * @param array $data
      * @param bool $force
-     * @return \Notadd\Foundation\Member\Models\Member
+     * @return \Notadd\Foundation\Member\Abstracts\Member
      */
     abstract protected function deleting(array $data, $force = false);
     /**
      * @param array $data
      * @param bool $force
-     * @return \Notadd\Foundation\Member\Models\Member
+     * @return \Notadd\Foundation\Member\Abstracts\Member
      */
     final public function edit(array $data, $force = false) {
         $member = $this->editing($data, $force);
@@ -80,25 +80,25 @@ abstract class Driver {
     /**
      * @param array $data
      * @param bool $force
-     * @return \Notadd\Foundation\Member\Models\Member
+     * @return \Notadd\Foundation\Member\Abstracts\Member
      */
     abstract protected function editing(array $data, $force = false);
     /**
      * @param $key
-     * @return \Notadd\Foundation\Member\Models\Member
+     * @return \Notadd\Foundation\Member\Abstracts\Member
      */
     final public function find($key) {
         return $this->finding($key);
     }
     /**
      * @param $key
-     * @return \Notadd\Foundation\Member\Models\Member
+     * @return \Notadd\Foundation\Member\Abstracts\Member
      */
     abstract protected function finding($key);
     /**
      * @param array $data
      * @param bool $force
-     * @return \Notadd\Foundation\Member\Models\Member
+     * @return \Notadd\Foundation\Member\Abstracts\Member
      */
     final public function store(array $data, $force = false) {
         $member = $this->storing($data, $force);
@@ -108,13 +108,13 @@ abstract class Driver {
     /**
      * @param array $data
      * @param bool $force
-     * @return \Notadd\Foundation\Member\Models\Member
+     * @return \Notadd\Foundation\Member\Abstracts\Member
      */
     abstract protected function storing(array $data, $force = false);
     /**
      * @param array $data
      * @param bool $force
-     * @return \Notadd\Foundation\Member\Models\Member
+     * @return \Notadd\Foundation\Member\Abstracts\Member
      */
     final public function update(array $data, $force = false) {
         $member = $this->updating($data, $force);
@@ -124,7 +124,7 @@ abstract class Driver {
     /**
      * @param array $data
      * @param bool $force
-     * @return \Notadd\Foundation\Member\Models\Member
+     * @return \Notadd\Foundation\Member\Abstracts\Member
      */
     abstract protected function updating(array $data, $force = false);
 }

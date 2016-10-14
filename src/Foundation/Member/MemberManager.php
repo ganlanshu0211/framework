@@ -40,8 +40,9 @@ class MemberManager implements FactoryContract {
      * @return \Notadd\Foundation\Member\Abstracts\Driver
      */
     public function driver($name = null) {
+        is_null($name) && $name = $this->default;
         if(isset($this->drivers[$name])) {
-            $driver = $this->container->call($this->drivers[$name]);
+            $driver = $this->container->call($this->drivers[$name], [$this->container]);
             if($driver instanceof Driver) {
                 return $driver;
             }
@@ -69,5 +70,52 @@ class MemberManager implements FactoryContract {
      */
     public function setDefaultDriver($driver) {
         $this->default = $driver;
+    }
+    /**
+     * @param array $data
+     * @param bool $force
+     * @return \Notadd\Foundation\Member\Abstracts\Member
+     */
+    public function create(array $data, $force = false) {
+        return $this->driver()->create($data, $force);
+    }
+    /**
+     * @param array $data
+     * @param bool $force
+     * @return \Notadd\Foundation\Member\Abstracts\Member
+     */
+    public function delete(array $data, $force = false) {
+        return $this->driver()->delete($data, $force);
+    }
+    /**
+     * @param $key
+     * @return \Notadd\Foundation\Member\Abstracts\Member
+     */
+    public function find($key) {
+        return $this->driver()->find($key);
+    }
+    /**
+     * @param array $data
+     * @param bool $force
+     * @return \Notadd\Foundation\Member\Abstracts\Member
+     */
+    public function edit(array $data, $force = false) {
+        return $this->driver()->edit($data, $force);
+    }
+    /**
+     * @param array $data
+     * @param bool $force
+     * @return \Notadd\Foundation\Member\Abstracts\Member
+     */
+    public function store(array $data, $force = false) {
+        return $this->driver()->store($data, $force);
+    }
+    /**
+     * @param array $data
+     * @param bool $force
+     * @return \Notadd\Foundation\Member\Abstracts\Member
+     */
+    public function update(array $data, $force = false) {
+        return $this->driver()->update($data, $force);
     }
 }

@@ -7,7 +7,6 @@
  */
 namespace Notadd\Admin\Serializers;
 use Notadd\Foundation\Passport\Abstracts\Serializer;
-use Notadd\Foundation\Member\Models\Member;
 /**
  * Class DashboardSerializer
  * @package Notadd\Admin\Serializers
@@ -18,7 +17,7 @@ class DashboardSerializer extends Serializer {
      */
     protected $type = 'user';
     /**
-     * @param \Notadd\Foundation\Member\Models\Member $user
+     * @param $user
      * @return array
      */
     protected function getDefaultAttributes($user) {

@@ -5,13 +5,13 @@
  * @copyright (c) 2016, iBenchu.org
  * @datetime 2016-09-24 18:13
  */
-namespace Notadd\Foundation\Member\Models;
+namespace Notadd\Foundation\Member\Abstracts;
 use Notadd\Foundation\Auth\Models\User as Authenticatable;
 /**
  * Class Member
  * @package Notadd\Member\Models
  */
-class Member extends Authenticatable {
+abstract class Member extends Authenticatable {
     /**
      * @var array
      */

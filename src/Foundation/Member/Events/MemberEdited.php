@@ -8,7 +8,7 @@
 namespace Notadd\Foundation\Member\Events;
 use Illuminate\Container\Container;
 use Notadd\Foundation\Member\Abstracts\Driver;
-use Notadd\Foundation\Member\Models\Member;
+use Notadd\Foundation\Member\Abstracts\Member;
 /**
  * Class MemberEdited
  * @package Notadd\Foundation\Member\Events
@@ -23,14 +23,14 @@ class MemberEdited {
      */
     protected $driver;
     /**
-     * @var \Notadd\Foundation\Member\Models\Member
+     * @var \Notadd\Foundation\Member\Abstracts\Member
      */
     protected $member;
     /**
      * MemberUpdated constructor.
      * @param \Illuminate\Container\Container $container
      * @param \Notadd\Foundation\Member\Abstracts\Driver $driver
-     * @param \Notadd\Foundation\Member\Models\Member $member
+     * @param \Notadd\Foundation\Member\Abstracts\Member $member
      */
     public function __construct(Container $container, Driver $driver, Member $member) {
         $this->container = $container;
