@@ -8,7 +8,6 @@
 namespace Notadd\Foundation\Member;
 use Closure;
 use Illuminate\Container\Container;
-use Illuminate\Events\Dispatcher;
 use InvalidArgumentException;
 use Notadd\Foundation\Member\Abstracts\Driver;
 use Notadd\Foundation\Member\Contracts\Factory as FactoryContract;
@@ -30,21 +29,11 @@ class MemberManager implements FactoryContract {
      */
     protected $default;
     /**
-     * @var array
-     */
-    protected $providers = [];
-    /**
-     * @var \Illuminate\Events\Dispatcher
-     */
-    protected $events;
-    /**
      * MemberManager constructor.
      * @param \Illuminate\Container\Container $container
-     * @param \Illuminate\Events\Dispatcher $events
      */
-    public function __construct(Container $container, Dispatcher $events) {
+    public function __construct(Container $container) {
         $this->container = $container;
-        $this->events = $events;
     }
     /**
      * @param string $name
@@ -73,15 +62,6 @@ class MemberManager implements FactoryContract {
      */
     public function getDefaultDriver() {
         return $this->default;
-    }
-    /**
-     * @param string $provider
-     * @param \Closure $callback
-     * @return \Notadd\Foundation\Member\MemberManager
-     */
-    public function provider($provider, Closure $callback) {
-        $this->providers[$provider] = $callback;
-        return $this;
     }
     /**
      * @param $driver

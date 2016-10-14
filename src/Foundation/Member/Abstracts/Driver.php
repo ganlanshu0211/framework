@@ -8,12 +8,16 @@
 namespace Notadd\Foundation\Member\Abstracts;
 use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher;
-use Notadd\Foundation\Member\Contracts\Driver as DriverContract;
+use Notadd\Foundation\Member\Events\MemberCreated;
+use Notadd\Foundation\Member\Events\MemberDeleted;
+use Notadd\Foundation\Member\Events\MemberEdited;
+use Notadd\Foundation\Member\Events\MemberStored;
+use Notadd\Foundation\Member\Events\MemberUpdated;
 /**
  * Class Driver
  * @package Notadd\Foundation\Member\Abstracts
  */
-abstract class Driver implements DriverContract {
+abstract class Driver {
     /**
      * @var \Illuminate\Container\Container
      */
@@ -34,31 +38,93 @@ abstract class Driver implements DriverContract {
     /**
      * @param array $data
      * @param bool $force
-     * @return mixed
+     * @return \Notadd\Foundation\Member\Models\Member
      */
-    abstract public function create(array $data, $force = false);
+    final public function create(array $data, $force = false) {
+        $member = $this->creating($data, $force);
+        $this->events->fire(new MemberCreated($this->container, $this, $member));
+        return $member;
+    }
     /**
      * @param array $data
      * @param bool $force
-     * @return mixed
+     * @return \Notadd\Foundation\Member\Models\Member
      */
-    abstract public function delete(array $data, $force = false);
+    abstract protected function creating(array $data, $force = false);
     /**
      * @param array $data
      * @param bool $force
-     * @return mixed
+     * @return \Notadd\Foundation\Member\Models\Member
      */
-    abstract public function edit(array $data, $force = false);
+    final public function delete(array $data, $force = false) {
+        $member = $this->deleting($data, $force);
+        $this->events->fire(new MemberDeleted($this->container, $this, $member));
+        return $member;
+    }
     /**
      * @param array $data
      * @param bool $force
-     * @return mixed
+     * @return \Notadd\Foundation\Member\Models\Member
      */
-    abstract public function store(array $data, $force = false);
+    abstract protected function deleting(array $data, $force = false);
     /**
      * @param array $data
      * @param bool $force
-     * @return mixed
+     * @return \Notadd\Foundation\Member\Models\Member
      */
-    abstract public function update(array $data, $force = false);
+    final public function edit(array $data, $force = false) {
+        $member = $this->editing($data, $force);
+        $this->events->fire(new MemberEdited($this->container, $this, $member));
+        return $member;
+    }
+    /**
+     * @param array $data
+     * @param bool $force
+     * @return \Notadd\Foundation\Member\Models\Member
+     */
+    abstract protected function editing(array $data, $force = false);
+    /**
+     * @param $key
+     * @return \Notadd\Foundation\Member\Models\Member
+     */
+    final public function find($key) {
+        return $this->finding($key);
+    }
+    /**
+     * @param $key
+     * @return \Notadd\Foundation\Member\Models\Member
+     */
+    abstract protected function finding($key);
+    /**
+     * @param array $data
+     * @param bool $force
+     * @return \Notadd\Foundation\Member\Models\Member
+     */
+    final public function store(array $data, $force = false) {
+        $member = $this->storing($data, $force);
+        $this->events->fire(new MemberStored($this->container, $this, $member));
+        return $member;
+    }
+    /**
+     * @param array $data
+     * @param bool $force
+     * @return \Notadd\Foundation\Member\Models\Member
+     */
+    abstract protected function storing(array $data, $force = false);
+    /**
+     * @param array $data
+     * @param bool $force
+     * @return \Notadd\Foundation\Member\Models\Member
+     */
+    final public function update(array $data, $force = false) {
+        $member = $this->updating($data, $force);
+        $this->events->fire(new MemberUpdated($this->container, $this, $member));
+        return $member;
+    }
+    /**
+     * @param array $data
+     * @param bool $force
+     * @return \Notadd\Foundation\Member\Models\Member
+     */
+    abstract protected function updating(array $data, $force = false);
 }
