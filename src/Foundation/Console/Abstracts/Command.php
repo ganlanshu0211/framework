@@ -7,7 +7,9 @@
  */
 namespace Notadd\Foundation\Console\Abstracts;
 use Illuminate\Container\Container;
+use Illuminate\Contracts\Support\Arrayable;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
+use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -56,6 +58,12 @@ abstract class Command extends SymfonyCommand {
         return $instance->run(new ArrayInput($arguments), $this->output);
     }
     /**
+     * @param $string
+     */
+    public function error($string) {
+        $this->output->writeln("<error>$string</error>");
+    }
+    /**
      * @param \Symfony\Component\Console\Input\InputInterface $input
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      * @return mixed
@@ -74,6 +82,12 @@ abstract class Command extends SymfonyCommand {
      */
     protected function getContainer() {
         return Container::getInstance();
+    }
+    /**
+     * @return \Symfony\Component\Console\Output\OutputInterface
+     */
+    public function getOutput() {
+        return $this->output;
     }
     /**
      * @param $name
@@ -102,5 +116,17 @@ abstract class Command extends SymfonyCommand {
      */
     protected function setContainer($container) {
         $this->container = $container;
+    }
+    /**
+     * @param array $headers
+     * @param $rows
+     * @param string $style
+     */
+    public function table(array $headers, $rows, $style = 'default') {
+        $table = new Table($this->output);
+        if($rows instanceof Arrayable) {
+            $rows = $rows->toArray();
+        }
+        $table->setHeaders($headers)->setRows($rows)->setStyle($style)->render();
     }
 }

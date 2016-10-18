@@ -60,7 +60,10 @@ class MigrateCommand extends Command {
      */
     protected function getMigrationPath() {
         if(!is_null($targetPath = $this->input->getOption('path'))) {
-            return $this->container->basePath() . '/' . $targetPath;
+            return call_user_func([
+                $this->container,
+                'basePath'
+            ]) . '/' . $targetPath;
         }
         return realpath(__DIR__ . '/../../../../migrations');
     }
