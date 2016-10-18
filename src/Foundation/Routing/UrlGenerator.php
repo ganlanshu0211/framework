@@ -112,7 +112,7 @@ class UrlGenerator {
         if(is_null($root)) {
             if(is_null($this->cachedRoot)) {
                 $request = $this->container->make(ServerRequestInterface::class);
-                $this->cachedRoot = $scheme . $request->getUri()->getHost() . $request->getUri()->getPath();
+                $this->cachedRoot = $scheme . $request->getUri()->getHost();
             }
             $root = rtrim($this->cachedRoot, '/');
         }
