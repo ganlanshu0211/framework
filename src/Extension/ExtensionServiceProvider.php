@@ -28,7 +28,7 @@ class ExtensionServiceProvider extends ServiceProvider {
     /**
      * @param \Notadd\Extension\ExtensionManager $manager
      */
-    public function boot(ExtensionManager $manager) {
+    public function boot(ExtensionManager $manager = null) {
         $extensions = $manager->getExtensions();
         $extensions->each(function(Extension $extension) use($manager) {
             $registrar = $extension->getRegistrar();
