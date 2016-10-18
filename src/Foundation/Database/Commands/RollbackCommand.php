@@ -32,6 +32,7 @@ class RollbackCommand extends Command {
     protected function configure() {
         $this->addOption('database', null, InputOption::VALUE_OPTIONAL, 'The database connection to use.');
         $this->addOption('force', null, InputOption::VALUE_NONE, 'Force the operation to run when in production.');
+        $this->addOption('path', null, InputOption::VALUE_OPTIONAL, 'The path of migrations files to be executed.');
         $this->addOption('pretend', null, InputOption::VALUE_NONE, 'Dump the SQL queries that would be run.');
         $this->addOption('step', null, InputOption::VALUE_OPTIONAL, 'The number of migrations to be reverted.');
         $this->setDescription('Rollback the last database migration');
