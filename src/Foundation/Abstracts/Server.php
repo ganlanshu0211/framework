@@ -28,6 +28,7 @@ use Notadd\Foundation\Cookie\CookieServiceProvider;
 use Notadd\Foundation\Database\DatabaseServiceProvider;
 use Notadd\Foundation\Http\HttpServiceProvider;
 use Notadd\Foundation\Localization\LocalizationServiceProvider;
+use Notadd\Foundation\Pagination\PaginationServiceProvider;
 use Notadd\Foundation\Routing\RouterServiceProvider;
 use Notadd\Foundation\Session\SessionServiceProvider;
 use Notadd\Foundation\Member\Abstracts\Member;
@@ -69,6 +70,7 @@ abstract class Server {
         $app->register(HashServiceProvider::class);
         $app->register(LocalizationServiceProvider::class);
         $app->register(MailServiceProvider::class);
+        $app->register(PaginationServiceProvider::class);
         $app->register(PassportServiceProvider::class);
         $app->register(RouterServiceProvider::class);
         $app->register(SessionServiceProvider::class);
