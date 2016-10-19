@@ -6,8 +6,8 @@
  * @datetime 2016-09-29 15:48
  */
 namespace Notadd\Install\Pipelines;
-use Notadd\Foundation\Http\Contracts\Request;
 use Notadd\Foundation\Routing\Responses\RedirectResponse;
+use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 /**
  * Class RedirectIfNotInstalled
@@ -15,7 +15,7 @@ use Psr\Http\Message\ResponseInterface as Response;
  */
 class RedirectIfNotInstalled {
     /**
-     * @param \Notadd\Foundation\Http\Contracts\Request $request
+     * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface $response
      * @param callable|null $out
      * @return \Psr\Http\Message\ResponseInterface
