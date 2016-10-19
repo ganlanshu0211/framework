@@ -17,6 +17,12 @@ use Zend\Stratigility\Http\Request as ZendRequest;
  */
 class Request extends ZendRequest implements RequestContract {
     /**
+     * @return bool
+     */
+    public function ajax() {
+        return 'XMLHttpRequest' == $this->getHeader('X-Requested-With');
+    }
+    /**
      * @return array
      */
     public function all() {
@@ -95,6 +101,12 @@ class Request extends ZendRequest implements RequestContract {
         return collect($this->getQueryParams() + $this->getParsedBody())->get($key);
     }
     /**
+     * @return string
+     */
+    public function ip() {
+        return collect($this->getServerParams())->get('REMOTE_ADDR');
+    }
+    /**
      * @param $key
      * @return bool
      */
@@ -115,6 +127,12 @@ class Request extends ZendRequest implements RequestContract {
             Arr::set($results, $key, data_get($input, $key));
         }
         return $results;
+    }
+    /**
+     * @return bool
+     */
+    public function pjax() {
+        return $this->getHeader('X-PJAX') == true;
     }
     /**
      * @return mixed

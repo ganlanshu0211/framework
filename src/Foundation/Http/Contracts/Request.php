@@ -13,6 +13,10 @@ use Psr\Http\Message\ServerRequestInterface;
  */
 interface Request extends ServerRequestInterface {
     /**
+     * @return bool
+     */
+    public function ajax();
+    /**
      * @return array
      */
     public function all();
@@ -46,6 +50,14 @@ interface Request extends ServerRequestInterface {
      * @return array
      */
     public function only($keys);
+    /**
+     * @return string
+     */
+    public function ip();
+    /**
+     * @return bool
+     */
+    public function pjax();
     /**
      * @return mixed
      */
