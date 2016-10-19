@@ -74,6 +74,15 @@ if(!function_exists('config')) {
         return app('config')->get($key, $default);
     }
 }
+if(!function_exists('database_path')) {
+    /**
+     * @param string $path
+     * @return string
+     */
+    function database_path($path = '') {
+        return app()->databasePath() . ($path ? DIRECTORY_SEPARATOR . $path : $path);
+    }
+}
 if(!function_exists('event')) {
     /**
      * @param string|object $event

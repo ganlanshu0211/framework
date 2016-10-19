@@ -47,6 +47,10 @@ class Application extends Container implements ApplicationContract {
      */
     protected $bootedCallbacks = [];
     /**
+     * @var string
+     */
+    protected $databasePath;
+    /**
      * @var bool
      */
     protected $debug = false;
@@ -140,6 +144,12 @@ class Application extends Container implements ApplicationContract {
             ]);
         }
         return null;
+    }
+    /**
+     * @return string
+     */
+    public function databasePath() {
+        return $this->databasePath ?: $this->basePath . DIRECTORY_SEPARATOR . 'databases';
     }
     /**
      * @param mixed
