@@ -26,5 +26,8 @@ class HttpServiceProvider extends ServiceProvider {
             RememberFromCookie::class,
             AuthenticateWithSession::class
         ]);
+        $this->loadViewsFrom(__DIR__ . '/../../../resources/views/admin', 'admin');
+        $this->loadViewsFrom(__DIR__ . '/../../../resources/views/install', 'install');
+        $this->loadViewsFrom(__DIR__ . '/../../../resources/views/theme', 'theme');
     }
 }
