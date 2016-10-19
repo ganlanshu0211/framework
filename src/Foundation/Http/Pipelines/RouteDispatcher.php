@@ -52,7 +52,7 @@ class RouteDispatcher implements MiddlewareInterface {
      * @throws \Notadd\Foundation\Http\Exceptions\RouteNotFoundException
      */
     public function __invoke(ServerRequestInterface $request, Response $response, callable $out = null) {
-        $request = new Request(call_user_func([$request, 'getCurrentRequest']), call_user_func([$request, 'getOriginalRequest']));
+        $request = (new Request(call_user_func([$request, 'getCurrentRequest']), call_user_func([$request, 'getOriginalRequest'])))->enableHttpMethodParameterOverride();
         $this->router = $this->container->make('router');
         $this->events->fire(new RouteRegister($this->container, $this->router));
         $this->container->instance(RedirectResponse::class, function() use($request) {

@@ -8,7 +8,6 @@
 namespace Notadd\Foundation\Http;
 use Illuminate\Support\Arr;
 use Notadd\Foundation\Http\Contracts\Request as RequestContract;
-use Psr\Http\Message\ServerRequestInterface;
 use Zend\Stratigility\Http\Request as ZendRequest;
 /**
  * Class Request
@@ -16,38 +15,24 @@ use Zend\Stratigility\Http\Request as ZendRequest;
  */
 class Request extends ZendRequest implements RequestContract {
     /**
-     * @var \Psr\Http\Message\ServerRequestInterface
-     */
-    private $originalRequest;
-    /**
-     * @var \Psr\Http\Message\ServerRequestInterface
-     */
-    private $psrRequest;
-    /**
-     * Request constructor.
-     * @param \Psr\Http\Message\ServerRequestInterface $decoratedRequest
-     * @param \Psr\Http\Message\ServerRequestInterface $originalRequest
-     */
-    public function __construct(ServerRequestInterface $decoratedRequest, $originalRequest) {
-        if(null === $originalRequest) {
-            $originalRequest = $decoratedRequest;
-        }
-        $this->originalRequest = $originalRequest;
-        if('POST' === $decoratedRequest->getMethod()) {
-            if($method = $decoratedRequest->getHeader('X-HTTP-METHOD-OVERRIDE')) {
-                $decoratedRequest = $decoratedRequest->withMethod(strtoupper($method));
-            } else {
-                $method = collect($decoratedRequest->getQueryParams())->get('_method', collect($decoratedRequest->getParsedBody())->get('_method', 'POST'));
-                $decoratedRequest = $decoratedRequest->withMethod(strtoupper($method));
-            }
-        }
-        $this->psrRequest = $decoratedRequest->withAttribute('originalUri', $originalRequest->getUri());
-    }
-    /**
      * @return array
      */
     public function all() {
         return collect($this->getQueryParams() + $this->getParsedBody() + $this->getUploadedFiles())->toArray();
+    }
+    /**
+     * @return \Notadd\Foundation\Http\Request
+     */
+    public function enableHttpMethodParameterOverride() {
+        if('POST' === $this->getMethod()) {
+            if($method = $this->getHeader('X-HTTP-METHOD-OVERRIDE')) {
+                return $this->withMethod(strtoupper($method));
+            } else {
+                $method = collect($this->getQueryParams())->get('_method', collect($this->getParsedBody())->get('_method', 'POST'));
+                return $this->withMethod(strtoupper($method));
+            }
+        }
+        return $this;
     }
     /**
      * @param array|string $key
