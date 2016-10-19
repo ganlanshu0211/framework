@@ -24,6 +24,7 @@ class RouterServiceProvider extends ServiceProvider {
             if (isset($app['session.store'])) {
                 $redirector->setSession($app['session.store']);
             }
+            return $redirector;
         });
         $this->app->singleton('url', function($app) {
             return new UrlGenerator($app);
