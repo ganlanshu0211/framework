@@ -271,6 +271,12 @@ class Router {
         return '';
     }
     /**
+     * @return array
+     */
+    public function getRoutes() {
+        return $this->routes;
+    }
+    /**
      * @param array $attributes
      * @param \Closure $callback
      * @return void

@@ -7,6 +7,7 @@
  */
 namespace Notadd\Foundation\Console;
 use Notadd\Foundation\Abstracts\Server as BaseServer;
+use Notadd\Foundation\Routing\Events\RouteRegister;
 use Notadd\Install\InstallServiceProvider;
 /**
  * Class Server
@@ -26,6 +27,9 @@ class Server extends BaseServer{
     protected function getConsoleApplication() {
         $app = $this->getApp();
         $app->register(InstallServiceProvider::class);
+        if($app->runningInConsole()) {
+            $app->make('events')->fire(new RouteRegister($app, $app->make('router')));
+        }
         $console = Application::getInstance($app, 'Notadd');
         return $console;
     }

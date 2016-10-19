@@ -7,11 +7,18 @@
  */
 namespace Notadd\Foundation\Routing;
 use Illuminate\Support\ServiceProvider;
+use Notadd\Foundation\Routing\Listeners\CommandRegistrar;
 /**
  * Class RouterServiceProvider
  * @package Notadd\Foundation\Routing
  */
 class RouterServiceProvider extends ServiceProvider {
+    /**
+     * @return void
+     */
+    public function boot() {
+        $this->app->make('events')->subscribe(CommandRegistrar::class);
+    }
     /**
      * @return void
      */
