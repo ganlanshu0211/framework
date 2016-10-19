@@ -13,10 +13,24 @@ use Psr\Http\Message\ServerRequestInterface;
  */
 interface Request extends ServerRequestInterface {
     /**
+     * @return array
+     */
+    public function all();
+    /**
+     * @param array|string $key
+     * @return bool
+     */
+    public function exists($key);
+    /**
      * @param string $key
      * @return mixed
      */
     public function file($key);
+    /**
+     * @param string|array  $key
+     * @return bool
+     */
+    public function has($key);
     /**
      * @param string $key
      * @return mixed
