@@ -24,6 +24,7 @@ class InstallServiceProvider extends ServiceProvider {
     public function boot() {
         $this->events->subscribe(CommandRegistrar::class);
         $this->events->subscribe(RouteRegistrar::class);
+        $this->loadViewsFrom(resource_path('views/install'), 'install');
     }
     /**
      * @return void
