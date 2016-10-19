@@ -133,13 +133,14 @@ abstract class Controller implements ControllerContract {
     }
     /**
      * @param $template
+     * @param array $data
      * @return \Illuminate\Contracts\View\View
      */
-    protected function view($template) {
+    protected function view($template, array $data) {
         if(Str::contains($template, '::')) {
-            return $this->view->make($template);
+            return $this->view->make($template, $data);
         } else {
-            return $this->view->make('theme::' . $template);
+            return $this->view->make('theme::' . $template, $data);
         }
     }
 }
