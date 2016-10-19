@@ -422,6 +422,12 @@ class Application extends Container implements ApplicationContract {
         return $this->basePath . DIRECTORY_SEPARATOR . 'resources';
     }
     /**
+     * @return bool
+     */
+    public function runningInConsole() {
+        return php_sapi_name() == 'cli';
+    }
+    /**
      * @param string $basePath
      * @return $this
      */
