@@ -8,12 +8,41 @@
 namespace Notadd\Foundation\Http;
 use Illuminate\Support\Arr;
 use Notadd\Foundation\Http\Contracts\Request as RequestContract;
+use Psr\Http\Message\ServerRequestInterface;
 use Zend\Stratigility\Http\Request as ZendRequest;
 /**
  * Class Request
  * @package Notadd\Foundation\Http
  */
 class Request extends ZendRequest implements RequestContract {
+    /**
+     * @var \Psr\Http\Message\ServerRequestInterface
+     */
+    private $originalRequest;
+    /**
+     * @var \Psr\Http\Message\ServerRequestInterface
+     */
+    private $psrRequest;
+    /**
+     * Request constructor.
+     * @param \Psr\Http\Message\ServerRequestInterface $decoratedRequest
+     * @param \Psr\Http\Message\ServerRequestInterface $originalRequest
+     */
+    public function __construct(ServerRequestInterface $decoratedRequest, $originalRequest) {
+        if(null === $originalRequest) {
+            $originalRequest = $decoratedRequest;
+        }
+        $this->originalRequest = $originalRequest;
+        if('POST' === $decoratedRequest->getMethod()) {
+            if($method = $decoratedRequest->getHeader('X-HTTP-METHOD-OVERRIDE')) {
+                $decoratedRequest = $decoratedRequest->withMethod(strtoupper($method));
+            } else {
+                $method = collect($decoratedRequest->getQueryParams())->get('_method', collect($decoratedRequest->getParsedBody())->get('_method', 'POST'));
+                $decoratedRequest = $decoratedRequest->withMethod(strtoupper($method));
+            }
+        }
+        $this->psrRequest = $decoratedRequest->withAttribute('originalUri', $originalRequest->getUri());
+    }
     /**
      * @return array
      */
