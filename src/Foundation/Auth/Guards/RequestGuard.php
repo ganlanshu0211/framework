@@ -8,7 +8,7 @@
 namespace Notadd\Foundation\Auth\Guards;
 use Illuminate\Contracts\Auth\Guard;
 use Notadd\Foundation\Auth\Traits\GuardHelpers;
-use Psr\Http\Message\ServerRequestInterface as Request;
+use Notadd\Foundation\Http\Contracts\Request;
 /**
  * Class RequestGuard
  * @package Notadd\Foundation\Auth
@@ -20,13 +20,13 @@ class RequestGuard implements Guard {
      */
     protected $callback;
     /**
-     * @var \Psr\Http\Message\ServerRequestInterface
+     * @var \Notadd\Foundation\Http\Contracts\Request
      */
     protected $request;
     /**
      * RequestGuard constructor.
      * @param callable $callback
-     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Notadd\Foundation\Http\Contracts\Request $request
      */
     public function __construct(callable $callback, Request $request) {
         $this->request = $request;
@@ -49,8 +49,8 @@ class RequestGuard implements Guard {
         return !is_null((new static($this->callback, $credentials['request']))->user());
     }
     /**
-     * @param \Psr\Http\Message\ServerRequestInterface $request
-     * @return $this
+     * @param \Notadd\Foundation\Http\Contracts\Request $request
+     * @return \Notadd\Foundation\Auth\Guards\RequestGuard
      */
     public function setRequest(Request $request) {
         $this->request = $request;

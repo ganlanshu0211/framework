@@ -6,14 +6,14 @@
  * @datetime 2016-08-31 14:35
  */
 namespace Notadd\Foundation\Http\Middlewares;
-use Psr\Http\Message\ServerRequestInterface as Request;
+use Notadd\Foundation\Http\Contracts\Request;
 /**
  * Class AuthenticateWithSession
  * @package Notadd\Foundation\Http\Middlewares
  */
 class AuthenticateWithSession {
     /**
-     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Notadd\Foundation\Http\Contracts\Request $request
      * @param callable $next
      * @return \Psr\Http\Message\ResponseInterface
      */

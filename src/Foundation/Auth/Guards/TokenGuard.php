@@ -9,7 +9,7 @@ namespace Notadd\Foundation\Auth\Guards;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\UserProvider;
 use Notadd\Foundation\Auth\Traits\GuardHelpers;
-use Psr\Http\Message\ServerRequestInterface as Request;
+use Notadd\Foundation\Http\Contracts\Request;
 /**
  * Class TokenGuard
  * @package Notadd\Foundation\Auth
@@ -17,7 +17,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 class TokenGuard implements Guard {
     use GuardHelpers;
     /**
-     * @var \Psr\Http\Message\ServerRequestInterface
+     * @var \Notadd\Foundation\Http\Contracts\Request
      */
     protected $request;
     /**
@@ -30,7 +30,7 @@ class TokenGuard implements Guard {
     protected $storageKey;
     /**
      * @param \Illuminate\Contracts\Auth\UserProvider $provider
-     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Notadd\Foundation\Http\Contracts\Request $request
      */
     public function __construct(UserProvider $provider, Request $request) {
         $this->request = $request;
@@ -80,7 +80,7 @@ class TokenGuard implements Guard {
         return false;
     }
     /**
-     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Notadd\Foundation\Http\Contracts\Request $request
      * @return $this
      */
     public function setRequest(Request $request) {

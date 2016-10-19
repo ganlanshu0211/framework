@@ -12,9 +12,9 @@ use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Contracts\Encryption\Encrypter;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use League\OAuth2\Server\ResourceServer;
+use Notadd\Foundation\Http\Contracts\Request;
 use Notadd\Foundation\Passport\Repositories\ClientRepository;
 use Notadd\Foundation\Passport\Repositories\TokenRepository;
-use Psr\Http\Message\ServerRequestInterface as Request;
 /**
  * Class TokenGuard
  * @package Notadd\Foundation\Passport\Guards
@@ -56,7 +56,7 @@ class TokenGuard {
         $this->encrypter = $encrypter;
     }
     /**
-     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Notadd\Foundation\Http\Contracts\Request $request
      * @return \Exception|\League\OAuth2\Server\Exception\OAuthServerException|null|void
      */
     public function user(Request $request) {
@@ -67,7 +67,7 @@ class TokenGuard {
         }
     }
     /**
-     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Notadd\Foundation\Http\Contracts\Request $request
      * @return \Exception|\League\OAuth2\Server\Exception\OAuthServerException|null|void
      */
     protected function authenticateViaBearerToken(Request $request) {
@@ -88,7 +88,7 @@ class TokenGuard {
         }
     }
     /**
-     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Notadd\Foundation\Http\Contracts\Request $request
      */
     protected function authenticateViaCookie(Request $request) {
         try {
@@ -104,7 +104,7 @@ class TokenGuard {
         }
     }
     /**
-     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Notadd\Foundation\Http\Contracts\Request $request
      * @return array
      */
     protected function decodeJwtTokenCookie(Request $request) {
@@ -112,7 +112,7 @@ class TokenGuard {
     }
     /**
      * @param $token
-     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Notadd\Foundation\Http\Contracts\Request $request
      * @return bool
      */
     protected function validCsrf($token, Request $request) {

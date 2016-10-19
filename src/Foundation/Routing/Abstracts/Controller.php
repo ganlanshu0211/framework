@@ -10,8 +10,8 @@ use Illuminate\Container\Container;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 use Illuminate\Support\Str;
 use Notadd\Foundation\Console\Application;
+use Notadd\Foundation\Http\Contracts\Request;
 use Notadd\Foundation\Routing\Contracts\Controller as ControllerContract;
-use Psr\Http\Message\ServerRequestInterface;
 /**
  * Class Controller
  * @package Notadd\Foundation\Http\Abstracts
@@ -34,7 +34,7 @@ abstract class Controller implements ControllerContract {
      */
     protected $redirector;
     /**
-     * @var \Psr\Http\Message\ServerRequestInterface
+     * @var \Notadd\Foundation\Http\Contracts\Request
      */
     protected $request;
     /**
@@ -52,7 +52,7 @@ abstract class Controller implements ControllerContract {
         $this->container = $this->getContainer();
         $this->events = $this->container->make('events');
         $this->redirector = $this->container->make('redirector');
-        $this->request = $this->container->make(ServerRequestInterface::class);
+        $this->request = $this->container->make('request');
         $this->session = $this->request->getAttribute('session');
         $this->view = $this->container->make('view');
     }

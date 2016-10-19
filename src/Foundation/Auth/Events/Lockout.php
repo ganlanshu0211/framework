@@ -6,19 +6,19 @@
  * @datetime 2016-09-23 16:12
  */
 namespace Notadd\Foundation\Auth\Events;
-use Psr\Http\Message\ServerRequestInterface as Request;
+use Notadd\Foundation\Http\Contracts\Request;
 /**
  * Class Lockout
  * @package Notadd\Foundation\Auth\Events
  */
 class Lockout {
     /**
-     * @var \Psr\Http\Message\ServerRequestInterface
+     * @var \Notadd\Foundation\Http\Contracts\Request
      */
     public $request;
     /**
      * Lockout constructor.
-     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Notadd\Foundation\Http\Contracts\Request $request
      */
     public function __construct(Request $request) {
         $this->request = $request;

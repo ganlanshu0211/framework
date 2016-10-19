@@ -20,6 +20,7 @@ use Notadd\Foundation\Routing\Redirector;
 use Notadd\Foundation\Routing\Router;
 use Notadd\Foundation\Routing\UrlGenerator;
 use Notadd\Setting\Contracts\SettingsRepository;
+use Psr\Http\Message\ServerRequestInterface;
 /**
  * Class Application
  * @package Notadd\Foundation
@@ -138,6 +139,7 @@ class Application extends Container implements ApplicationContract {
                 'boot'
             ]);
         }
+        return null;
     }
     /**
      * @param mixed
@@ -273,7 +275,7 @@ class Application extends Container implements ApplicationContract {
      * @param \Illuminate\Support\ServiceProvider|string $provider
      * @param array $options
      * @param bool $force
-     * @return \Illuminate\Support\ServiceProvider
+     * @return bool|\Illuminate\Support\ServiceProvider
      */
     public function register($provider, $options = [], $force = false) {
         if($registered = $this->getProvider($provider) && !$force) {
@@ -378,6 +380,11 @@ class Application extends Container implements ApplicationContract {
             ],
             'migration.repository' => MigrationRepositoryInterface::class,
             'redirector' => Redirector::class,
+            'request' => [
+                'Psr\Http\Message\ServerRequestInterface',
+                'Notadd\Foundation\Http\Contracts\Request',
+                'Notadd\Foundation\Http\Request',
+            ],
             'router' => Router::class,
             SettingsRepository::class => 'setting',
             'session' => ['Illuminate\Session\SessionManager'],

@@ -15,7 +15,6 @@ use Notadd\Foundation\Http\Pipelines\RouteDispatcher;
 use Notadd\Foundation\Http\Pipelines\SessionStarter;
 use Notadd\Install\InstallServiceProvider;
 use Notadd\Install\Pipelines\RedirectIfNotInstalled;
-use UnexpectedValueException;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Server as ZendServer;
@@ -27,29 +26,12 @@ use Zend\Stratigility\MiddlewarePipe;
  */
 class Server extends BaseServer {
     /**
-     * @param callable $callback
-     * @param array $server
-     * @param array $query
-     * @param array $body
-     * @param array $cookies
-     * @param array $files
-     * @return \Zend\Diactoros\Server
-     */
-    public static function createServer(callable $callback, array $server, array $query, array $body, array $cookies, array $files) {
-        $server = ServerRequestFactory::normalizeServer($server ?: $_SERVER);
-        $files = ServerRequestFactory::normalizeFiles($files ?: $_FILES);
-        $headers = ServerRequestFactory::marshalHeaders($server);
-        $request = new ServerRequest($server, $files, ServerRequestFactory::marshalUriFromServer($server, $headers), ServerRequestFactory::get('REQUEST_METHOD', $server, 'GET'), 'php://input', $headers, $cookies ?: $_COOKIE, $query ?: $_GET, $body ?: $_POST, static::marshalProtocolVersion($server));
-        $response = new Response();
-        return new ZendServer($callback, $request, $response);
-    }
-    /**
      * @param \Notadd\Foundation\Application $app
-     * @return \Zend\Stratigility\MiddlewareInterface
+     * @return \Zend\Stratigility\MiddlewarePipe
      */
     protected function getMiddleware(Application $app) {
         $errorDir = realpath(__DIR__ . '/../../../errors');
-        $pipe = new MiddlewarePipe;
+        $pipe = new MiddlewarePipe();
         $path = parse_url($this->getUrl(), PHP_URL_PATH);
         if(!$app->isInstalled()) {
             $app->register(InstallServiceProvider::class);
@@ -98,20 +80,7 @@ class Server extends BaseServer {
      */
     public function listen() {
         $app = $this->getApp();
-        $server = static::createServer($this->getMiddleware($app), $_SERVER, $_GET, $_POST, $_COOKIE, $_FILES);
+        $server = ZendServer::createServer($this->getMiddleware($app), $_SERVER, $_GET, $_POST, $_COOKIE, $_FILES);
         $server->listen();
-    }
-    /**
-     * @param array $server
-     * @return string
-     */
-    protected static function marshalProtocolVersion(array $server) {
-        if(!isset($server['SERVER_PROTOCOL'])) {
-            return '1.1';
-        }
-        if(!preg_match('#^(HTTP/)?(?P<version>[1-9]\d*(?:\.\d)?)$#', $server['SERVER_PROTOCOL'], $matches)) {
-            throw new UnexpectedValueException(sprintf('Unrecognized protocol version (%s)', $server['SERVER_PROTOCOL']));
-        }
-        return $matches['version'];
     }
 }

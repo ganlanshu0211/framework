@@ -7,14 +7,14 @@
  */
 namespace Notadd\Foundation\Session\Contracts;
 use Illuminate\Session\SessionInterface;
-use Psr\Http\Message\ServerRequestInterface as Request;
+use Notadd\Foundation\Http\Contracts\Request;
 /**
  * Interface Session
  * @package Notadd\Foundation\Session\Contracts
  */
 interface Session extends SessionInterface {
     /**
-     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Notadd\Foundation\Http\Contracts\Request $request
      * @return void
      */
     public function setPsrRequestOnHandler(Request $request);

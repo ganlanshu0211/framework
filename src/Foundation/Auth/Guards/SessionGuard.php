@@ -19,7 +19,7 @@ use Notadd\Foundation\Auth\Events\Authenticated;
 use Notadd\Foundation\Auth\Events\Failed;
 use Notadd\Foundation\Auth\Events\Login;
 use Notadd\Foundation\Auth\Traits\GuardHelpers;
-use Psr\Http\Message\ServerRequestInterface as Request;
+use Notadd\Foundation\Http\Contracts\Request;
 use RuntimeException;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Zend\Diactoros\Response;
@@ -50,7 +50,7 @@ class SessionGuard implements StatefulGuard, SupportsBasicAuth {
      */
     protected $cookie;
     /**
-     * @var \Symfony\Component\HttpFoundation\Request
+     * @var \Notadd\Foundation\Http\Contracts\Request
      */
     protected $request;
     /**
@@ -70,7 +70,7 @@ class SessionGuard implements StatefulGuard, SupportsBasicAuth {
      * @param string $name
      * @param \Illuminate\Contracts\Auth\UserProvider $provider
      * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
-     * @param \Psr\Http\Message\ServerRequestInterface|null $request
+     * @param \Notadd\Foundation\Http\Contracts\Request|null $request
      */
     public function __construct($name, UserProvider $provider, SessionInterface $session, Request $request = null) {
         $this->name = $name;
@@ -199,7 +199,7 @@ class SessionGuard implements StatefulGuard, SupportsBasicAuth {
         }
     }
     /**
-     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Notadd\Foundation\Http\Contracts\Request $request
      * @param $field
      * @param array $extraConditions
      * @return bool
@@ -212,7 +212,7 @@ class SessionGuard implements StatefulGuard, SupportsBasicAuth {
         return $this->attempt(array_merge($credentials, $extraConditions));
     }
     /**
-     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Notadd\Foundation\Http\Contracts\Request $request
      * @param $field
      * @return array
      */
@@ -482,7 +482,7 @@ class SessionGuard implements StatefulGuard, SupportsBasicAuth {
         return $this->request;
     }
     /**
-     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Notadd\Foundation\Http\Contracts\Request $request
      * @return $this
      */
     public function setRequest(Request $request) {

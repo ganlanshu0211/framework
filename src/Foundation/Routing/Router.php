@@ -14,13 +14,13 @@ use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher as EventsDispatcher;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Notadd\Foundation\Http\Contracts\Request;
 use Notadd\Foundation\Http\Exceptions\MethodNotAllowedException;
 use Notadd\Foundation\Http\Exceptions\RouteNotFoundException;
 use Notadd\Foundation\Routing\Dispatchers\ApiDispatcher;
 use Notadd\Foundation\Routing\Dispatchers\CallableDispatcher;
 use Notadd\Foundation\Routing\Dispatchers\ControllerDispatcher;
 use Notadd\Foundation\Routing\Registrars\ResourceRegistrar;
-use Psr\Http\Message\ServerRequestInterface;
 /**
  * Class Router
  * @package Notadd\Foundation\Routing
@@ -157,10 +157,10 @@ class Router {
         return $this;
     }
     /**
-     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Notadd\Foundation\Http\Contracts\Request $request
      * @return mixed
      */
-    public function dispatch(ServerRequestInterface $request) {
+    public function dispatch(Request $request) {
         $method = $request->getMethod();
         $pathInfo = $request->getUri()->getPath() ?: '/';
         if(isset($this->routes[$method . $pathInfo])) {
@@ -510,7 +510,7 @@ class Router {
     public function sendThroughPipeline(array $middleware, Closure $then) {
         $shouldSkipMiddleware = $this->container->bound('middleware.disable') && $this->container->make('middleware.disable') === true;
         if(count($middleware) > 0 && !$shouldSkipMiddleware) {
-            return (new Pipeline($this->container))->send($this->container->make(ServerRequestInterface::class))->through($middleware)->then($then);
+            return (new Pipeline($this->container))->send($this->container->make(Request::class))->through($middleware)->then($then);
         }
         return $then();
     }

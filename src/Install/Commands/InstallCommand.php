@@ -60,7 +60,7 @@ class InstallCommand extends Command {
         //    'email' => $this->data->get('admin_email'),
         //    'password' => bcrypt($this->data->get('admin_password')),
         //]);
-        //if($this->container->bound(ServerRequestInterface::class)) {
+        //if($this->container->bound(Request::class)) {
         //    $this->container->make('auth')->login($user);
         //}
     }

@@ -10,28 +10,28 @@ use Illuminate\Cache\RateLimiter;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
 use Notadd\Foundation\Auth\Events\Lockout;
-use Psr\Http\Message\ServerRequestInterface as Request;
+use Notadd\Foundation\Http\Contracts\Request;
 /**
  * Class ThrottlesLogins
  * @package Notadd\Foundation\Auth\Traits
  */
 trait ThrottlesLogins {
     /**
-     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Notadd\Foundation\Http\Contracts\Request $request
      * @return bool
      */
     protected function hasTooManyLoginAttempts(Request $request) {
         return $this->limiter()->tooManyAttempts($this->throttleKey($request), 5, 1);
     }
     /**
-     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Notadd\Foundation\Http\Contracts\Request $request
      * @return int
      */
     protected function incrementLoginAttempts(Request $request) {
         $this->limiter()->hit($this->throttleKey($request));
     }
     /**
-     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Notadd\Foundation\Http\Contracts\Request $request
      * @return \Notadd\Foundation\Http\
      */
     protected function sendLockoutResponse(Request $request) {
@@ -40,21 +40,21 @@ trait ThrottlesLogins {
         return redirect()->back()->withInput($request->only($this->username(), 'remember'))->withErrors([$this->username() => $message]);
     }
     /**
-     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Notadd\Foundation\Http\Contracts\Request $request
      * @return void
      */
     protected function clearLoginAttempts(Request $request) {
         $this->limiter()->clear($this->throttleKey($request));
     }
     /**
-     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Notadd\Foundation\Http\Contracts\Request $request
      * @return void
      */
     protected function fireLockoutEvent(Request $request) {
         event(new Lockout($request));
     }
     /**
-     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Notadd\Foundation\Http\Contracts\Request $request
      * @return string
      */
     protected function throttleKey(Request $request) {

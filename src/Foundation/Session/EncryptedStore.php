@@ -7,15 +7,15 @@
  */
 namespace Notadd\Foundation\Session;
 use Illuminate\Session\EncryptedStore as IlluminateEncryptedStore;
+use Notadd\Foundation\Http\Contracts\Request;
 use Notadd\Foundation\Session\Contracts\Session as SessionContract;
-use Psr\Http\Message\ServerRequestInterface as Request;
 /**
  * Class EncryptedStore
  * @package Notadd\Foundation\Session
  */
 class EncryptedStore extends IlluminateEncryptedStore implements SessionContract {
     /**
-     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Notadd\Foundation\Http\Contracts\Request $request
      */
     public function setPsrRequestOnHandler(Request $request) {
         if($this->handlerNeedsRequest()) {

@@ -8,7 +8,7 @@
 namespace Notadd\Foundation\Routing;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Routing\UrlRoutable;
-use Psr\Http\Message\ServerRequestInterface;
+use Notadd\Foundation\Http\Contracts\Request;
 /**
  * Class UrlGenerator
  * @package Notadd\Foundation\Routing
@@ -77,7 +77,7 @@ class UrlGenerator {
     protected function getSchemeForUrl($secure) {
         if(is_null($secure)) {
             if(is_null($this->cachedScheme)) {
-                $this->cachedScheme = $this->container->make(ServerRequestInterface::class)->getUri()->getScheme() . '://';
+                $this->cachedScheme = $this->container->make(Request::class)->getUri()->getScheme() . '://';
             }
             return $this->cachedScheme;
         }
@@ -111,7 +111,7 @@ class UrlGenerator {
     protected function getRootUrl($scheme, $root = null) {
         if(is_null($root)) {
             if(is_null($this->cachedRoot)) {
-                $request = $this->container->make(ServerRequestInterface::class);
+                $request = $this->container->make(Request::class);
                 $this->cachedRoot = $scheme . $request->getUri()->getHost();
             }
             $root = rtrim($this->cachedRoot, '/');
@@ -179,7 +179,7 @@ class UrlGenerator {
      */
     protected function getScheme($secure) {
         if(is_null($secure)) {
-            return $this->forceSchema ?: $this->container->make(ServerRequestInterface::class)->getUri()->getScheme() . '://';
+            return $this->forceSchema ?: $this->container->make(Request::class)->getUri()->getScheme() . '://';
         }
         return $secure ? 'https://' : 'http://';
     }

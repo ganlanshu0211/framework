@@ -6,7 +6,8 @@
  * @datetime 2016-09-26 10:45
  */
 namespace Notadd\Foundation\Auth\Traits;
-use Psr\Http\Message\ServerRequestInterface as Request;
+use Notadd\Foundation\Auth\Events\Registered;
+use Notadd\Foundation\Http\Contracts\Request;
 /**
  * Class RegistersUsers
  * @package Notadd\Foundation\Auth\Traits
@@ -20,7 +21,7 @@ trait RegistersUsers {
         return view('auth.register');
     }
     /**
-     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Notadd\Foundation\Http\Contracts\Request $request
      * @return mixed
      */
     public function register(Request $request) {

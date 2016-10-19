@@ -7,16 +7,16 @@
  */
 namespace Notadd\Foundation\Routing\Contracts;
 use Closure;
-use Psr\Http\Message\ServerRequestInterface;
+use Notadd\Foundation\Http\Contracts\Request;
 /**
  * Interface RouterMiddleware
  * @package Notadd\Foundation\Routing\Contracts
  */
 interface RouterMiddleware {
     /**
-     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Notadd\Foundation\Http\Contracts\Request $request
      * @param \Closure $next
      * @return mixed
      */
-    public function handle(ServerRequestInterface $request, Closure $next);
+    public function handle(Request $request, Closure $next);
 }
