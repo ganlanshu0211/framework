@@ -9,6 +9,7 @@ namespace Notadd\Foundation\Database\Commands;
 use Illuminate\Support\Composer;
 use Notadd\Foundation\Console\Abstracts\Command;
 use Notadd\Foundation\Database\Migrations\MigrationCreator;
+use Notadd\Foundation\Database\Traits\MigrationPath;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 /**
@@ -16,6 +17,7 @@ use Symfony\Component\Console\Input\InputOption;
  * @package Foundation\Database\Commands
  */
 class MigrationMakeCommand extends Command {
+    use MigrationPath;
     /**
      * @var \Illuminate\Database\Migrations\MigrationCreator
      */
@@ -58,18 +60,6 @@ class MigrationMakeCommand extends Command {
         }
         $this->writeMigration($name, $table, $create);
         $this->composer->dumpAutoloads();
-    }
-    /**
-     * @return string
-     */
-    protected function getMigrationPath() {
-        if(!is_null($targetPath = $this->input->getOption('path'))) {
-            return call_user_func([
-                $this->container,
-                'basePath'
-            ]) . '/' . $targetPath;
-        }
-        return realpath(__DIR__ . '/../../../../resources/migrations');
     }
     /**
      * @param $name

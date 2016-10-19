@@ -84,6 +84,12 @@ abstract class Command extends SymfonyCommand {
         return Container::getInstance();
     }
     /**
+     * @return \Symfony\Component\Console\Input\InputInterface
+     */
+    public function getInput() {
+        return $this->input;
+    }
+    /**
      * @return \Symfony\Component\Console\Output\OutputInterface
      */
     public function getOutput() {

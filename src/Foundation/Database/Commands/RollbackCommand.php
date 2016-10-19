@@ -8,12 +8,14 @@
 namespace Notadd\Foundation\Database\Commands;
 use Notadd\Foundation\Console\Abstracts\Command;
 use Notadd\Foundation\Database\Migrations\Migrator;
+use Notadd\Foundation\Database\Traits\MigrationPath;
 use Symfony\Component\Console\Input\InputOption;
 /**
  * Class RollbackCommand
  * @package Notadd\Foundation\Database\Commands
  */
 class RollbackCommand extends Command {
+    use MigrationPath;
     /**
      * @var \Notadd\Foundation\Database\Migrations\Migrator
      */
@@ -50,17 +52,5 @@ class RollbackCommand extends Command {
         foreach($this->migrator->getNotes() as $note) {
             $this->output->writeln($note);
         }
-    }
-    /**
-     * @return string
-     */
-    protected function getMigrationPath() {
-        if(!is_null($targetPath = $this->input->getOption('path'))) {
-            return call_user_func([
-                $this->container,
-                'basePath'
-            ]) . '/' . $targetPath;
-        }
-        return realpath(__DIR__ . '/../../../../resources/migrations');
     }
 }

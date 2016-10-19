@@ -80,7 +80,7 @@ class SeederMakeCommand extends Command {
      * @return string
      */
     protected function getPath($name) {
-        return resource_path('seeds' . DIRECTORY_SEPARATOR . $name . '.php');
+        return database_path('seeds' . DIRECTORY_SEPARATOR . $name . '.php');
     }
     /**
      * @param string $path

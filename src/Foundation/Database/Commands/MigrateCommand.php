@@ -8,12 +8,14 @@
 namespace Notadd\Foundation\Database\Commands;
 use Notadd\Foundation\Console\Abstracts\Command;
 use Notadd\Foundation\Database\Migrations\Migrator;
+use Notadd\Foundation\Database\Traits\MigrationPath;
 use Symfony\Component\Console\Input\InputOption;
 /**
  * Class MigrateCommand
  * @package Notadd\Foundation\Database\Commands
  */
 class MigrateCommand extends Command {
+    use MigrationPath;
     /**
      * @var \Notadd\Foundation\Database\Migrations\Migrator
      */
@@ -54,18 +56,6 @@ class MigrateCommand extends Command {
         if($this->input->getOption('seed')) {
             $this->call('db:seed', ['--force' => true]);
         }
-    }
-    /**
-     * @return string
-     */
-    protected function getMigrationPath() {
-        if(!is_null($targetPath = $this->input->getOption('path'))) {
-            return call_user_func([
-                $this->container,
-                'basePath'
-            ]) . '/' . $targetPath;
-        }
-        return realpath(__DIR__ . '/../../../../resources/migrations');
     }
     /**
      * @return void
