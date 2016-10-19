@@ -15,7 +15,7 @@ use Symfony\Component\Console\Input\InputOption;
  * Class MakeMigration
  * @package Foundation\Database\Commands
  */
-class MakeMigrationCommand extends Command {
+class MigrationMakeCommand extends Command {
     /**
      * @var \Illuminate\Database\Migrations\MigrationCreator
      */
@@ -25,7 +25,7 @@ class MakeMigrationCommand extends Command {
      */
     protected $composer;
     /**
-     * MakeMigrationCommand constructor.
+     * MigrationMakeCommand constructor.
      * @param \Notadd\Foundation\Database\Migrations\MigrationCreator $creator
      * @param \Illuminate\Support\Composer $composer
      */

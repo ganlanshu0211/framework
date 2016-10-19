@@ -7,6 +7,7 @@
  */
 namespace Notadd\Foundation\Database\Commands;
 use Illuminate\Database\ConnectionResolverInterface;
+use Illuminate\Database\Eloquent\Model;
 use Notadd\Foundation\Console\Abstracts\Command;
 use Symfony\Component\Console\Input\InputOption;
 /**
@@ -37,11 +38,13 @@ class SeedCommand extends Command {
         $this->setName('db:seed');
     }
     /**
-     * @return mixed
+     * @return void
      */
     protected function fire() {
         $this->resolver->setDefaultConnection($this->getDatabase());
-        echo "JKJKJJK";
+        Model::unguarded(function () {
+            $this->getSeeder()->run();
+        });
     }
     /**
      * @return string
@@ -49,5 +52,12 @@ class SeedCommand extends Command {
     protected function getDatabase() {
         $database = $this->input->getOption('database');
         return $database ?: $this->container->make('config')->get('database.default');
+    }
+    /**
+     * @return \Illuminate\Database\Seeder
+     */
+    protected function getSeeder() {
+        $class = $this->container->make($this->input->getOption('class'));
+        return $class->setContainer($this->container)->setCommand($this);
     }
 }

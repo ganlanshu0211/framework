@@ -10,11 +10,13 @@ use Notadd\Foundation\Console\Abstracts\CommandRegistrar as AbstractCommandRegis
 use Notadd\Foundation\Console\Events\RegisterCommand as CommandRegisterEvent;
 use Notadd\Foundation\Database\Commands\InfoCommand;
 use Notadd\Foundation\Database\Commands\InstallCommand;
-use Notadd\Foundation\Database\Commands\MakeMigrationCommand;
+use Notadd\Foundation\Database\Commands\MigrationMakeCommand;
 use Notadd\Foundation\Database\Commands\MigrateCommand;
 use Notadd\Foundation\Database\Commands\RefreshCommand;
 use Notadd\Foundation\Database\Commands\ResetCommand;
 use Notadd\Foundation\Database\Commands\RollbackCommand;
+use Notadd\Foundation\Database\Commands\SeedCommand;
+use Notadd\Foundation\Database\Commands\SeederMakeCommand;
 use Notadd\Foundation\Database\Commands\StatusCommand;
 /**
  * Class RegisterCommand
@@ -27,11 +29,13 @@ class CommandRegistrar extends AbstractCommandRegistrar {
     public function handle(CommandRegisterEvent $console) {
         $console->registerCommand(new InfoCommand());
         $console->registerCommand($this->container->make(InstallCommand::class));
-        $console->registerCommand($this->container->make(MakeMigrationCommand::class));
+        $console->registerCommand($this->container->make(MigrationMakeCommand::class));
         $console->registerCommand($this->container->make(MigrateCommand::class));
         $console->registerCommand($this->container->make(RefreshCommand::class));
         $console->registerCommand($this->container->make(ResetCommand::class));
         $console->registerCommand($this->container->make(RollbackCommand::class));
+        $console->registerCommand($this->container->make(SeedCommand::class));
+        $console->registerCommand($this->container->make(SeederMakeCommand::class));
         $console->registerCommand($this->container->make(StatusCommand::class));
     }
 }
