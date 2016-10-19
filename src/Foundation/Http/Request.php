@@ -37,6 +37,16 @@ class Request extends ZendRequest implements RequestContract {
         return $this;
     }
     /**
+     * @param array|string $keys
+     * @return array
+     */
+    public function except($keys) {
+        $keys = is_array($keys) ? $keys : func_get_args();
+        $results = $this->all();
+        Arr::forget($results, $keys);
+        return $results;
+    }
+    /**
      * @param array|string $key
      * @return bool
      */
@@ -92,6 +102,19 @@ class Request extends ZendRequest implements RequestContract {
         $value = $this->input($key);
         $boolOrArray = is_bool($value) || is_array($value);
         return !$boolOrArray && trim((string)$value) === '';
+    }
+    /**
+     * @param array|string $keys
+     * @return array
+     */
+    public function only($keys) {
+        $keys = is_array($keys) ? $keys : func_get_args();
+        $results = [];
+        $input = $this->all();
+        foreach($keys as $key) {
+            Arr::set($results, $key, data_get($input, $key));
+        }
+        return $results;
     }
     /**
      * @return mixed

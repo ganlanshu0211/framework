@@ -17,6 +17,11 @@ interface Request extends ServerRequestInterface {
      */
     public function all();
     /**
+     * @param array|string $keys
+     * @return array
+     */
+    public function except($keys);
+    /**
      * @param array|string $key
      * @return bool
      */
@@ -36,6 +41,11 @@ interface Request extends ServerRequestInterface {
      * @return mixed
      */
     public function input($key);
+    /**
+     * @param array|string $keys
+     * @return array
+     */
+    public function only($keys);
     /**
      * @return mixed
      */
