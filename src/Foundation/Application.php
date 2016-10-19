@@ -255,7 +255,7 @@ class Application extends Container implements ApplicationContract {
      * @return string
      */
     public function localizationPath() {
-        return realpath(__DIR__ . '/../../localizations');
+        return realpath(__DIR__ . '/../../resources/localizations');
     }
     /**
      * @param $provider

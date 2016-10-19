@@ -116,7 +116,7 @@ class InstallCommand extends Command {
         }
         $this->call('migrate', [
             '--force' => true,
-            '--path' => str_replace(base_path() . DIRECTORY_SEPARATOR, '', realpath(__DIR__ . '/../../../migrations/'))
+            '--path' => str_replace(base_path() . DIRECTORY_SEPARATOR, '', realpath(__DIR__ . '/../../../resources/migrations/'))
         ]);
         $setting = $this->container->make(SettingsRepository::class);
         $setting->set('setting.title', $this->data->get('website'));

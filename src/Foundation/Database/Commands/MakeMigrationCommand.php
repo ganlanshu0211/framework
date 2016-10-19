@@ -69,7 +69,7 @@ class MakeMigrationCommand extends Command {
                 'basePath'
             ]) . '/' . $targetPath;
         }
-        return realpath(__DIR__ . '/../../../../migrations');
+        return realpath(__DIR__ . '/../../../../resources/migrations');
     }
     /**
      * @param $name

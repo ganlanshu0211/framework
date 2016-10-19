@@ -17,7 +17,7 @@ class MigrationCreator extends IlluminateMigrationCreator {
      * @return string
      */
     public function getStubPath() {
-        return realpath(__DIR__ . '/../../../../stubs/migrations');
+        return realpath(__DIR__ . '/../../../../resources/stubs/migrations');
     }
     /**
      * @param string $name

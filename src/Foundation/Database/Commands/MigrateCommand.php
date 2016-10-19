@@ -65,7 +65,7 @@ class MigrateCommand extends Command {
                 'basePath'
             ]) . '/' . $targetPath;
         }
-        return realpath(__DIR__ . '/../../../../migrations');
+        return realpath(__DIR__ . '/../../../../resources/migrations');
     }
     /**
      * @return void

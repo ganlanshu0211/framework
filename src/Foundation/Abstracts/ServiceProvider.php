@@ -47,9 +47,9 @@ abstract class ServiceProvider extends IlluminateServiceProvider {
         $this->router = $this->app->make('router');
         $this->view = $this->app->make('view');
         $this->blade = $this->view->getEngineResolver()->resolve('blade')->getCompiler();
-        $this->loadViewsFrom(__DIR__ . '/../../../views/admin', 'admin');
-        $this->loadViewsFrom(__DIR__ . '/../../../views/install', 'install');
-        $this->loadViewsFrom(__DIR__ . '/../../../views/theme', 'theme');
+        $this->loadViewsFrom(__DIR__ . '/../../../resources/views/admin', 'admin');
+        $this->loadViewsFrom(__DIR__ . '/../../../resources/views/install', 'install');
+        $this->loadViewsFrom(__DIR__ . '/../../../resources/views/theme', 'theme');
     }
     /**
      * @return void

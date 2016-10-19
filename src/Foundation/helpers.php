@@ -11,7 +11,7 @@ if(!function_exists('app')) {
     /**
      * @param string $make
      * @param array $parameters
-     * @return \Illuminate\Container\Container
+     * @return \Illuminate\Container\Container|\Notadd\Foundation\Application
      */
     function app($make = null, $parameters = []) {
         if(is_null($make)) {
@@ -101,6 +101,15 @@ if(!function_exists('public_path')) {
      */
     function public_path($path = '') {
         return app()->make('path.public') . ($path ? DIRECTORY_SEPARATOR . $path : $path);
+    }
+}
+if(!function_exists('resource_path')) {
+    /**
+     * @param string $path
+     * @return string
+     */
+    function resource_path($path = '') {
+        return app()->resourcePath() . ($path ? DIRECTORY_SEPARATOR . $path : $path);
     }
 }
 if(!function_exists('secure_asset')) {

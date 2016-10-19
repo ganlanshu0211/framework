@@ -30,7 +30,7 @@ class Server extends BaseServer {
      * @return \Zend\Stratigility\MiddlewarePipe
      */
     protected function getMiddleware(Application $app) {
-        $errorDir = realpath(__DIR__ . '/../../../errors');
+        $errorDir = realpath(__DIR__ . '/../../../resources/errors');
         $pipe = new MiddlewarePipe();
         $path = parse_url($this->getUrl(), PHP_URL_PATH);
         if(!$app->isInstalled()) {
