@@ -8,6 +8,8 @@
 namespace Notadd\Foundation\Http;
 use Illuminate\Support\Arr;
 use Notadd\Foundation\Http\Contracts\Request as RequestContract;
+use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\UriInterface;
 use Zend\Stratigility\Http\Request as ZendRequest;
 /**
  * Class Request
@@ -96,5 +98,113 @@ class Request extends ZendRequest implements RequestContract {
      */
     public function url() {
         return $this->getUri();
+    }
+    /**
+     * @param string $header
+     * @param string|\string[] $value
+     * @return \Notadd\Foundation\Http\Request
+     */
+    public function withAddedHeader($header, $value) {
+        $new = $this->getCurrentRequest()->withAddedHeader($header, $value);
+        return new self($new, $this->getOriginalRequest());
+    }
+    /**
+     * @param string $attribute
+     * @param mixed $value
+     * @return \Notadd\Foundation\Http\Request
+     */
+    public function withAttribute($attribute, $value) {
+        $new = $this->getCurrentRequest()->withAttribute($attribute, $value);
+        return new self($new, $this->getOriginalRequest());
+    }
+    /**
+     * @param \Psr\Http\Message\StreamInterface $body
+     * @return \Notadd\Foundation\Http\Request
+     */
+    public function withBody(StreamInterface $body) {
+        $new = $this->getCurrentRequest()->withBody($body);
+        return new self($new, $this->getOriginalRequest());
+    }
+    /**
+     * @param array $cookies
+     * @return \Notadd\Foundation\Http\Request
+     */
+    public function withCookieParams(array $cookies) {
+        $new = $this->getCurrentRequest()->withCookieParams($cookies);
+        return new self($new, $this->getOriginalRequest());
+    }
+    /**
+     * @param string $header
+     * @param string|\string[] $value
+     * @return \Notadd\Foundation\Http\Request
+     */
+    public function withHeader($header, $value) {
+        $new = $this->getCurrentRequest()->withHeader($header, $value);
+        return new self($new, $this->getOriginalRequest());
+    }
+    /**
+     * @param string $method
+     * @return \Notadd\Foundation\Http\Request
+     */
+    public function withMethod($method) {
+        $new = $this->getCurrentRequest()->withMethod($method);
+        return new self($new, $this->getOriginalRequest());
+    }
+    /**
+     * @param string $attribute
+     * @return \Notadd\Foundation\Http\Request
+     */
+    public function withoutAttribute($attribute) {
+        $new = $this->getCurrentRequest()->withoutAttribute($attribute);
+        return new self($new, $this->getOriginalRequest());
+    }
+    /**
+     * @param string $header
+     * @return \Notadd\Foundation\Http\Request
+     */
+    public function withoutHeader($header) {
+        $new = $this->getCurrentRequest()->withoutHeader($header);
+        return new self($new, $this->getOriginalRequest());
+    }
+    /**
+     * @param array|null|object $params
+     * @return \Notadd\Foundation\Http\Request
+     */
+    public function withParsedBody($params) {
+        $new = $this->getCurrentRequest()->withParsedBody($params);
+        return new self($new, $this->getOriginalRequest());
+    }
+    /**
+     * @param string $version
+     * @return \Notadd\Foundation\Http\Request
+     */
+    public function withProtocolVersion($version) {
+        $new = $this->getCurrentRequest()->withProtocolVersion($version);
+        return new self($new, $this->getOriginalRequest());
+    }
+    /**
+     * @param array $query
+     * @return \Notadd\Foundation\Http\Request
+     */
+    public function withQueryParams(array $query) {
+        $new = $this->getCurrentRequest()->withQueryParams($query);
+        return new self($new, $this->getOriginalRequest());
+    }
+    /**
+     * @param mixed $requestTarget
+     * @return \Notadd\Foundation\Http\Request
+     */
+    public function withRequestTarget($requestTarget) {
+        $new = $this->getCurrentRequest()->withRequestTarget($requestTarget);
+        return new self($new, $this->getOriginalRequest());
+    }
+    /**
+     * @param \Psr\Http\Message\UriInterface $uri
+     * @param bool $preserveHost
+     * @return \Notadd\Foundation\Http\Request
+     */
+    public function withUri(UriInterface $uri, $preserveHost = false) {
+        $new = $this->getCurrentRequest()->withUri($uri, $preserveHost);
+        return new self($new, $this->getOriginalRequest());
     }
 }
