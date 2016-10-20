@@ -7,20 +7,11 @@
  */
 namespace Notadd\Foundation;
 use Illuminate\Container\Container;
-use Illuminate\Database\ConnectionInterface;
-use Illuminate\Database\ConnectionResolverInterface;
-use Illuminate\Database\Migrations\MigrationRepositoryInterface;
 use Illuminate\Events\EventServiceProvider;
 use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
-use Notadd\Extension\ExtensionManager;
 use Notadd\Foundation\Contracts\Application as ApplicationContract;
-use Notadd\Foundation\Routing\Redirector;
-use Notadd\Foundation\Routing\Router;
-use Notadd\Foundation\Routing\UrlGenerator;
-use Notadd\Setting\Contracts\SettingsRepository;
-use Psr\Http\Message\ServerRequestInterface;
 /**
  * Class Application
  * @package Notadd\Foundation
@@ -345,9 +336,10 @@ class Application extends Container implements ApplicationContract {
     public function registerCoreContainerAliases() {
         $aliases = [
             'app' => [
-                Application::class,
                 'Illuminate\Contracts\Container\Container',
-                'Illuminate\Contracts\Foundation\Application'
+                'Illuminate\Contracts\Foundation\Application',
+                'Notadd\Foundation\Contracts\Application',
+                'Notadd\Foundation\Application'
             ],
             'auth' => [
                 'Illuminate\Auth\AuthManager',
@@ -367,9 +359,9 @@ class Application extends Container implements ApplicationContract {
                 'Illuminate\Config\Repository',
                 'Illuminate\Contracts\Config\Repository'
             ],
-            'db' => ConnectionResolverInterface::class,
-            'db.connection' => ConnectionInterface::class,
-            'extensions' => ExtensionManager::class,
+            'db' => 'Illuminate\Database\ConnectionResolverInterface',
+            'db.connection' => 'Illuminate\Database\ConnectionInterface',
+            'extensions' => 'Notadd\Extension\ExtensionManager',
             'events' => [
                 'Illuminate\Events\Dispatcher',
                 'Illuminate\Contracts\Events\Dispatcher'
@@ -388,21 +380,21 @@ class Application extends Container implements ApplicationContract {
                 'Illuminate\Contracts\Mail\Mailer',
                 'Illuminate\Contracts\Mail\MailQueue'
             ],
-            'migration.repository' => MigrationRepositoryInterface::class,
-            'redirector' => Redirector::class,
+            'migration.repository' => 'Illuminate\Database\Migrations\MigrationRepositoryInterface',
+            'redirector' => 'Notadd\Foundation\Routing\Redirector',
             'request' => [
                 'Psr\Http\Message\ServerRequestInterface',
                 'Notadd\Foundation\Http\Contracts\Request',
                 'Notadd\Foundation\Http\Request',
             ],
-            'router' => Router::class,
-            SettingsRepository::class => 'setting',
+            'router' => 'Notadd\Foundation\Routing\Router',
+            'setting' => 'Notadd\Setting\Contracts\SettingsRepository',
             'session' => ['Illuminate\Session\SessionManager'],
             'session.store' => [
                 'Illuminate\Session\Store',
                 'Symfony\Component\HttpFoundation\Session\SessionInterface'
             ],
-            'url' => UrlGenerator::class,
+            'url' => 'Notadd\Foundation\Routing\UrlGenerator',
             'validator' => [
                 'Illuminate\Validation\Factory',
                 'Illuminate\Contracts\Validation\Factory'

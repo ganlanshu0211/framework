@@ -18,7 +18,7 @@ class SettingServiceProvider extends ServiceProvider {
      * @return void
      */
     public function register() {
-        $this->app->singleton(SettingsRepository::class, function() {
+        $this->app->singleton('setting', function() {
             return new MemoryCacheSettingsRepository(
                 new DatabaseSettingsRepository(
                     $this->app->make(ConnectionInterface::class)
