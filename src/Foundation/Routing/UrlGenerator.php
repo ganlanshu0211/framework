@@ -31,6 +31,10 @@ class UrlGenerator {
      */
     protected $forceSchema;
     /**
+     * @var callable
+     */
+    protected $sessionResolver;
+    /**
      * UrlGenerator constructor.
      * @param \Illuminate\Container\Container $container
      */
@@ -182,5 +186,29 @@ class UrlGenerator {
             return $this->forceSchema ?: $this->container->make(Request::class)->getUri()->getScheme() . '://';
         }
         return $secure ? 'https://' : 'http://';
+    }
+    public function previous($fallback = false) {
+        $referrer = $this->container->make(Request::class)->getHeader('referer');
+        $url = $referrer ? $this->to($referrer) : $this->getPreviousUrlFromSession();
+        if($url) {
+            return $url;
+        } elseif($fallback) {
+            return $this->to($fallback);
+        } else {
+            return $this->to('/');
+        }
+    }
+    protected function getPreviousUrlFromSession() {
+        $session = $this->getSession();
+        return $session ? $session->previousUrl() : null;
+    }
+    protected function getSession() {
+        if($this->sessionResolver) {
+            return call_user_func($this->sessionResolver);
+        }
+    }
+    public function setSessionResolver(callable $sessionResolver) {
+        $this->sessionResolver = $sessionResolver;
+        return $this;
     }
 }

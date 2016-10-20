@@ -40,6 +40,16 @@ if(!function_exists('asset')) {
         return app('url')->asset($path, $secure);
     }
 }
+if(!function_exists('back')) {
+    /**
+     * @param int $status
+     * @param array $headers
+     * @return mixed
+     */
+    function back($status = 302, $headers = []) {
+        return app('redirect')->back($status, $headers);
+    }
+}
 if(!function_exists('base_path')) {
     /**
      * @param string $path
@@ -102,6 +112,17 @@ if(!function_exists('head')) {
      */
     function head($array) {
         return reset($array);
+    }
+}
+if(!function_exists('old')) {
+    /**
+     * Retrieve an old input item.
+     * @param  string $key
+     * @param  mixed $default
+     * @return mixed
+     */
+    function old($key = null, $default = null) {
+        return app('request')->old($key, $default);
     }
 }
 if(!function_exists('public_path')) {

@@ -101,4 +101,8 @@ class Redirector {
     protected function withSessionCookie(Response $response, SessionInterface $session) {
         return FigResponseCookies::set($response, SetCookie::create($session->getName(), $session->getId())->withPath('/')->withHttpOnly(true));
     }
+    public function back($status = 302, $headers = []) {
+        $back = $this->generator->previous();
+        return $this->createRedirect($back, $status, $headers);
+    }
 }

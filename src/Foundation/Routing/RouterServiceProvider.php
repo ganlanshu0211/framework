@@ -34,7 +34,11 @@ class RouterServiceProvider extends ServiceProvider {
             return $redirector;
         });
         $this->app->singleton('url', function($app) {
-            return new UrlGenerator($app);
+            $url = new UrlGenerator($app);
+            $url->setSessionResolver(function () {
+                return $this->app['session'];
+            });
+            return $url;
         });
     }
 }

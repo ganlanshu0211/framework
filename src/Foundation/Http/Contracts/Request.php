@@ -75,6 +75,12 @@ interface Request extends ServerRequestInterface {
      */
     public function input($key = null, $default = null);
     /**
+     * @param null $key
+     * @param null $default
+     * @return mixed
+     */
+    public function old($key = null, $default = null);
+    /**
      * @param array|string $keys
      * @return array
      */

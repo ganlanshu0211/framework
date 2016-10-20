@@ -167,6 +167,14 @@ class Request extends ZendRequest implements RequestContract {
         return !$boolOrArray && trim((string)$value) === '';
     }
     /**
+     * @param null $key
+     * @param null $default
+     * @return mixed
+     */
+    public function old($key = null, $default = null) {
+        return $this->session()->getOldInput($key, $default);
+    }
+    /**
      * @param array|string $keys
      * @return array
      */
