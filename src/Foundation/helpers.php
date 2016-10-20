@@ -47,7 +47,7 @@ if(!function_exists('back')) {
      * @return mixed
      */
     function back($status = 302, $headers = []) {
-        return app('redirect')->back($status, $headers);
+        return app('redirector')->back($status, $headers);
     }
 }
 if(!function_exists('base_path')) {
