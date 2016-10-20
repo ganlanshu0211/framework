@@ -218,7 +218,7 @@ class Request extends ZendRequest implements RequestContract {
      */
     public function withAddedHeader($header, $value) {
         $new = $this->getCurrentRequest()->withAddedHeader($header, $value);
-        return new self($new, $this->getOriginalRequest());
+        return new static($new, $this->getOriginalRequest());
     }
     /**
      * @param string $attribute
@@ -227,7 +227,7 @@ class Request extends ZendRequest implements RequestContract {
      */
     public function withAttribute($attribute, $value) {
         $new = $this->getCurrentRequest()->withAttribute($attribute, $value);
-        return new self($new, $this->getOriginalRequest());
+        return new static($new, $this->getOriginalRequest());
     }
     /**
      * @param \Psr\Http\Message\StreamInterface $body
@@ -235,7 +235,7 @@ class Request extends ZendRequest implements RequestContract {
      */
     public function withBody(StreamInterface $body) {
         $new = $this->getCurrentRequest()->withBody($body);
-        return new self($new, $this->getOriginalRequest());
+        return new static($new, $this->getOriginalRequest());
     }
     /**
      * @param array $cookies
@@ -243,7 +243,7 @@ class Request extends ZendRequest implements RequestContract {
      */
     public function withCookieParams(array $cookies) {
         $new = $this->getCurrentRequest()->withCookieParams($cookies);
-        return new self($new, $this->getOriginalRequest());
+        return new static($new, $this->getOriginalRequest());
     }
     /**
      * @param string $header
@@ -252,7 +252,7 @@ class Request extends ZendRequest implements RequestContract {
      */
     public function withHeader($header, $value) {
         $new = $this->getCurrentRequest()->withHeader($header, $value);
-        return new self($new, $this->getOriginalRequest());
+        return new static($new, $this->getOriginalRequest());
     }
     /**
      * @param string $method
@@ -260,7 +260,7 @@ class Request extends ZendRequest implements RequestContract {
      */
     public function withMethod($method) {
         $new = $this->getCurrentRequest()->withMethod($method);
-        return new self($new, $this->getOriginalRequest());
+        return new static($new, $this->getOriginalRequest());
     }
     /**
      * @param string $attribute
@@ -268,7 +268,7 @@ class Request extends ZendRequest implements RequestContract {
      */
     public function withoutAttribute($attribute) {
         $new = $this->getCurrentRequest()->withoutAttribute($attribute);
-        return new self($new, $this->getOriginalRequest());
+        return new static($new, $this->getOriginalRequest());
     }
     /**
      * @param string $header
@@ -276,7 +276,7 @@ class Request extends ZendRequest implements RequestContract {
      */
     public function withoutHeader($header) {
         $new = $this->getCurrentRequest()->withoutHeader($header);
-        return new self($new, $this->getOriginalRequest());
+        return new static($new, $this->getOriginalRequest());
     }
     /**
      * @param array|null|object $params
@@ -284,7 +284,7 @@ class Request extends ZendRequest implements RequestContract {
      */
     public function withParsedBody($params) {
         $new = $this->getCurrentRequest()->withParsedBody($params);
-        return new self($new, $this->getOriginalRequest());
+        return new static($new, $this->getOriginalRequest());
     }
     /**
      * @param string $version
@@ -292,7 +292,7 @@ class Request extends ZendRequest implements RequestContract {
      */
     public function withProtocolVersion($version) {
         $new = $this->getCurrentRequest()->withProtocolVersion($version);
-        return new self($new, $this->getOriginalRequest());
+        return new static($new, $this->getOriginalRequest());
     }
     /**
      * @param array $query
@@ -300,7 +300,7 @@ class Request extends ZendRequest implements RequestContract {
      */
     public function withQueryParams(array $query) {
         $new = $this->getCurrentRequest()->withQueryParams($query);
-        return new self($new, $this->getOriginalRequest());
+        return new static($new, $this->getOriginalRequest());
     }
     /**
      * @param mixed $requestTarget
@@ -308,7 +308,7 @@ class Request extends ZendRequest implements RequestContract {
      */
     public function withRequestTarget($requestTarget) {
         $new = $this->getCurrentRequest()->withRequestTarget($requestTarget);
-        return new self($new, $this->getOriginalRequest());
+        return new static($new, $this->getOriginalRequest());
     }
     /**
      * @param \Psr\Http\Message\UriInterface $uri
@@ -317,6 +317,6 @@ class Request extends ZendRequest implements RequestContract {
      */
     public function withUri(UriInterface $uri, $preserveHost = false) {
         $new = $this->getCurrentRequest()->withUri($uri, $preserveHost);
-        return new self($new, $this->getOriginalRequest());
+        return new static($new, $this->getOriginalRequest());
     }
 }

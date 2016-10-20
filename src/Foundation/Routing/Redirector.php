@@ -8,6 +8,7 @@
 namespace Notadd\Foundation\Routing;
 use Dflydev\FigCookies\FigResponseCookies;
 use Dflydev\FigCookies\SetCookie;
+use Illuminate\Container\Container;
 use Illuminate\Session\SessionInterface;
 use Notadd\Foundation\Routing\Responses\RedirectResponse;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -16,6 +17,10 @@ use Psr\Http\Message\ResponseInterface as Response;
  * @package Notadd\Foundation\Routing
  */
 class Redirector {
+    /**
+     * @var \Illuminate\Container\Container
+     */
+    protected $container;
     /**
      * @var \Notadd\Foundation\Routing\UrlGenerator
      */
@@ -26,9 +31,11 @@ class Redirector {
     protected $session;
     /**
      * Redirector constructor.
+     * @param \Illuminate\Container\Container $container
      * @param \Notadd\Foundation\Routing\UrlGenerator $generator
      */
-    public function __construct(UrlGenerator $generator) {
+    public function __construct(Container $container, UrlGenerator $generator) {
+        $this->container = $container;
         $this->generator = $generator;
     }
     /**
@@ -51,6 +58,7 @@ class Redirector {
         if(isset($this->session)) {
             $response = $this->withSessionCookie($response, $this->session);
         }
+        $response->setRequest($this->container->make('request'));
         return $response;
     }
     /**

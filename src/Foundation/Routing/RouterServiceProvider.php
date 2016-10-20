@@ -27,7 +27,7 @@ class RouterServiceProvider extends ServiceProvider {
             return new Router($app, $app['events']);
         });
         $this->app->singleton('redirector', function($app) {
-            $redirector = new Redirector($app['url']);
+            $redirector = new Redirector($app, $app['url']);
             if (isset($app['session.store'])) {
                 $redirector->setSession($app['session.store']);
             }
