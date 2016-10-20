@@ -14,7 +14,6 @@ use Notadd\Foundation\Console\Commands\ServeCommand;
 use Notadd\Foundation\Console\Commands\ViewClearCommand;
 use Notadd\Foundation\Console\Events\RegisterCommand;
 use Symfony\Component\Console\Application as SymfonyApplication;
-use Symfony\Component\Console\Command\Command;
 /**
  * Class Application
  * @package Notadd\Foundation\Console
