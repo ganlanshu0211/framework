@@ -10,6 +10,7 @@ use Illuminate\Contracts\Config\Repository;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
 use Notadd\Foundation\Console\Abstracts\Command;
+use Notadd\Foundation\Member\Abstracts\Member;
 use Notadd\Setting\Contracts\SettingsRepository;
 use PDO;
 /**
@@ -55,14 +56,14 @@ class InstallCommand extends Command {
      * @return void
      */
     protected function createAdministrationUser() {
-        //$user = Member::create([
-        //    'name' => $this->data->get('admin_account'),
-        //    'email' => $this->data->get('admin_email'),
-        //    'password' => bcrypt($this->data->get('admin_password')),
-        //]);
-        //if($this->container->bound(Request::class)) {
-        //    $this->container->make('auth')->login($user);
-        //}
+        $user = Member::create([
+            'name' => $this->data->get('admin_account'),
+            'email' => $this->data->get('admin_email'),
+            'password' => bcrypt($this->data->get('admin_password')),
+        ]);
+        if($this->container->bound('request')) {
+            $this->container->make('auth')->login($user);
+        }
     }
     /**
      * @return void
@@ -116,7 +117,7 @@ class InstallCommand extends Command {
         }
         $this->call('migrate', [
             '--force' => true,
-            '--path' => str_replace(base_path() . DIRECTORY_SEPARATOR, '', realpath(__DIR__ . '/../../../resources/migrations/'))
+            '--path' => str_replace(base_path() . DIRECTORY_SEPARATOR, '', database_path('migrations'))
         ]);
         $setting = $this->container->make(SettingsRepository::class);
         $setting->set('setting.title', $this->data->get('website'));

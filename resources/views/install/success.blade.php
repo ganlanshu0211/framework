@@ -22,3 +22,6 @@
         </main>
     </div>
 @endsection
+@section('sheets')
+    <link href="{{ asset('assets/install/sheets/install.css') }}" rel="stylesheet">
+@endsection

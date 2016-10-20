@@ -51,7 +51,7 @@ class InstallController extends Controller {
      */
     public function store() {
         $this->command = $this->getCommand('install');
-        $data = $this->request->getParsedBody();
+        $data = $this->request->input();
         $this->command->setDataFromController($data);
         $input = new ArrayInput([]);
         $output = new BufferedOutput();
