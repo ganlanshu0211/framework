@@ -6,6 +6,7 @@
  * @datetime 2016-08-20 01:40
  */
 use Illuminate\Container\Container;
+use Illuminate\Contracts\View\Factory as ViewFactory;
 use Notadd\Foundation\Routing\UrlGenerator;
 if(!function_exists('app')) {
     /**
@@ -161,5 +162,20 @@ if(!function_exists('url')) {
             return app(UrlGenerator::class);
         }
         return app(UrlGenerator::class)->to($path, $parameters, $secure);
+    }
+}
+if(!function_exists('view')) {
+    /**
+     * @param string $view
+     * @param array $data
+     * @param array $mergeData
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
+    function view($view = null, $data = [], $mergeData = []) {
+        $factory = app(ViewFactory::class);
+        if (func_num_args() === 0) {
+            return $factory;
+        }
+        return $factory->make($view, $data, $mergeData);
     }
 }
