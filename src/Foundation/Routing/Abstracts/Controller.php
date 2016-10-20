@@ -11,12 +11,14 @@ use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 use Illuminate\Support\Str;
 use Notadd\Foundation\Console\Application;
 use Notadd\Foundation\Http\Contracts\Request;
+use Notadd\Foundation\Http\Traits\ValidatesRequests;
 use Notadd\Foundation\Routing\Contracts\Controller as ControllerContract;
 /**
  * Class Controller
  * @package Notadd\Foundation\Http\Abstracts
  */
 abstract class Controller implements ControllerContract {
+    use ValidatesRequests;
     /**
      * @var \Illuminate\Container\Container
      */
@@ -134,13 +136,14 @@ abstract class Controller implements ControllerContract {
     /**
      * @param $template
      * @param array $data
+     * @param array $mergeData
      * @return \Illuminate\Contracts\View\View
      */
-    protected function view($template, array $data = []) {
+    protected function view($template, array $data = [], $mergeData = []) {
         if(Str::contains($template, '::')) {
-            return $this->view->make($template, $data);
+            return $this->view->make($template, $data, $mergeData);
         } else {
-            return $this->view->make('theme::' . $template, $data);
+            return $this->view->make('theme::' . $template, $data, $mergeData);
         }
     }
 }
