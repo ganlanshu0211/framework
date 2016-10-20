@@ -19,7 +19,7 @@ class ExtensionServiceProvider extends ServiceProvider {
     protected static $complies;
     /**
      * ExtensionServiceProvider constructor.
-     * @param \Illuminate\Contracts\Foundation\Application $application
+     * @param \Notadd\Foundation\Application $application
      */
     public function __construct($application) {
         parent::__construct($application);

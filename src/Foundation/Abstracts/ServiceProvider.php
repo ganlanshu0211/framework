@@ -38,7 +38,7 @@ abstract class ServiceProvider extends IlluminateServiceProvider {
     protected $view;
     /**
      * ServiceProvider constructor.
-     * @param \Illuminate\Contracts\Foundation\Application $application
+     * @param \Notadd\Foundation\Application $application
      */
     public function __construct($application) {
         parent::__construct($application);
