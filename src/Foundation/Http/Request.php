@@ -7,15 +7,25 @@
  */
 namespace Notadd\Foundation\Http;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+use Illuminate\Support\Traits\Macroable;
 use Notadd\Foundation\Http\Contracts\Request as RequestContract;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
+use RuntimeException;
+use Symfony\Component\HttpFoundation\AcceptHeader;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Zend\Stratigility\Http\Request as ZendRequest;
 /**
  * Class Request
  * @package Notadd\Foundation\Http
  */
 class Request extends ZendRequest implements RequestContract {
+    use Macroable;
+    /**
+     * @var array
+     */
+    protected $acceptableContentTypes;
     /**
      * @return bool
      */
@@ -27,6 +37,17 @@ class Request extends ZendRequest implements RequestContract {
      */
     public function all() {
         return collect($this->getQueryParams() + $this->getParsedBody() + $this->getUploadedFiles())->toArray();
+    }
+    /**
+     * @param  string $key
+     * @param  string|array|null $default
+     * @return string|array
+     */
+    public function cookie($key = null, $default = null) {
+        if(is_null($key)) {
+            return $this->getCookieParams();
+        }
+        return data_get($this->getCookieParams(), $key, $default);
     }
     /**
      * @return \Notadd\Foundation\Http\Request
@@ -67,11 +88,26 @@ class Request extends ZendRequest implements RequestContract {
         return true;
     }
     /**
+     * @return bool
+     */
+    public function expectsJson() {
+        return ($this->ajax() && !$this->pjax()) || $this->wantsJson();
+    }
+    /**
      * @param string $key
      * @return mixed
      */
     public function file($key) {
         return collect($this->getUploadedFiles())->get($key);
+    }
+    /**
+     * @return array
+     */
+    public function getAcceptableContentTypes() {
+        if(null !== $this->acceptableContentTypes) {
+            return $this->acceptableContentTypes;
+        }
+        return $this->acceptableContentTypes = array_keys(AcceptHeader::fromString(collect((array)$this->getHeader('Accept'))->first())->all());
     }
     /**
      * @param string|array $key
@@ -90,15 +126,30 @@ class Request extends ZendRequest implements RequestContract {
      * @param string $key
      * @return bool
      */
+    public function hasCookie($key) {
+        return !is_null($this->cookie($key));
+    }
+    /**
+     * @param string $key
+     * @return bool
+     */
     public function hasFile($key) {
         return collect($this->getUploadedFiles())->offsetExists($key);
     }
     /**
+     * @return bool
+     */
+    public function hasSession() {
+        return null !== $this->getAttribute('session');
+    }
+    /**
      * @param string $key
+     * @param null $default
      * @return mixed
      */
-    public function input($key) {
-        return collect($this->getQueryParams() + $this->getParsedBody())->get($key);
+    public function input($key = null, $default = null) {
+        $input = $this->getQueryParams() + $this->getParsedBody();
+        return data_get($input, $key, $default);
     }
     /**
      * @return string
@@ -135,10 +186,30 @@ class Request extends ZendRequest implements RequestContract {
         return $this->getHeader('X-PJAX') == true;
     }
     /**
+     * @return \Illuminate\Session\Store
+     * @throws \RuntimeException
+     */
+    public function session() {
+        if(!$this->hasSession()) {
+            throw new RuntimeException('Session store not set on request.');
+        }
+        return $this->getAttribute('session');
+    }
+    /**
      * @return mixed
      */
     public function url() {
         return $this->getUri();
+    }
+    /**
+     * @return bool
+     */
+    public function wantsJson() {
+        $acceptable = $this->getAcceptableContentTypes();
+        return isset($acceptable[0]) && Str::contains($acceptable[0], [
+            '/json',
+            '+json'
+        ]);
     }
     /**
      * @param string $header
