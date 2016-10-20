@@ -5,7 +5,7 @@
  * @copyright (c) 2016, iBenchu.org
  * @datetime 2016-10-19 14:05
  */
-namespace Notadd\Foundation\Database;
+namespace Notadd\Foundation\Database\Abstracts;
 use Illuminate\Container\Container;
 use Illuminate\Database\ConnectionInterface;
 use Notadd\Foundation\Console\Abstracts\Command;

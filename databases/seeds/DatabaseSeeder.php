@@ -1,5 +1,5 @@
 <?php
-use Notadd\Foundation\Database\Seeder;
+use Notadd\Foundation\Database\Abstracts\Seeder;
 /**
  * Class DatabaseSeeder
  */

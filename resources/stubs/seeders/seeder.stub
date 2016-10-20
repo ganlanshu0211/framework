@@ -3,7 +3,7 @@
  * This file is part of Notadd.
  * @datetime DummyDatetime
  */
-use Notadd\Foundation\Database\Seeder;
+use Notadd\Foundation\Database\Abstracts\Seeder;
 /**
  * Class DummyClass
  */
