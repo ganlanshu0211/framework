@@ -144,9 +144,9 @@ if(!function_exists('redirect')) {
      */
     function redirect($to = null, $status = 302, $headers = [], $secure = null) {
         if (is_null($to)) {
-            return app('redirect');
+            return app('redirector');
         }
-        return app('redirect')->to($to, $status, $headers, $secure);
+        return app('redirector')->to($to, $status, $headers, $secure);
     }
 }
 if(!function_exists('resource_path')) {
