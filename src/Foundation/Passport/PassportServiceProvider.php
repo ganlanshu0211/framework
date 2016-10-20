@@ -23,12 +23,19 @@ use Notadd\Foundation\Passport\Bridges\Repositories\RefreshTokenRepository;
 use Notadd\Foundation\Passport\Bridges\Repositories\ScopeRepository;
 use Notadd\Foundation\Passport\Bridges\Repositories\UserRepository;
 use Notadd\Foundation\Passport\Guards\TokenGuard;
+use Notadd\Foundation\Passport\Listeners\CommandRegistrar;
 use Notadd\Foundation\Passport\Repositories\TokenRepository;
 /**
  * Class PassportServiceProvider
  * @package Notadd\Foundation\Passport
  */
 class PassportServiceProvider extends ServiceProvider {
+    /**
+     * @return void
+     */
+    public function boot() {
+        $this->app->make('events')->subscribe(CommandRegistrar::class);
+    }
     /**
      * @return \League\OAuth2\Server\Grant\AuthCodeGrant
      */

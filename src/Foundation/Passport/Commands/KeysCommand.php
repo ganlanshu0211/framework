@@ -5,7 +5,7 @@
  * @copyright (c) 2016, iBenchu.org
  * @datetime 2016-09-26 17:59
  */
-namespace Notadd\Passport\Commands;
+namespace Notadd\Foundation\Passport\Commands;
 use Notadd\Foundation\Console\Abstracts\Command;
 use Notadd\Foundation\Passport\Passport;
 use phpseclib\Crypt\RSA;

@@ -5,7 +5,7 @@
  * @copyright (c) 2016, iBenchu.org
  * @datetime 2016-09-26 17:58
  */
-namespace Notadd\Passport\Commands;
+namespace Notadd\Foundation\Passport\Commands;
 use Notadd\Foundation\Console\Abstracts\Command;
 use Notadd\Foundation\Passport\PersonalAccessClient;
 use Notadd\Foundation\Passport\Repositories\ClientRepository;

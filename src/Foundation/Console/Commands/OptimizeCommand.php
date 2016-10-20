@@ -65,7 +65,6 @@ class OptimizeCommand extends Command {
         '/vendor/illuminate/hashing/HashServiceProvider.php',
         '/vendor/illuminate/mail/MailServiceProvider.php',
         '/src/Foundation/Passport/PassportServiceProvider.php',
-        '/src/Passport/PassportServiceProvider.php',
         '/src/Foundation/Auth/Traits/CreatesUserProviders.php',
         '/vendor/illuminate/contracts/Auth/Factory.php',
         '/src/Foundation/Auth/AuthManager.php',

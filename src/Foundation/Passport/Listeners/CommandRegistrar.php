@@ -5,12 +5,12 @@
  * @copyright (c) 2016, iBenchu.org
  * @datetime 2016-09-27 09:52
  */
-namespace Notadd\Passport\Listeners;
+namespace Notadd\Foundation\Passport\Listeners;
 use Notadd\Foundation\Console\Abstracts\CommandRegistrar as AbstractCommandRegistrar;
 use Notadd\Foundation\Console\Events\RegisterCommand as CommandRegisterEvent;
-use Notadd\Passport\Commands\ClientCommand;
-use Notadd\Passport\Commands\InstallCommand;
-use Notadd\Passport\Commands\KeysCommand;
+use Notadd\Foundation\Passport\Commands\ClientCommand;
+use Notadd\Foundation\Passport\Commands\InstallCommand;
+use Notadd\Foundation\Passport\Commands\KeysCommand;
 /**
  * Class RegisterCommand
  * @package Notadd\Passport\Listeners
