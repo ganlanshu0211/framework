@@ -20,7 +20,7 @@ use Symfony\Component\Console\Question\Question;
  */
 abstract class Command extends SymfonyCommand {
     /**
-     * @var \Illuminate\Container\Container
+     * @var \Illuminate\Container\Container|\Notadd\Foundation\Application
      */
     protected $container;
     /**
@@ -78,7 +78,7 @@ abstract class Command extends SymfonyCommand {
      */
     abstract protected function fire();
     /**
-     * @return \Illuminate\Container\Container
+     * @return \Illuminate\Container\Container|\Notadd\Foundation\Application
      */
     protected function getContainer() {
         return Container::getInstance();

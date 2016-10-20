@@ -7,7 +7,11 @@
  */
 namespace Notadd\Foundation\Console;
 use Illuminate\Container\Container;
+use Notadd\Foundation\Console\Commands\EnvironmentCommand;
+use Notadd\Foundation\Console\Commands\OptimizeClearCommand;
 use Notadd\Foundation\Console\Commands\OptimizeCommand;
+use Notadd\Foundation\Console\Commands\ServeCommand;
+use Notadd\Foundation\Console\Commands\ViewClearCommand;
 use Notadd\Foundation\Console\Events\RegisterCommand;
 use Symfony\Component\Console\Application as SymfonyApplication;
 use Symfony\Component\Console\Command\Command;
@@ -62,6 +66,10 @@ class Application extends SymfonyApplication {
      * @return void
      */
     protected function registerCommands() {
+        $this->add($this->container->make(EnvironmentCommand::class));
+        $this->add($this->container->make(OptimizeClearCommand::class));
         $this->add($this->container->make(OptimizeCommand::class));
+        $this->add($this->container->make(ServeCommand::class));
+        $this->add($this->container->make(ViewClearCommand::class));
     }
 }

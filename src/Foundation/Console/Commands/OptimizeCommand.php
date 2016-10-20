@@ -212,7 +212,7 @@ class OptimizeCommand extends Command {
      */
     protected function compileClasses() {
         $loader = (new Factory)->create(['skip' => true]);
-        $handle = $loader->prepareOutput(storage_path('/caches/compiled.php'));
+        $handle = $loader->prepareOutput($this->container->getCachedCompilePath());
         foreach ($this->getClassFiles() as $file) {
             try {
                 fwrite($handle, $loader->getCode($file, false)."\n");
