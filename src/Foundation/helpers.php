@@ -134,6 +134,21 @@ if(!function_exists('public_path')) {
         return app()->make('path.public') . ($path ? DIRECTORY_SEPARATOR . $path : $path);
     }
 }
+if(!function_exists('redirect')) {
+    /**
+     * @param string|null  $to
+     * @param int $status
+     * @param array $headers
+     * @param bool $secure
+     * @return \Notadd\Foundation\Routing\Redirector|\Notadd\Foundation\Routing\Responses\RedirectResponse
+     */
+    function redirect($to = null, $status = 302, $headers = [], $secure = null) {
+        if (is_null($to)) {
+            return app('redirect');
+        }
+        return app('redirect')->to($to, $status, $headers, $secure);
+    }
+}
 if(!function_exists('resource_path')) {
     /**
      * @param string $path
