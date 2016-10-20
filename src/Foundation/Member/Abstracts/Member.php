@@ -11,7 +11,7 @@ use Notadd\Foundation\Auth\Models\User as Authenticatable;
  * Class Member
  * @package Notadd\Member\Models
  */
-abstract class Member extends Authenticatable {
+class Member extends Authenticatable {
     /**
      * @var array
      */

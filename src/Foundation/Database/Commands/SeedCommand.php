@@ -45,6 +45,7 @@ class SeedCommand extends Command {
         Model::unguarded(function () {
             $this->getSeeder()->run();
         });
+        $this->output->writeln("<info>Seeded:</info> {$this->input->getOption('class')}");
     }
     /**
      * @return string
