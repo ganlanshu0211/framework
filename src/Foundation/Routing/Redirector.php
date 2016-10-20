@@ -57,6 +57,7 @@ class Redirector {
         $response = new RedirectResponse($path, $status, $headers);
         if(isset($this->session)) {
             $response = $this->withSessionCookie($response, $this->session);
+            $response->setSession($this->session);
         }
         $response->setRequest($this->container->make('request'));
         return $response;
