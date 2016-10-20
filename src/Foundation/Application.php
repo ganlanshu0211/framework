@@ -186,7 +186,7 @@ class Application extends Container implements ApplicationContract {
      * @return string
      */
     public function getCachedCompilePath() {
-        return $this->basePath() . '/bootstrap/cache/compiled.php';
+        return $this->storagePath() . '/bootstrap/caches/compiled.php';
     }
     /**
      * @return string
