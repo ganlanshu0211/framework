@@ -12,12 +12,15 @@
         }
     ],
     "autoload": {
-        "psr-4": {
-            "Notadd\\": "src/"
-        },
+        "classmap": [
+            "databases"
+        ],
         "files": [
             "src/Foundation/helpers.php"
-        ]
+        ],
+        "psr-4": {
+            "Notadd\\": "src/"
+        }
     },
     "autoload-dev": {
         "psr-4": {
